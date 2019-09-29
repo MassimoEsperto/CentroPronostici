@@ -1,0 +1,18 @@
+
+
+.btn{
+    border-radius: 15px; 
+	-moz-border-radius: 15px; /* firefox */
+	-webkit-border-radius: 15px; /* safari, chrome */
+}
+
+.default {
+    font-family: 'Finger Paint', cursive;      /*  font-family: Comic Sans MS*/;
+	/*background-color: #1B98CE;*/
+    text-align: center;
+    padding: 25px;
+    margin: 25px;
+}
+	/* Coded with sign in */
+   
+   
