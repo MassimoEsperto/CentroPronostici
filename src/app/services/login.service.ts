@@ -11,10 +11,11 @@ export class LoginService {
 
   getLogin(username:string,pass: string)
   {
-    let miaUrl:string="http://localhost:3000/USER";
+    let miaUrl:string="https://messomale.000webhostapp.com/service/login.php";
     
-    //return this.http.post<User[]>(miaUrl, { data: username,pass });
+  //  return this.http.post<User[]>(miaUrl, { data: username,pass },);
     //bisogna passare i parametri
-    return this.http.get<User[]>(miaUrl);
+   return this.http.get<User[]>(miaUrl);
+  
   }
 }
