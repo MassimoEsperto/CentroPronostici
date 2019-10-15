@@ -23,9 +23,9 @@ export class LoginSignInComponent implements OnInit {
   LoginUser(){
     console.log("esername: "+this.username);
     console.log("PASSWORD: "+this.password);
-   // this.utente = new User(this.username,this.password,'',1);
-    this.service.getLogin(this.username,this.password).subscribe((result: any) =>{this.utente=result, console.log(this.utente)});
-    
+  
+   // this.service.getLogin(this.username,this.password).subscribe((result: any) =>{this.utente=result, console.log(this.utente)});
+   this.service.getLogin(this.username,this.password).subscribe((result: any) =>{ console.log(result)});
     
     
     /*
