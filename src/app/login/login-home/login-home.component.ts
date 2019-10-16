@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
 })
 export class LoginHomeComponent implements AfterViewInit {
   constructor(private router: Router,private elementRef: ElementRef) { }
-
+  ngOnInit() {
+    localStorage.setItem('user', '');
+  }
   ngAfterViewInit()
   {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#1B98CE';
