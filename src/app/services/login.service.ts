@@ -13,7 +13,7 @@ export class LoginService {
   {
     let miaUrl:string="https://messomale.000webhostapp.com/service/login.php";
     
-  //  return this.http.post<User[]>(miaUrl, { data: username,pass },);
+ //   return this.http.post<User[]>(miaUrl, { data: username,pass });
     //bisogna passare i parametri
    return this.http.get<User[]>(miaUrl);
   
