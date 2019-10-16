@@ -24,14 +24,24 @@ export class LoginSignInComponent implements OnInit {
     console.log("esername: "+this.username);
     console.log("PASSWORD: "+this.password);
   
-   // this.service.getLogin(this.username,this.password).subscribe((result: any) =>{this.utente=result, console.log(this.utente)});
-   this.service.getLogin(this.username,this.password).subscribe((result: any) =>{ console.log(result)});
+   this.service.getLogin(this.username,this.password).subscribe(
+     (result: any) =>{
+       this.utente=result, 
+       console.log('risultato'), 
+       console.log(this.utente),
+       localStorage.setItem('user', JSON.stringify(this.utente)),
+       this.router.navigate(['/dashboard'])
+      });
+   //this.service.getLogin(this.username,this.password).subscribe((result: any) =>{ console.log(result)});
+ 
     
+  //  localStorage.setItem('user', JSON.stringify(this.utente));
     
-    /*
+    //this.router.navigate(['/dashboard']);
 
-    localStorage.setItem('user', JSON.stringify(this.utente));
-    this.router.navigate(['/dashboard']);
-*/
+  }
+  goLink(mio:User){
+    if(mio!=null)
+    this.router.navigate(['/dashboard'])
   }
 }
