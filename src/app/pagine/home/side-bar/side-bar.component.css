@@ -1,0 +1,10 @@
+.filler {
+    flex: 1 1 auto;
+ }
+ .gap {
+    margin-right: 10px;
+ }
+
+ .mat-icon-button {
+   border: none !important;
+}
