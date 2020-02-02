@@ -1,0 +1,27 @@
+<div *ngIf="error" class="alert alert-danger">{{error}}</div>
+<div *ngIf="success" class="alert alert-success">{{success}}</div>
+<div class="login-wrapper">
+    <form clrForm #newUtente="ngForm" (submit)="registrati(newUtente)">
+    <section class="title">
+        <h3 class="welcome">Benvenuto al </h3>
+        Centro Pronostici di Maresca
+        <h5 class="hint">Inserisci username e password</h5>
+    </section>
+    <clr-input-container>
+        <label>Username</label>
+        <input clrInput type="text" [(ngModel)]="newUtente.username" name="username" required />
+        <clr-control-error>Campo Obbligatorio</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+        <label>Mail (Optional)</label>
+        <input clrInput type="text" [(ngModel)]="newUtente.email" name="email" />
+    </clr-input-container>
+    <clr-input-container>
+        <label>Password</label>
+        <input clrInput type="text" [(ngModel)]="newUtente.password" name="password" required />
+        <clr-control-error>Campi Obbligatorio</clr-control-error>
+    </clr-input-container>
+     <button  
+        class="btn btn-primary btn-sm" [disabled]="newUtente.invalid">Registrati</button>
+</form>
+</div>
