@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button class = "gap">
+            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+        </button>      
+        <span>PRONOSTICI</span>
+        <span class = "filler"></span>
+        <span>{{username}} <clr-icon shape="user"></clr-icon></span>    
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+        <a *ngIf="isAdmin" mat-list-item [routerLink]="'/home/gestione'" (click)="sidenav.toggle()">
+            <clr-icon  shape="user"></clr-icon>Gestione	</a>
+            <a mat-list-item [routerLink]="'/home/visualizza'"(click)="sidenav.toggle()">
+            <clr-icon  shape="file-group"></clr-icon>Pronostici</a>  
+            <a mat-list-item [routerLink]="'/home/inserimento'" (click)="sidenav.toggle()">
+            <clr-icon  shape="copy-to-clipboard"></clr-icon>Inserimento</a>		
+            <a mat-list-item [routerLink]="'/login'"(click)="sidenav.toggle()">
+            <clr-icon  shape="home"></clr-icon>Exit</a>
+            <a mat-list-item (click)="sidenav.toggle()" mat-list-item>Close</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div style="height: 88vh;padding:2%;">  
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
