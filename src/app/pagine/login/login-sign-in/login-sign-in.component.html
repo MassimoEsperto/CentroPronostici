@@ -1,0 +1,31 @@
+<div class="login-wrapper">
+      <form class="login">
+          <section class="title">
+              <h3 class="welcome">Benvenuto al </h3>
+              Centro Pronostici di Maresca
+              <h5 class="hint">Inserisci username e password</h5>
+          </section>
+          <div class="login-group">
+              <clr-input-container>
+                  <label class="clr-sr-only">Username</label>
+                  <input type="text" name="username" clrInput placeholder="Username" [(ngModel)]="username" required />
+                  <clr-control-error>Maccaron inserisci il tuo nome</clr-control-error>
+                </clr-input-container>
+              <clr-password-container>
+                  <label class="clr-sr-only">Password</label>
+                  <input type="password" name="password" clrPassword placeholder="Password" [(ngModel)]="password" required />
+                  <clr-control-error>Inserisci anche la password</clr-control-error>
+              </clr-password-container>
+              <clr-checkbox-wrapper>
+                  <label>Ricordami</label>
+                  <input type="checkbox" name="rememberMe" clrCheckbox />
+              </clr-checkbox-wrapper>
+              <div *ngIf="!isPresente" class="error active">
+                  Invalid user name or password
+              </div>
+              <button type="submit" class="btn btn-primary"  (click)="LoginUser()">Accedi</button>
+          </div>
+          <h5 class="hint">Non sei registrato? Fallo adesso gratis <a routerLink="/register">qui!</a></h5>
+      </form>
+      
+  </div>
