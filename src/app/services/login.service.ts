@@ -1,21 +1,42 @@
+import { User } from '../classi/model/user';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../model/user';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { HttpSenderService } from './http-sender-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginService extends HttpSenderService {
+  baseUrl = 'http://marescafantaeuropeo.altervista.org/webServices';
+  users: User[];
+  constructor(private http:HttpClient) {super();}
 
-  constructor(private http:HttpClient) {}
+ 
 
-  getLogin(username:string,pass: string)
-  {
-    let miaUrl:string="https://messomale.000webhostapp.com/service/login.php";
-    
- //   return this.http.post<User[]>(miaUrl, { data: username,pass });
-    //bisogna passare i parametri
-   return this.http.get<User[]>(miaUrl);
+  login(username:string,pass: string){
+    const params = new HttpParams()
+    .set('user', username).set('pass', pass);
+   console.log('call servizio di login');
+    return this.http.get<User[]>(`${this.baseUrl}/login.php`, { params: params  })
+    .pipe(map((res) => {
+      if('negato'==res['data'])
+      {
+        console.log('negato');
+        return null;
+      }
+      console.log('ritorno');
+      console.log(res['data']);
+      this.users = res['data'];
+      console.log('return:');
+      console.log(this.users[0]);
+      return this.users[0];
   
-  }
+    }),
+    catchError(this.handleError));
+}
+
+  
+
 }
