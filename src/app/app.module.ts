@@ -1,13 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core'; 
 import { AppRoutingModule } from './app-routing.module';
-import { StudentModule } from './home/student.module';
+import { PronosticoModule } from './pagine/home/pronostico.module';
 import { AppComponent } from './app.component';
-import { LoginHomeComponent } from './login/login-home/login-home.component';
-import { LoginSignInComponent } from './login/login-sign-in/login-sign-in.component';
-import { LoginRegisterComponent } from './login/login-register/login-register.component';
+import { LoginHomeComponent } from './pagine/login/login-home/login-home.component';
+import { LoginSignInComponent } from './pagine/login/login-sign-in/login-sign-in.component';
+import { LoginRegisterComponent } from './pagine/login/login-register/login-register.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ClarityModule } from '@clr/angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -21,9 +23,11 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StudentModule,
+    PronosticoModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ClarityModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
