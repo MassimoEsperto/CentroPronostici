@@ -1,0 +1,160 @@
+<clr-alert *ngIf="success" [clrAlertType]="'success'">
+    <clr-alert-item>
+        <span class="alert-text">{{success}}</span>
+    </clr-alert-item>
+</clr-alert>
+<clr-alert *ngIf="error" [clrAlertType]="'warning'">
+    <clr-alert-item>
+        <span class="alert-text">{{error}}</span>
+    </clr-alert-item>
+</clr-alert>
+
+<clr-tabs>
+    <clr-tab>
+        <button clrTabLink>Utenti</button>
+        <ng-template [(clrIfActive)]="dashboardActive">
+            <clr-tab-content>
+
+                <clr-datagrid>
+                    <clr-dg-column>username</clr-dg-column>
+                    <clr-dg-column>email</clr-dg-column>
+                    <clr-dg-column>ruolo</clr-dg-column>
+
+                    <clr-dg-row *clrDgItems="let user of utenti;let i = index;" [clrDgItem]="user">
+                        <clr-dg-action-overflow>
+                            <button class="action-item" (click)="onEditUser(user);updateModal = true">Modifica</button>
+                            <button class="action-item" (click)="onDelete(user)">Elimina</button>
+                        </clr-dg-action-overflow>
+                        <clr-dg-cell>{{user.username}}</clr-dg-cell>
+                        <clr-dg-cell>{{user.email}}</clr-dg-cell>
+                        <clr-dg-cell>{{user.ruolo}}</clr-dg-cell>
+                    </clr-dg-row>
+
+                    <clr-dg-footer>{{totale}} utenti</clr-dg-footer>
+                </clr-datagrid>
+
+                <clr-modal [(clrModalOpen)]="updateModal">
+                    <h3 class="modal-title">AGGIORNA MATCH</h3>
+                    <div class="modal-body">
+                        <form *ngIf="options2" clrForm (submit)="onUpdateUtente(newUtente);updateModal = false">
+                            <label>MODIFICA UTENTE</label>
+                            <clr-input-container>
+                                <label>Username</label>
+                                <input clrInput type="text" [(ngModel)]="newUtente.username" name="username" required />
+                                <clr-control-error>Obbligatorio</clr-control-error>
+                            </clr-input-container>
+                            <clr-input-container>
+                                <label>Mail (Optional)</label>
+                                <input clrInput type="text" [(ngModel)]="newUtente.email" name="email" />
+                            </clr-input-container>
+                            <clr-select-container>
+                                <label>Ruolo</label>
+                                <select clrSelect name="ruolo" [(ngModel)]="newUtente.ruolo" required>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Giocatore</option>
+                                    <option value="3">Visitatore</option>
+                                </select>
+                                <clr-control-error>Obbligatorio</clr-control-error>
+                            </clr-select-container>
+                           
+                            <br>
+                            <button class="btn btn-primary" [disabled]="newUtente.invalid" style="float: right;">Aggiorna</button>
+                            <button type="button" class="btn btn-outline" (click)="updateModal = false" style="float: right;">Annulla</button>
+                        </form>
+                    </div>
+   
+                </clr-modal>
+
+            </clr-tab-content>
+        </ng-template>
+    </clr-tab>
+
+    <clr-tab>
+        <button clrTabLink>Nuovo utente</button>
+        <ng-template [(clrIfActive)]="managementActive">
+            <clr-tab-content>
+                <clr-toggle-container clrInline>
+                    <label>INSERISCI NUOVO UTENTE</label>
+                    <clr-toggle-wrapper>
+                        <input type="checkbox" clrToggle name="options" required value="true" [(ngModel)]="options" />
+                        <label>Esegui</label>
+                    </clr-toggle-wrapper>
+                </clr-toggle-container>
+
+                <form *ngIf="options" clrForm #newUtente="ngForm" (submit)="onAddUtente(newUtente)">
+                    <clr-input-container>
+                        <label>Username</label>
+                        <input clrInput type="text" [(ngModel)]="newUtente.username" name="username" required />
+                        <clr-control-error>Obbligatorio</clr-control-error>
+                    </clr-input-container>
+                    <clr-input-container>
+                        <label>Mail (Optional)</label>
+                        <input clrInput type="text" [(ngModel)]="newUtente.email" name="email" />
+                    </clr-input-container>
+                    <clr-select-container>
+                        <label>Ruolo</label>
+                        <select clrSelect name="ruolo" [(ngModel)]="newUtente.ruolo" required>
+                            <option value="1">Admin</option>
+                            <option value="2">Giocatore</option>
+                            <option value="3">Visitatore</option>
+                        </select>
+                        <clr-control-error>Obbligatorio</clr-control-error>
+                    </clr-select-container>
+                    <button class="btn btn-primary btn-sm" [disabled]="newUtente.invalid">Aggiungi</button>
+                </form>
+            </clr-tab-content>
+        </ng-template>
+    </clr-tab>
+
+    <clr-tab>
+        <button clrTabLink>Calendario</button>
+        <ng-template [(clrIfActive)]="cloudActive">
+            <clr-tab-content>
+                
+                <clr-datagrid>
+                    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50"></clr-dg-column>
+                    <clr-dg-column>partita</clr-dg-column>
+                    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">golc</clr-dg-column>
+                    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">golt</clr-dg-column>
+
+                    <clr-dg-row *clrDgItems="let match of partite;let i = index;" [clrDgItem]="match">
+                     
+                        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
+                            <clr-icon shape="administrator" class="is-solid"(click)="onEditMatch(match);basic = true"></clr-icon></clr-dg-cell>
+                        <clr-dg-cell>{{match.partita}}</clr-dg-cell>
+                        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{match.goalc}}</clr-dg-cell>
+                        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{match.goalt}}</clr-dg-cell>
+                    </clr-dg-row>
+
+                </clr-datagrid>
+
+                <clr-modal [(clrModalOpen)]="basic">
+                    <h3 class="modal-title">AGGIORNA MATCH</h3>
+                    <div class="modal-body">
+                        <form clrForm (submit)="onUpdateMatch(newMatch);basic = false">                            
+                            <clr-input-container>
+                                <label>Partita</label>
+                                <input clrInput type="text" [(ngModel)]="newMatch.partita" name="partita" required />
+                                <clr-control-error>Obbligatorio</clr-control-error>
+                            </clr-input-container>
+                            <clr-input-container>
+                                <label>Goals casa</label>
+                                <input clrInput type="text" [(ngModel)]="newMatch.goalc" name="goalc" required />
+                            </clr-input-container>
+                            <clr-input-container>
+                                <label>Goals trasterta</label>
+                                <input clrInput type="text" [(ngModel)]="newMatch.goalt" name="goalt" required />
+                            </clr-input-container>
+                            <br>
+                            <button class="btn btn-primary" [disabled]="newMatch.invalid" style="float: right;">Aggiorna</button>
+                            <button type="button" class="btn btn-outline" (click)="basic = false" style="float: right;">Annulla</button>
+                        </form>
+                    </div>
+   
+                </clr-modal>
+            </clr-tab-content>
+        </ng-template>
+    </clr-tab>
+
+   
+</clr-tabs>
