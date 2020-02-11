@@ -5,6 +5,7 @@ import { WS_BASE_URL } from '../classi/utils/costanti'
 export class HttpSenderService {
 
   
+  
  buildURL(operation: string = ""): string {
  
     let URL: string = WS_BASE_URL
@@ -24,8 +25,19 @@ export class HttpSenderService {
   }
 
   isadmin(){
-    let ruolo= JSON.parse(localStorage.getItem("tk-user")).ruolo
+    let ruolo= this.ruolo();
     if(ruolo==1){
+      return true
+    }
+    else
+    {
+      return false
+    }
+  }
+    
+  isPlayer(){
+    let ruolo= this.ruolo();
+    if(ruolo<3){
       return true
     }
     else
