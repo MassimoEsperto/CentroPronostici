@@ -7,9 +7,7 @@ import { PronosticoRoutingModule } from './pronostico-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ClrIconModule } from '@clr/angular';
 import { ClarityModule } from "@clr/angular";
-import { GestioneComponent } from './gestione/gestione.component';
-import { InserimentoComponent } from './inserimento/inserimento.component';
-import { VisualizzaComponent } from './visualizza/visualizza.component';
+import { GestioneComponent } from './gestione-utente/gestione-utente.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -18,10 +16,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 import { SideBarComponent } from './side-bar/side-bar.component';
+import { InserimentoPronosticoComponent } from './inserimento-pronostico/inserimento-pronostico.component';
+import { ListaPronosticiComponent } from './lista-pronostici/lista-pronostici.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, GestioneComponent, InserimentoComponent, VisualizzaComponent, SideBarComponent],
+  declarations: [DashboardComponent, GestioneComponent, SideBarComponent, InserimentoPronosticoComponent, ListaPronosticiComponent],
   imports: [
     CommonModule,
     PronosticoRoutingModule,
