@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Utente } from 'src/app/classi/model/utente';
-import { GestioneService } from 'src/app/services/gestione.service';
+import { GestioneUtenteService } from 'src/app/services/gestione-utente.service';
 import { SUCCESS } from 'src/app/classi/utils/costanti';
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginRegisterComponent implements OnInit {
   utenti: Utente[];
   esistente:Boolean;
   
-  constructor(private utenteService: GestioneService) {}
+  constructor(private utenteService: GestioneUtenteService) {}
 
   ngOnInit() {
     this.getUtenti();
