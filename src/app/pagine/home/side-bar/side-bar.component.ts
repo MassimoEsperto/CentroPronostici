@@ -1,6 +1,6 @@
 import { User } from 'src/app/classi/model/user';
 import { Component, OnInit } from '@angular/core';
-import { InserimentoService } from 'src/app/services/inserimento.service';
+import { GestionePronosticiService } from 'src/app/services/gestione-pronostici.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -10,13 +10,13 @@ import { InserimentoService } from 'src/app/services/inserimento.service';
 export class SideBarComponent implements OnInit{
   username:string;
   isAdmin:boolean;
+  loading:boolean=true;
   
-  constructor(private service: InserimentoService) { }
+  constructor(private service: GestionePronosticiService) { }
 
    ngOnInit() {
     this.isAdmin=this.service.isadmin();
     this.username=this.service.username();
    }
-  
  
  }
