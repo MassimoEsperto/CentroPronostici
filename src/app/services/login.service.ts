@@ -9,7 +9,6 @@ import { HttpSenderService } from './http-sender-service';
   providedIn: 'root'
 })
 export class LoginService extends HttpSenderService {
-  baseUrl = 'http://marescafantaeuropeo.altervista.org/webServices';
   users: User[];
   constructor(private http:HttpClient) {super();}
 
@@ -19,7 +18,7 @@ export class LoginService extends HttpSenderService {
     const params = new HttpParams()
     .set('user', username).set('pass', pass);
    console.log('call servizio di login');
-    return this.http.get<User[]>(`${this.baseUrl}/login.php`, { params: params  })
+    return this.http.get<User[]>(`${this.buildURL("GestioneLogin/login")}`, { params: params  })
     .pipe(map((res) => {
       if('negato'==res['data'])
       {
