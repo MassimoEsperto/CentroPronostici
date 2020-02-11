@@ -4,12 +4,30 @@ export class Calendario {
     data:Date;
     goalc:number;
     goalt:number;
-   
+    risultato:string;
+    doppiachance1:string;
+    doppiachance2:string;
+    underOver:string;
+    risEsatto:string;
+    pariDispari:string;
+    golNogol:string;
+
+
+
       constructor(
         id_calendario:number,
         partita:string,
         data:Date,
         goalc:number,
-        goalt:number) {}
+        goalt:number,
+        risultato:string,
+        doppiachance1:string,
+        doppiachance2:string,
+        underOver:string,
+        risEsatto:string,
+        pariDispari:string,
+        golNogol:string       
+        
+        ) {}
     }
     
