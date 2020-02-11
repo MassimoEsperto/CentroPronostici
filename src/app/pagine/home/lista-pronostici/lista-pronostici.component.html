@@ -1,0 +1,21 @@
+<p>in questa sessione ogni giocatore potra vedere la lista delle sue scommesse giocate in precedenza per mentre l admin potra vedere tutte le liste di pronostici</p>
+
+<span *ngIf="loading" class="spinner"></span>
+    <clr-datagrid *ngIf="pronostico">
+        <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">view</clr-dg-column>
+        <clr-dg-column>num_schedina</clr-dg-column>
+        <clr-dg-column>data</clr-dg-column>
+        <clr-dg-column>pt.totali</clr-dg-column>
+        <clr-dg-row *clrDgItems="let scheda of pronostico;let i = index;" [clrDgItem]="match">
+         
+            <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
+                <clr-icon shape="administrator" class="is-solid"(click)="onEditScheda(scheda);basic = true"></clr-icon></clr-dg-cell>
+                <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{i+1}}</clr-dg-cell>
+            <clr-dg-cell>{{scheda.tempo}}</clr-dg-cell>
+            <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">0</clr-dg-cell>
+        </clr-dg-row>
+    
+    </clr-datagrid>
+   
+    
+    
