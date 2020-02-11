@@ -1,11 +1,11 @@
 import { SideBarComponent } from './side-bar/side-bar.component';
-import { GestioneComponent } from './gestione/gestione.component';
+import { GestioneComponent } from './gestione-utente/gestione-utente.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { InserimentoComponent } from './inserimento/inserimento.component';
-import { VisualizzaComponent } from './visualizza/visualizza.component';
 import { AuthGuard } from 'src/app/classi/auth-guard';
+import { InserimentoPronosticoComponent } from './inserimento-pronostico/inserimento-pronostico.component';
+import { ListaPronosticiComponent } from './lista-pronostici/lista-pronostici.component';
 
 
 const routes: Routes = [
@@ -19,16 +19,16 @@ const routes: Routes = [
                 component: DashboardComponent
             },
             {
-                path: 'gestione',
+                path: 'gestione-utente',
                 component: GestioneComponent
             },
             {
-                path: 'inserimento',
-                component: InserimentoComponent
+                path: 'inserimento-pronostico',
+                component: InserimentoPronosticoComponent
             },
             {
-                path: 'visualizza',
-                component: VisualizzaComponent
+                path: 'lista-pronostici',
+                component: ListaPronosticiComponent
             }
            
         ]
