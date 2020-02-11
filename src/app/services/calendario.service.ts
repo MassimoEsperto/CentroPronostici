@@ -1,3 +1,4 @@
+import { ScommesseAntepost } from 'src/app/classi/model/scommesse-antepost';
 import { Injectable } from '@angular/core';
 import { Calendario } from '../classi/model/calendario';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -11,6 +12,7 @@ import { HttpSenderService } from './http-sender-service';
 export class CalendarioService extends HttpSenderService {
  
   calendario: Calendario[];
+  altrescommesse : ScommesseAntepost[];
   
   constructor(private http: HttpClient) {
     super();
@@ -27,6 +29,18 @@ export class CalendarioService extends HttpSenderService {
       catchError(this.handleError));
     }
 
+    getAltreScommesse(): Observable<ScommesseAntepost[]> {
+      return this.http.get(`${this.buildURL("GestioneCalendario/altreList")}`).pipe(
+        map((res) => {
+      
+          this.altrescommesse = res['data'];
+          console.log(res['data']);
+          return this.altrescommesse;
+      }),
+      catchError(this.handleError));
+    }
+
+    
     update(calendario: Calendario): Observable<Calendario[]> {
       console.log('call servizio');
       console.log(calendario);
@@ -46,6 +60,19 @@ export class CalendarioService extends HttpSenderService {
         catchError(this.handleError));
     }
 
-   
+    updateAltri(altre: ScommesseAntepost): Observable<ScommesseAntepost[]> {
+      return this.http.put(`${this.buildURL("GestioneCalendario/updateAltreScommesse")}`, { data: altre })
+        .pipe(map((res) => {
+          const theMatch = this.altrescommesse.find((item) => {
+            return +item['id_calendario'] === +altre['id_calendario'];
+          });
+          if (theMatch) {
+            theMatch['scommessa'] = altre['scommessa'];
+            theMatch['risultato'] = altre['risultato'];
+          }
+          return this.altrescommesse;
+        }),
+        catchError(this.handleError));
+    }
     
 }
