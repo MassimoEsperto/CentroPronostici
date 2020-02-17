@@ -18,10 +18,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { InserimentoPronosticoComponent } from './inserimento-pronostico/inserimento-pronostico.component';
 import { ListaPronosticiComponent } from './lista-pronostici/lista-pronostici.component';
+import { ClassificaComponent } from './classifica/classifica.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, GestioneComponent, SideBarComponent, InserimentoPronosticoComponent, ListaPronosticiComponent],
+  declarations: [DashboardComponent, GestioneComponent, SideBarComponent, InserimentoPronosticoComponent, ListaPronosticiComponent, ClassificaComponent],
   imports: [
     CommonModule,
     PronosticoRoutingModule,
