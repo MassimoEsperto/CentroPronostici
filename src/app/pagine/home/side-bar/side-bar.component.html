@@ -15,13 +15,16 @@
         <a mat-list-item [routerLink]="'/home/dashboard'" (click)="sidenav.toggle()">
           <clr-icon  shape="file-group"></clr-icon>Home</a>  
         <a *ngIf="isAdmin" mat-list-item [routerLink]="'/home/gestione-utente'" (click)="sidenav.toggle()">
-            <clr-icon  shape="user"></clr-icon>Gestione	Utenti</a>
-            <a mat-list-item [routerLink]="'/home/lista-pronostici'"(click)="sidenav.toggle()">
-            <clr-icon  shape="file-group"></clr-icon>Liste Pronostici</a>  
-              <a mat-list-item [routerLink]="'/home/inserimento-pronostico'" (click)="sidenav.toggle()">
+            <clr-icon  shape="user"></clr-icon>Gestione	Admin</a>
+            <a *ngIf="isPlayer" mat-list-item [routerLink]="'/home/lista-pronostici'"(click)="sidenav.toggle()">
+            <clr-icon  shape="file-group"></clr-icon>Pronostici Peronali</a>  
+              <a *ngIf="isPlayer" mat-list-item [routerLink]="'/home/inserimento-pronostico'" (click)="sidenav.toggle()">
             <clr-icon  shape="copy-to-clipboard"></clr-icon>Insert Pronostico</a>		
+            <a mat-list-item [routerLink]="'/home/classifica'"(click)="sidenav.toggle()">
+              <clr-icon  shape="home"></clr-icon>Classifica</a>
             <a mat-list-item [routerLink]="'/login'"(click)="sidenav.toggle()">
             <clr-icon  shape="home"></clr-icon>Exit</a>
+            
             <a mat-list-item (click)="sidenav.toggle()" mat-list-item>Close</a>
       </mat-nav-list>
     </mat-sidenav>
