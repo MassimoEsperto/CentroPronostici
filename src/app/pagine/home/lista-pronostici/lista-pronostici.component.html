@@ -9,13 +9,109 @@
         <clr-dg-row *clrDgItems="let scheda of pronostico;let i = index;" [clrDgItem]="match">
          
             <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
-                <clr-icon shape="administrator" class="is-solid"(click)="onEditScheda(scheda);basic = true"></clr-icon></clr-dg-cell>
+                <clr-icon shape="help-info" class="is-solid"(click)="onEditScheda(scheda);basic = true"></clr-icon></clr-dg-cell>
                 <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{i+1}}</clr-dg-cell>
             <clr-dg-cell>{{scheda.tempo}}</clr-dg-cell>
             <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">0</clr-dg-cell>
         </clr-dg-row>
     
     </clr-datagrid>
-   
+   <br>
+
+    <clr-datagrid *ngIf="play&&schede">
+        <clr-dg-column>scommessa</clr-dg-column>
+        <clr-dg-column>risultato</clr-dg-column>
+    
+        <clr-dg-row *clrDgItems="let match of schede;let i = index;" [clrDgItem]="match">
+         
+            
+            <clr-dg-cell>{{match.partita}}</clr-dg-cell>
+            <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50" >
+                <a *ngIf="match.tipo==1" (click)="onEditMatch(i);risultatiModal = true" >{{match.risultato}}</a>
+                <a *ngIf="match.id_partita==39||match.id_partita==41 ||match.id_partita==42" (click)="onEditMatch(i);scquadreModal = true">{{match.risultato}}</a>
+                <a *ngIf="match.id_partita==40" (click)="onEditMatch(i);cannonieriModal = true">{{match.risultato}}</a>
+                <a *ngIf="match.id_partita>42" (click)="onEditMatch(i);gironiModal = true">{{match.risultato}}</a>
+            </clr-dg-cell>
+       
+        </clr-dg-row>
+        
+    
+    </clr-datagrid>
+ 
+    
+    <div *ngIf="partita_sel&&combosel&&getItemsGirone(partita_sel.partita)">
+    
+    <clr-modal  [(clrModalOpen)]="risultatiModal">
+        <h3 class="modal-title">{{partita_sel.partita}}</h3>
+        <div class="modal-body">
+            <form clrForm (submit)="onUpdateMatch(partita_sel);risultatiModal = false">                            
+                <clr-radio-container clrInline>
+                    <label>Risultati Match</label>
+                    <clr-radio-wrapper *ngFor="let ris of combosel.risultati">
+                      <input type="radio" clrRadio name="partita_sel.risultato"  [value]="ris" [(ngModel)]="partita_sel.risultato" />
+                      <label>{{ris}}</label>
+                    </clr-radio-wrapper>
+                  </clr-radio-container>  
+                  <br>
+                    <button class="btn btn-primary" [disabled]="partita_sel.invalid" style="float: right;">Aggiorna</button>
+                    <button type="button" class="btn btn-outline" (click)="risultatiModal = false" style="float: right;">Annulla</button>
+            </form>
+            
+        </div>
+    </clr-modal>
+    
+    <clr-modal  [(clrModalOpen)]="cannonieriModal">
+        <h3 class="modal-title">{{partita_sel.partita}}</h3>
+        <div class="modal-body">
+            <form clrForm (submit)="onUpdateMatch(partita_sel);cannonieriModal = false">                             
+                <clr-select-container>
+                    <label>Seleziona</label>
+                    <select clrSelect name="partita_sel.risultato" [(ngModel)]="partita_sel.risultato" >
+                      <option *ngFor="let item of combosel.cannonieri" [value]="item">{{item}}</option>
+                    </select>
+                  </clr-select-container>
+                  <br>
+                    <button class="btn btn-primary" [disabled]="partita_sel.invalid" style="float: right;">Aggiorna</button>
+                    <button type="button" class="btn btn-outline" (click)="cannonieriModal = false" style="float: right;">Annulla</button>
+            </form>
+        </div>
+    </clr-modal>
+    
+    <clr-modal  [(clrModalOpen)]="scquadreModal">
+        <h3 class="modal-title">{{partita_sel.partita}}</h3>
+        <div class="modal-body">
+            <form clrForm (submit)="onUpdateMatch(partita_sel);scquadreModal = false">                             
+                <clr-select-container>
+                    <label>Seleziona</label>
+                    <select clrSelect name="partita_sel.risultato" [(ngModel)]="partita_sel.risultato" >
+                      <option *ngFor="let item of combosel.squadre" [value]="item.squadre">{{item.squadre}}</option>
+                    </select>
+                  </clr-select-container>
+                  <br>
+                    <button class="btn btn-primary" [disabled]="partita_sel.invalid" style="float: right;">Aggiorna</button>
+                    <button type="button" class="btn btn-outline" (click)="scquadreModal = false" style="float: right;">Annulla</button>
+            </form>
+        </div>
+    </clr-modal>
+    
+    <clr-modal  [(clrModalOpen)]="gironiModal">
+        <h3 class="modal-title">{{partita_sel.partita}}</h3>
+        <div class="modal-body">
+            <form clrForm (submit)="onUpdateMatch(partita_sel);gironiModal = false">                             
+                <clr-select-container>
+                    <label>Seleziona</label>
+                    <select clrSelect name="partita_sel.risultato" [(ngModel)]="partita_sel.risultato" >
+                      <option *ngFor="let item of getItemsGirone(partita_sel.partita)" [value]="item.squadre">{{item.squadre}}</option>
+                    </select>
+                  </clr-select-container>
+                  <br>
+                    <button class="btn btn-primary" [disabled]="partita_sel.invalid" style="float: right;">Aggiorna</button>
+                    <button type="button" class="btn btn-outline" (click)="gironiModal = false" style="float: right;">Annulla</button>
+            </form>
+        </div>
+    </clr-modal>
+    
+    </div>
+    
     
     
