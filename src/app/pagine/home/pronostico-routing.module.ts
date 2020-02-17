@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from 'src/app/classi/auth-guard';
 import { InserimentoPronosticoComponent } from './inserimento-pronostico/inserimento-pronostico.component';
 import { ListaPronosticiComponent } from './lista-pronostici/lista-pronostici.component';
+import { ClassificaComponent } from './classifica/classifica.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,10 @@ const routes: Routes = [
             {
                 path: 'lista-pronostici',
                 component: ListaPronosticiComponent
+            },
+            {
+                path: 'classifica',
+                component: ClassificaComponent
             }
            
         ]
