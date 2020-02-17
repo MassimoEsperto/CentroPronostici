@@ -69,7 +69,7 @@
             </clr-tab-content>
         </ng-template>
     </clr-tab>
-
+<!--
     <clr-tab>
         <button clrTabLink>Nuovo</button>
         <ng-template [(clrIfActive)]="managementActive">
@@ -106,7 +106,7 @@
             </clr-tab-content>
         </ng-template>
     </clr-tab>
-
+-->
     <clr-tab>
         <button clrTabLink>Calendario</button>
         <ng-template [(clrIfActive)]="calendarioActive">
@@ -170,9 +170,9 @@
                      
                         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
                            
-                            <clr-icon *ngIf="match.id_calendario==39||match.id_calendario==41 ||match.id_calendario==42" shape="administrator" class="is-solid"(click)="onEditAltreScommesse(match);scquadreModal = true"></clr-icon>
-                            <clr-icon *ngIf="match.id_calendario==40" shape="administrator" class="is-solid"(click)="onEditAltreScommesse(match);cannonieriModal = true"></clr-icon>
-                            <clr-icon *ngIf="match.id_calendario>42" shape="administrator" class="is-solid"(click)="onEditAltreScommesse(match);gironiModal = true"></clr-icon>
+                            <clr-icon *ngIf="match.id_partita==39||match.id_partita==41 ||match.id_partita==42" shape="administrator" class="is-solid"(click)="onEditScommesseAntepost(match);scquadreModal = true"></clr-icon>
+                            <clr-icon *ngIf="match.id_partita==40" shape="administrator" class="is-solid"(click)="onEditScommesseAntepost(match);cannonieriModal = true"></clr-icon>
+                            <clr-icon *ngIf="match.id_partita>42" shape="administrator" class="is-solid"(click)="onEditScommesseAntepost(match);gironiModal = true"></clr-icon>
                         </clr-dg-cell>
                             <clr-dg-cell>{{match.scommessa}}</clr-dg-cell>
                         <clr-dg-cell>{{match.risultato}}</clr-dg-cell>
@@ -183,7 +183,7 @@
                 <clr-modal [(clrModalOpen)]="altreModel">
                     <h3 class="modal-title">AGGIORNA SCOMMESSA</h3>
                     <div class="modal-body">
-                        <form clrForm (submit)="onUpdateAltreScommesse(newAltreScommesse);altreModel = false">                            
+                        <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);altreModel = false">                            
                             <clr-input-container>
                                 <label>Scommessa</label>
                                 <input clrInput type="text" [(ngModel)]="newAltreScommesse.scommessa" name="scommessa" required />
@@ -205,7 +205,7 @@
                 <clr-modal  [(clrModalOpen)]="scquadreModal">
                     <h3 class="modal-title">{{newAltreScommesse.scommessa}}</h3>
                     <div class="modal-body">
-                        <form clrForm (submit)="onUpdateAltreScommesse(newAltreScommesse);scquadreModal = false">                             
+                        <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);scquadreModal = false">                             
                             <clr-select-container>
                                 <label>Seleziona</label>
                                 <select clrSelect name="newAltreScommesse.risultato" [(ngModel)]="newAltreScommesse.risultato" >
@@ -222,7 +222,7 @@
                 <clr-modal  [(clrModalOpen)]="gironiModal">
                     <h3 class="modal-title">{{newAltreScommesse.scommessa}}</h3>
                     <div class="modal-body">
-                        <form clrForm (submit)="onUpdateAltreScommesse(newAltreScommesse);gironiModal = false">                             
+                        <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);gironiModal = false">                             
                             <clr-select-container>
                                 <label>Seleziona</label>
                                 <select clrSelect name="newAltreScommesse.risultato" [(ngModel)]="newAltreScommesse.risultato" >
@@ -239,7 +239,7 @@
                 <clr-modal  [(clrModalOpen)]="cannonieriModal">
                     <h3 class="modal-title">{{newAltreScommesse.scommessa}}</h3>
                     <div class="modal-body">
-                        <form clrForm (submit)="onUpdateAltreScommesse(newAltreScommesse);cannonieriModal = false">                             
+                        <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);cannonieriModal = false">                             
                             <clr-select-container>
                                 <label>Seleziona</label>
                                 <select clrSelect name="newAltreScommesse.risultato" [(ngModel)]="newAltreScommesse.risultato" >
