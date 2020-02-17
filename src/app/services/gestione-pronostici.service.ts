@@ -12,6 +12,7 @@ import { Pronostici } from '../classi/model/pronostici';
 export class GestionePronosticiService extends HttpSenderService {
 
   scheda: Schedina[];
+  schedaPiena: Schedina[];
   pronostico:Pronostici[];
   private risultatiClassici = ['1', 'X', '2', '1X', 'X2','OVER','UNDER','GOL','NOGOL','PARI','DISPARI'];
   private risultatiEsatti = ['1-0', '2-0','3-0','4-0','5-0','2-1','3-1','4-1','5-1','3-2','4-2','5-2','4-3','5-3','5-4',
@@ -70,8 +71,8 @@ schedinaPiena(id_schedina:number){
   return this.http.get<Schedina[]>(`${this.buildURL("GestioneSchedina/schedinaPiena")}`, { params: params  })
   .pipe(map((res) => {
     console.log('ritorno schedina');
-    this.scheda = res['data'];
-    return this.scheda;
+    this.schedaPiena = res['data'];
+    return this.schedaPiena;
 
   }),
   catchError(this.handleError));
@@ -89,7 +90,30 @@ insert(pronostico: Schedina[]){
  return this.http.post(`${this.buildURL("GestionePronostici/insert")}`, { data: pronostico })
     .pipe(map((res) => {
       console.log("ritorno",res['data']);
-      return "OK";
+      return res['data'];
+    }),
+    catchError(this.handleError));
+}
+/**
+ * 
+ * @param pronostico 
+ * modifica del pronostico
+ */
+update(pronostico: Schedina){
+  console.log("pronostico",pronostico);
+  console.log(JSON.stringify(pronostico));
+
+ return this.http.post(`${this.buildURL("GestionePronostici/update")}`, { data: pronostico })
+    .pipe(map((res) => {
+      const scheda = this.schedaPiena.find((item) => {
+        return item['id_partita'] === pronostico['id_partita'];
+      });
+      if (scheda) {
+        scheda['risultato'] = pronostico['risultato'];
+      }
+      return this.schedaPiena;
+
+      return res['data'];
     }),
     catchError(this.handleError));
 }
