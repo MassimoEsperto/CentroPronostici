@@ -48,7 +48,7 @@ export class LoginRegisterComponent implements OnInit {
       return;
     }
 
-    this.newUtente.ruolo=2;
+    this.newUtente.ruolo=3;
     console.log(this.newUtente);
    
   
