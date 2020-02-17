@@ -57,14 +57,14 @@ export class GestioneComponent implements OnInit {
   }
   
   onEditMatch(match){
-    this.newMatch.id_calendario=match.id_calendario;
+    this.newMatch.id_partita=match.id_partita;
     this.newMatch.partita=match.partita;
     this.newMatch.goalc=match.goalc;
     this.newMatch.goalt=match.goalt;
   }
 
-  onEditAltreScommesse(scommesse){
-    this.newAltreScommesse.id_calendario=scommesse.id_calendario;
+  onEditScommesseAntepost(scommesse){
+    this.newAltreScommesse.id_partita=scommesse.id_partita;
     this.newAltreScommesse.scommessa=scommesse.scommessa;
     this.newAltreScommesse.risultato=scommesse.risultato;
   }
@@ -85,7 +85,7 @@ getCalendario(): void {
 
 getAltrescommesse(): void{
 
- this.calendarioService.getAltreScommesse()
+ this.calendarioService.getScommesseAntepost()
  .subscribe({
 
   next: (result: ScommesseAntepost[]) => {
@@ -142,7 +142,7 @@ onUpdateMatch(newMatch){
 
 
   this.calendarioService.update({ 
-    id_calendario: this.newMatch.id_calendario, 
+    id_partita: this.newMatch.id_partita, 
     partita: this.newMatch.partita,
     data:null, 
     goalc: this.newMatch.goalc, 
@@ -175,12 +175,12 @@ onUpdateMatch(newMatch){
 }
 
 //update delle scommesse antepost
-onUpdateAltreScommesse(newScommessa){
+updateScommesseAntepost(newScommessa){
   this.newAltreScommesse=newScommessa;
   this.resetErrors();
 
-  this.calendarioService.updateAltri({ 
-    id_calendario: this.newAltreScommesse.id_calendario, 
+  this.calendarioService.updateScommesseAntepost({ 
+    id_partita: this.newAltreScommesse.id_partita, 
     scommessa: this.newAltreScommesse.scommessa, 
     risultato:this.newAltreScommesse.risultato 
   })
@@ -271,19 +271,7 @@ onUpdateAltreScommesse(newScommessa){
     );
   }
 
-  onDeleteBomber(bomber:string)
-  {
-    const index: number = this.combosel.cannonieri.indexOf(bomber);
-    if (index !== -1) {
-        this.combosel.cannonieri.splice(index, 1);
-    }  
-  }
-
-  onAddBomber(bomber){
-
-    this.combosel.cannonieri.push(bomber);
-    this.newBomber='';
-  }
+ 
 
   onUpdateUtente(newUtente){
     this.newUtente=newUtente;
@@ -310,6 +298,57 @@ onUpdateAltreScommesse(newScommessa){
     return this.combosel.squadre.filter((item) => item.girone == girone);
   }
 
+
+
+  onAddBomber(bomber:string){
+
+    this.resetErrors();
+
+    this.calendarioService.insertBomber(bomber)
+    .subscribe({
+  
+    next: (result: string) => { 
+
+        this.combosel.cannonieri.push(result);
+        this.newBomber='';
+
+    },
+    error: (error: any) => {
+  
+      // Stampa messaggio d'errore
+      this.error = error
+  
+    }
+  })
+  }
+
+  onDeleteBomber(bomber:string){
+
+    this.resetErrors();
+
+    this.calendarioService.deleteBomber(bomber)
+    .subscribe({
+  
+    next: (result: string) => { 
+
+      const index: number = this.combosel.cannonieri.indexOf(result);
+      if (index !== -1) {
+          this.combosel.cannonieri.splice(index, 1);
+      }  
+       
+
+    },
+    error: (error: any) => {
+  
+      // Stampa messaggio d'errore
+      this.error = error
+  
+    }
+  })
+  }
+
+
+
 successo(){
   this.success = SUCCESS;
   setTimeout(() => {
@@ -317,5 +356,7 @@ successo(){
   }, 5000);
 
 }
+
+
 
 }
