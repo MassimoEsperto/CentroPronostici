@@ -1,7 +1,7 @@
 import { ScommesseAntepost } from 'src/app/classi/model/scommesse-antepost';
 import { Injectable } from '@angular/core';
 import { Calendario } from '../classi/model/calendario';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { HttpSenderService } from './http-sender-service';
@@ -29,12 +29,12 @@ export class CalendarioService extends HttpSenderService {
       catchError(this.handleError));
     }
 
-    getAltreScommesse(): Observable<ScommesseAntepost[]> {
-      return this.http.get(`${this.buildURL("GestioneCalendario/altreList")}`).pipe(
+    getScommesseAntepost(): Observable<ScommesseAntepost[]> {
+      return this.http.get(`${this.buildURL("GestioneCalendario/listAntepost")}`).pipe(
         map((res) => {
       
           this.altrescommesse = res['data'];
-          console.log(res['data']);
+          console.log("Antepost",res['data']);
           return this.altrescommesse;
       }),
       catchError(this.handleError));
@@ -48,7 +48,7 @@ export class CalendarioService extends HttpSenderService {
         .pipe(map((res) => {
           console.log('update effettuato');
           const theMatch = this.calendario.find((item) => {
-            return +item['id_calendario'] === +calendario['id_calendario'];
+            return +item['id_partita'] === +calendario['id_partita'];
           });
           if (theMatch) {
             theMatch['partita'] = calendario['partita'];
@@ -60,11 +60,11 @@ export class CalendarioService extends HttpSenderService {
         catchError(this.handleError));
     }
 
-    updateAltri(altre: ScommesseAntepost): Observable<ScommesseAntepost[]> {
-      return this.http.put(`${this.buildURL("GestioneCalendario/updateAltreScommesse")}`, { data: altre })
+    updateScommesseAntepost(altre: ScommesseAntepost): Observable<ScommesseAntepost[]> {
+      return this.http.put(`${this.buildURL("GestioneCalendario/updateScommesseAntepost")}`, { data: altre })
         .pipe(map((res) => {
           const theMatch = this.altrescommesse.find((item) => {
-            return +item['id_calendario'] === +altre['id_calendario'];
+            return +item['id_partita'] === +altre['id_partita'];
           });
           if (theMatch) {
             theMatch['scommessa'] = altre['scommessa'];
@@ -74,5 +74,34 @@ export class CalendarioService extends HttpSenderService {
         }),
         catchError(this.handleError));
     }
+
+    insertBomber(bomber: string): Observable<string> {
+      console.log(bomber);
+      const params = new HttpParams().set('nome', bomber);
+  
+     return this.http.get(`${this.buildURL("GestioneBomber/insert")}`, { params: params })
+        .pipe(map((res) => {
+         
+          let cannoniere=(res['data'].nome);
+         
+          return cannoniere;
+        }),
+        catchError(this.handleError));
+    }
+
+    deleteBomber(bomber: string): Observable<string> {
+      console.log(bomber);
+      const params = new HttpParams().set('nome', bomber);
+  
+     return this.http.get(`${this.buildURL("GestioneBomber/delete")}`, { params: params })
+        .pipe(map((res) => {
+         
+          let cannoniere=(res['data'].nome);
+         
+          return cannoniere;
+        }),
+        catchError(this.handleError));
+    }
+  
     
 }
