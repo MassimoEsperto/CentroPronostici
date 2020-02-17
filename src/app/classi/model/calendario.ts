@@ -1,5 +1,5 @@
 export class Calendario {
-    id_calendario:number;
+  id_partita:number;
     partita:string;
     data:Date;
     goalc:number;
@@ -15,7 +15,7 @@ export class Calendario {
 
 
       constructor(
-        id_calendario:number,
+        id_partita:number,
         partita:string,
         data:Date,
         goalc:number,
