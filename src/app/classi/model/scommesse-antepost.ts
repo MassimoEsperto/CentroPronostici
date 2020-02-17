@@ -1,10 +1,10 @@
 export class ScommesseAntepost {
-    id_calendario:number;
+  id_partita:number;
     scommessa:string;
     risultato:string;
    
       constructor(
-        id_calendario:number,
+        id_partita:number,
         scommessa:string,
         risultato:string) {}
     }
