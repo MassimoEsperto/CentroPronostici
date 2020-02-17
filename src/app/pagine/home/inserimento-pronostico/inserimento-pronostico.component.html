@@ -1,26 +1,43 @@
 <span *ngIf="loading" class="spinner"></span>
+<clr-alert *ngIf="success" [clrAlertType]="'success'">
+    <clr-alert-item>
+        <span class="alert-text">{{success}}</span>
+    </clr-alert-item>
+</clr-alert>
+<clr-alert *ngIf="error" [clrAlertType]="'warning'">
+    <clr-alert-item>
+        <span class="alert-text">{{error}}</span>
+    </clr-alert-item>
+</clr-alert>
+
 <div class="bottoni">
 <button *ngIf="!play" class="btn btn-success btn-block" (click)="nuovaScheda()">INSERISCI NUOVA SCHEDA</button>
 </div>
 
-<form *ngIf="play&&schede"  (ngSubmit)="inserisciFormSubmit()">
+<form *ngIf="play&&schede"  (ngSubmit)="insertPronostico()">
 <clr-datagrid>
+    <clr-dg-column>Partita</clr-dg-column>
+    <clr-dg-column>Risultato</clr-dg-column>
     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50"></clr-dg-column>
-    <clr-dg-column>scommessa</clr-dg-column>
-    <clr-dg-column>risultato</clr-dg-column>
 
     <clr-dg-row *clrDgItems="let match of schede;let i = index;" [clrDgItem]="match">
      
-        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
-            <clr-icon *ngIf="match.tipo==1" shape="administrator" class="is-solid"(click)="onEditMatch(i);risultatiModal = true"></clr-icon>
-            <clr-icon *ngIf="match.id_partita==39||match.id_partita==41 ||match.id_partita==42" shape="administrator" class="is-solid"(click)="onEditMatch(i);scquadreModal = true"></clr-icon>
-            <clr-icon *ngIf="match.id_partita==40" shape="administrator" class="is-solid"(click)="onEditMatch(i);cannonieriModal = true"></clr-icon>
-            <clr-icon *ngIf="match.id_partita>42" shape="administrator" class="is-solid"(click)="onEditMatch(i);gironiModal = true"></clr-icon>
+        <clr-dg-cell *ngIf="match.id_partita<43">{{match.partita}}</clr-dg-cell>
+        <clr-dg-cell *ngIf="match.id_partita<43" [style.min-width.px]="50" [style.width.px]="50">{{match.risultato}}</clr-dg-cell>
+        <clr-dg-cell *ngIf="match.id_partita<43" [style.min-width.px]="50" [style.width.px]="50">
+            <clr-icon *ngIf="match.tipo==1" shape="pencil" class="is-solid"(click)="onEditMatch(i);risultatiModal = true"></clr-icon>
+            <clr-icon *ngIf="match.id_partita==39||match.id_partita==41 ||match.id_partita==42" shape="pencil" class="is-solid"(click)="onEditMatch(i);scquadreModal = true"></clr-icon>
+            <clr-icon *ngIf="match.id_partita==40" shape="pencil" class="is-solid"(click)="onEditMatch(i);cannonieriModal = true"></clr-icon>          
         </clr-dg-cell>
-        <clr-dg-cell>{{match.partita}}</clr-dg-cell>
-        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{match.risultato}}</clr-dg-cell>
+        <clr-dg-cell  *ngIf="match.id_partita>42 && machVisibile(match.id_partita)">{{match.partita}}</clr-dg-cell>
+        <clr-dg-cell *ngIf="match.id_partita>42 && machVisibile(match.id_partita)" [style.min-width.px]="50" [style.width.px]="50">{{schede[i].risultato}}-{{schede[i-1].risultato}}-{{schede[i-2].risultato}}-{{schede[i-3].risultato}}</clr-dg-cell>
+        <clr-dg-cell *ngIf="match.id_partita>42 && machVisibile(match.id_partita)" [style.min-width.px]="50" [style.width.px]="50">         
+            <clr-icon  shape="pencil" class="is-solid"(click)="onEditMatchMultiple(i);gironiModal = true"></clr-icon>
+        </clr-dg-cell>
+       
    
     </clr-dg-row>
+   
     
 
 </clr-datagrid>
@@ -77,18 +94,44 @@
     </div>
 </clr-modal>
 
-<clr-modal  [(clrModalOpen)]="gironiModal">
-    <h3 class="modal-title">{{partita_sel.partita}}</h3>
-    <div class="modal-body">
-        <form clrForm (submit)="onUpdateMatch(partita_sel);gironiModal = false">                             
-            <clr-select-container>
-                <label>Seleziona</label>
-                <select clrSelect name="partita_sel.risultato" [(ngModel)]="partita_sel.risultato" >
-                  <option *ngFor="let item of getItemsGirone(partita_sel.partita)" [value]="item.squadre">{{item.squadre}}</option>
-                </select>
-              </clr-select-container>
-        </form>
-    </div>
-</clr-modal>
+
 
 </div>
+
+<div *ngIf="partita_sel1 || partita_sel2 || partita_sel3 || partita_sel4">
+    <clr-modal  [(clrModalOpen)]="gironiModal">
+        <h3 class="modal-title">{{partita_sel1.partita}}</h3>
+        <div class="modal-body">
+            <form clrForm (submit)="onUpdateMatch(partita_sel);gironiModal = false">                             
+                <clr-select-container>
+                    <label>Prima</label>
+                    <select clrSelect name="prima" [(ngModel)]="partita_sel1.risultato" >
+                        <option value=""></option>
+                      <option *ngFor="let item of getItemsGirone(partita_sel1.partita)" [value]="item.squadre">{{item.squadre}}</option>
+                    </select>
+                  </clr-select-container>
+                  <clr-select-container>
+                    <label>Seconda</label>
+                    <select clrSelect name="seconda" [(ngModel)]="partita_sel2.risultato" >
+                        <option value=""></option>
+                      <option *ngFor="let item of getItemsGirone(partita_sel1.partita)" [value]="item.squadre">{{item.squadre}}</option>
+                    </select>
+                  </clr-select-container>
+                  <clr-select-container>
+                    <label>Terza</label>
+                    <select clrSelect name="terza" [(ngModel)]="partita_sel3.risultato" >
+                        <option value=""></option>
+                      <option *ngFor="let item of getItemsGirone(partita_sel1.partita)" [value]="item.squadre">{{item.squadre}}</option>
+                    </select>
+                  </clr-select-container>
+                  <clr-select-container>
+                    <label>Quarta</label>
+                    <select clrSelect name="quarta" [(ngModel)]="partita_sel4.risultato" >
+                        <option value=""></option>
+                      <option *ngFor="let item of getItemsGirone(partita_sel1.partita)" [value]="item.squadre">{{item.squadre}}</option>
+                    </select>
+                  </clr-select-container>
+            </form>
+        </div>
+    </clr-modal>
+    </div>
