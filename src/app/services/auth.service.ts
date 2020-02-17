@@ -66,7 +66,7 @@ export class AuthService extends HttpSenderService {
     console.log("token",token);
     let route = this.route.url
 
-    // Ritorna true se entrambi i token sono presenti nella sessione
+    // Ritorna true se il token è presente nella sessione
 
     return !!token
 
