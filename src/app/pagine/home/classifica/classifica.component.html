@@ -1,0 +1,22 @@
+<span *ngIf="loading" class="spinner"></span>
+
+
+<clr-tabs *ngIf="!loading">
+    <clr-tab>
+        <button clrTabLink>Classifica</button>
+        <ng-template [(clrIfActive)]="classificaActive">
+            <clr-tab-content>
+                <p>Classifica in lavorazione</p>
+            </clr-tab-content>
+        </ng-template>
+    </clr-tab>
+
+    <clr-tab>
+        <button clrTabLink>Lista pronostici</button>
+        <ng-template [(clrIfActive)]="listaActive">
+            <clr-tab-content>
+                <p>Lista pronostici in lavorazione</p>
+            </clr-tab-content>
+        </ng-template>
+    </clr-tab>
+</clr-tabs>
