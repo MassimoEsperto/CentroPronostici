@@ -20,9 +20,15 @@ export class InserimentoPronosticoComponent implements OnInit {
   error = '';
   success = '';
   partita_sel:Schedina //la partita che viene selezionata
+  
   id_schedina:number;
-  submitBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
   combosel:Combo;
+
+  //per le multiselect
+  partita_sel1:Schedina 
+  partita_sel2:Schedina 
+  partita_sel3:Schedina 
+  partita_sel4:Schedina 
   
   ngOnInit() {
     this.getCombo();
@@ -39,7 +45,7 @@ export class InserimentoPronosticoComponent implements OnInit {
       next: (res: number) => {
   
         console.log("res",res);
-        this.id_schedina = res;   
+        this.id_schedina =Number(res);   
         this.getSchedinaVuota();
         this.play=true;
        
@@ -55,29 +61,34 @@ export class InserimentoPronosticoComponent implements OnInit {
   
   }
 
-  inserisciFormSubmit() {
-    this.submitBtnState = ClrLoadingState.LOADING;
+insertPronostico() {
+ 
+    this.play=false;
+    this.loading=true;
+
     
 this.service.insert(this.schede)
 .subscribe({
    
      next: (result: string) => {
-    
-    setTimeout(() => {
-      console.log("oooooooooooooooooo");
-       if(result=="OK"){
-        this.success = SUCCESS; 
-        this.play=false;
+     
+       if(result['risposta']=='ko')
+       {
+        this.error = result['stato']
+        this.play=true;
        }
-       this.submitBtnState = ClrLoadingState.DEFAULT;
-  }, 10000);
-
+       else{
+        this.successo();
+       }
+    console.log("RISULTATO UINSERIMENTO: ",result);
+   
 
      },
      error: (error: any) => {
  
        // Stampa messaggio d'errore
        this.error = error
+       this.play=true;
  
      }
    })
@@ -138,9 +149,24 @@ getCombo(){
  */
   onEditMatch(indice){
     this.partita_sel=this.schede[indice];
-   //da verificare..  this.schede[indice].tipo=1;//indica che si tratta della parte delle scommesse riguardanti i risultati
+  }
+
+  onEditMatchMultiple(indice){
+    this.partita_sel1=this.schede[indice];
+    this.partita_sel2=this.schede[indice-1];
+    this.partita_sel3=this.schede[indice-2];
+    this.partita_sel4=this.schede[indice-3];
   }
   onUpdateMatch(match){
+  }
+
+  machVisibile(match){
+    let num=match-2;
+
+    if(num%4==0)
+    return true
+    else
+    return false
   }
 
   getItemsGirone(gir:string) {
@@ -150,4 +176,12 @@ getCombo(){
     return this.combosel.squadre.filter((item) => item.girone == girone);
   }
  
+  successo(){
+    this.success = SUCCESS;
+    this.loading=false;
+    setTimeout(() => {
+      this.success = '';
+    }, 5000);
+  
+  }
 }
