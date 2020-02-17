@@ -37,7 +37,7 @@ export class HttpSenderService {
     
   isPlayer(){
     let ruolo= this.ruolo();
-    if(ruolo<3){
+    if(ruolo==1 || ruolo==2){
       return true
     }
     else
