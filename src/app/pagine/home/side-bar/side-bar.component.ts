@@ -10,6 +10,7 @@ import { GestionePronosticiService } from 'src/app/services/gestione-pronostici.
 export class SideBarComponent implements OnInit{
   username:string;
   isAdmin:boolean;
+  isPlayer:boolean;
   loading:boolean=true;
   
   constructor(private service: GestionePronosticiService) { }
@@ -17,6 +18,7 @@ export class SideBarComponent implements OnInit{
    ngOnInit() {
     this.isAdmin=this.service.isadmin();
     this.username=this.service.username();
+    this.isPlayer=this.service.isPlayer();
    }
  
  }
