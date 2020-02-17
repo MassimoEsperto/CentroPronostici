@@ -2,6 +2,9 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Pronostici } from 'src/app/classi/model/pronostici';
 import { GestionePronosticiService } from 'src/app/services/gestione-pronostici.service';
 import { Schedina } from 'src/app/classi/model/schedina';
+import { SUCCESS } from 'src/app/classi/utils/costanti';
+import { ComboService } from 'src/app/services/combo.service';
+import { Combo } from 'src/app/classi/model/combo';
 
 @Component({
   selector: 'app-lista-pronostici',
@@ -10,15 +13,21 @@ import { Schedina } from 'src/app/classi/model/schedina';
 })
 export class ListaPronosticiComponent implements OnInit {
 
-  constructor(private service: GestionePronosticiService) { }
+  constructor(private service: GestionePronosticiService,private combo: ComboService) { }
   pronostico:Pronostici[];
+  schede:Schedina[];
+  partita_sel:Schedina=new Schedina(0,0,'',0,'','');
   error = '';
   success = '';
   loading:boolean=true;
+  play:boolean=false;
+ 
+  combosel:Combo;
 
+  
   ngOnInit() {
+    this.getCombo();
     this.getListSchedine();
-    console.log("this.loading.emit(false)");
   }
 
   onEditScheda(scheda){
@@ -34,9 +43,9 @@ export class ListaPronosticiComponent implements OnInit {
    .subscribe({
   
     next: (result: Pronostici[]) => {
-console.log("result",result);
+
       this.pronostico=result;
-      console.log("this.pronostico",this.pronostico);
+      this.loading=false;
     },
     error: (error: any) => {
 
@@ -56,7 +65,10 @@ getSchedinaPiena(id_schedina:number){
 
   next: (result: Schedina[]) => {
    
-    console.log("schedina piena",result)
+   
+    this.schede=result;
+    console.log("schedina piena",this.schede)
+    this.play=true;
     this.loading=false;
   },
   error: (error: any) => {
@@ -66,6 +78,78 @@ getSchedinaPiena(id_schedina:number){
 
   }
 })
+
+}
+
+
+
+onEditMatch(indice){
+  this.partita_sel.id_partita=this.schede[indice].id_partita;
+  this.partita_sel.id_schedina=this.schede[indice].id_schedina;
+  this.partita_sel.risultato=this.schede[indice].risultato;
+  this.partita_sel.partita=this.schede[indice].partita;
+  console.log("this.partita_sel.partita",this.partita_sel.partita);
+  console.log("this.schede[indice]",this.schede);
+}
+
+onUpdateMatch(partita){
+  this.partita_sel.risultato=partita.risultato;;
+  this.loading=true;
+  
+this.service.update(this.partita_sel)
+.subscribe({
+ 
+   next: (result: string) => {
+  console.log("elemento salvato:",result);
+    this.successo();
+
+   },
+   error: (error: any) => {
+
+     // Stampa messaggio d'errore
+     this.error = error
+     this.play=true;
+
+   }
+ })
+
+}
+
+getCombo(){
+
+  this.combo.getCombo()
+  .subscribe({
+ 
+   next: (result: Combo) => {
+     this.combosel=result;
+    console.log("combo:",this.combosel.cannonieri);
+   },
+   error: (error: any) => {
+ 
+     // Stampa messaggio d'errore
+     this.error = error
+ 
+   }
+ })
+}
+ 
+getItemsGirone(gir:string) {
+  let girone='A';
+  if(null!=gir)
+  {
+    let lung=gir.length;
+    girone=gir.substring(lung-1,lung);
+}
+  return this.combosel.squadre.filter((item) => item.girone == girone);
+}
+
+
+successo(){
+  this.success = SUCCESS;
+  this.loading=false;
+  setTimeout(() => {
+    this.success = '';
+  }, 5000);
 
 }
 
