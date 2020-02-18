@@ -34,11 +34,9 @@ export class AuthService extends HttpSenderService {
         console.log('negato');
         return null;
       }
-      console.log('ritorno');
-      console.log(res['data']);
+    
       this.users = res['data'];
-      console.log('return:');
-      console.log(this.users[0]);
+  
       return this.users[0];
   
     }),
