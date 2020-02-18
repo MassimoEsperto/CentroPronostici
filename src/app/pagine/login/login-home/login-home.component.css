@@ -1,0 +1,22 @@
+.componente {
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    background-color: #1B98CE;
+}
+
+.btn{
+    border-radius: 15px; 
+   -moz-border-radius: 15px; /* firefox */
+    -webkit-border-radius: 15px; /* safari, chrome */
+}
+    
+.default {
+    font-family: 'Finger Paint', cursive;      /*  font-family: Comic Sans MS*/;
+    text-align: center;
+    padding: 25px;
+    margin: 25px;
+}
+    
+       
+       
