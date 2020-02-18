@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-login-home',
   templateUrl: './login-home.component.html',
-  styleUrls: ['../../../../assets/css/styles_login.css']
+  styleUrls: ['./login-home.component.css']
 })
 export class LoginHomeComponent implements AfterViewInit {
   constructor(private router: Router,private elementRef: ElementRef,private service: AuthService) { }
@@ -14,7 +14,7 @@ export class LoginHomeComponent implements AfterViewInit {
   }
   ngAfterViewInit()
   {
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#1B98CE';
+   // this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#1B98CE';
   }
  
 
