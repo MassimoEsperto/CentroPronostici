@@ -1,0 +1,33 @@
+.registrer{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10%;
+  }
+
+  .inventory-body {
+    position: fixed;
+    min-width: 100%;
+    background-image: linear-gradient(#E6DADA,#274046);
+    }
+
+.card-header {
+    background-color: crimson;
+    color: cyan;
+    text-align: center;   
+}
+
+.card-block{
+    text-align: center;
+}
+
+.btn-primary{
+    margin-top: 20px;
+}
+
+.card{
+    border-bottom-right-radius: 5%;
+    border-bottom-left-radius: 5%;
+    border: ridge;
+}
