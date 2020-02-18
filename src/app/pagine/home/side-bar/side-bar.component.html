@@ -1,42 +1,67 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <button mat-icon-button class = "gap">
-            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-        </button>      
-        <span>PRONOSTICI</span>
-        <span class = "filler"></span>
-        <span>{{username.substring(0,7)}} <clr-icon shape="user"></clr-icon></span>    
-    </mat-toolbar-row>
-  </mat-toolbar>
-  
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav>
-      <mat-nav-list>
-        <a mat-list-item [routerLink]="'/home/dashboard'" (click)="sidenav.toggle()">
-          <clr-icon  shape="file-group"></clr-icon>Home</a>  
-        <a *ngIf="isAdmin" mat-list-item [routerLink]="'/home/gestione-utente'" (click)="sidenav.toggle()">
-            <clr-icon  shape="user"></clr-icon>Gestione	Admin</a>
-            <a *ngIf="isPlayer" mat-list-item [routerLink]="'/home/lista-pronostici'"(click)="sidenav.toggle()">
-            <clr-icon  shape="file-group"></clr-icon>Pronostici Peronali</a>  
-              <a *ngIf="isPlayer" mat-list-item [routerLink]="'/home/inserimento-pronostico'" (click)="sidenav.toggle()">
-            <clr-icon  shape="copy-to-clipboard"></clr-icon>Insert Pronostico</a>		
-            <a mat-list-item [routerLink]="'/home/classifica'"(click)="sidenav.toggle()">
-              <clr-icon  shape="home"></clr-icon>Classifica</a>
-            <a mat-list-item [routerLink]="'/login'"(click)="sidenav.toggle()">
-            <clr-icon  shape="home"></clr-icon>Exit</a>
-            
-            <a mat-list-item (click)="sidenav.toggle()" mat-list-item>Close</a>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div style="min-height: 88vh;padding:2%;background-color: rgb(219,219,219);">  
-        <router-outlet ></router-outlet>
-      </div>
-     
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  <mat-toolbar color='primary'>
-    <span class='spacer'></span>
-      <h3>© FantaEuropeo Maresca</h3>
-    <span class='spacer'></span>
-  </mat-toolbar>
+  <mat-toolbar-row>
+    <button mat-icon-button class="gap">
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <span>PRONOSTICI</span>
+    <span class="filler"></span>
+    <span>{{username.substring(0,7)}} <clr-icon shape="user"></clr-icon></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="'/home/dashboard'" (click)="sidenav.toggle()">
+        <clr-icon class="icone" shape="home"></clr-icon>Home
+      </a>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <a *ngIf="isAdmin" mat-list-item [routerLink]="'/home/gestione-utente'" (click)="sidenav.toggle()">
+        <clr-icon class="icone" shape="user"></clr-icon>Gestione Admin
+      </a>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <a *ngIf="isPlayer" mat-list-item [routerLink]="'/home/lista-pronostici'" (click)="sidenav.toggle()">
+        <clr-icon class="icone" shape="file-group"></clr-icon>Pronostici Peronali
+      </a>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <a *ngIf="isPlayer" mat-list-item [routerLink]="'/home/inserimento-pronostico'" (click)="sidenav.toggle()">
+        <clr-icon class="icone" shape="copy-to-clipboard"></clr-icon>Insert Pronostico
+      </a>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="'/home/classifica'" (click)="sidenav.toggle()">
+        <clr-icon class="icone" shape="calculator"></clr-icon>Classifica
+      </a>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="'/login'" (click)="sidenav.toggle()">
+        <clr-icon class="icone" shape="logout"></clr-icon>Logout
+      </a>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <a mat-list-item (click)="sidenav.toggle()" mat-list-item>
+        <clr-icon class="icone" shape="window-close"></clr-icon>Close
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="min-height: 88vh;padding:2%;background-color: rgb(219,219,219);">
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<mat-toolbar color='primary'>
+  <span class='spacer'></span>
+  <h3>© FantaEuropeo Maresca</h3>
+  <span class='spacer'></span>
+</mat-toolbar>
