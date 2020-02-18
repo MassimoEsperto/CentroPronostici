@@ -1,27 +1,50 @@
-<div *ngIf="error" class="alert alert-danger">{{error}}</div>
-<div *ngIf="success" class="alert alert-success">{{success}}</div>
-<div class="login-wrapper">
-    <form clrForm #newUtente="ngForm" (submit)="registrati(newUtente)">
-    <section class="title">
-        <h3 class="welcome">Benvenuto al </h3>
-        Centro Pronostici di Maresca
-        <h5 class="hint">Inserisci username e password</h5>
-    </section>
-    <clr-input-container>
-        <label>Username</label>
-        <input clrInput type="text" [(ngModel)]="newUtente.username" name="username" required />
-        <clr-control-error>Campo Obbligatorio</clr-control-error>
-    </clr-input-container>
-    <clr-input-container>
-        <label>Mail (Optional)</label>
-        <input clrInput type="text" [(ngModel)]="newUtente.email" name="email" />
-    </clr-input-container>
-    <clr-input-container>
-        <label>Password</label>
-        <input clrInput type="text" [(ngModel)]="newUtente.password" name="password" required />
-        <clr-control-error>Campi Obbligatorio</clr-control-error>
-    </clr-input-container>
-     <button  
-        class="btn btn-primary btn-sm" [disabled]="newUtente.invalid">Registrati</button>
-</form>
+<div class="inventory-body">
+    <div class="registrer">
+        <div class="clr-row">
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <b>Centro Pronostici di Maresca</b>
+
+                    </div>
+                    <div class="card-block">
+                        <div class="card-title">
+                            Registrati Subito
+                        </div>
+                        <div class="card-text">
+                            <form clrForm #newUtente="ngForm" (submit)="registrati(newUtente)">
+
+                                <clr-input-container>
+                                    <label>Username</label>
+                                    <input clrInput type="text" [(ngModel)]="newUtente.username" name="username"
+                                        required />
+                                    <clr-control-error>Campo Obbligatorio</clr-control-error>
+                                </clr-input-container>
+                                <clr-input-container>
+                                    <label>Mail (Optional)</label>
+                                    <input clrInput type="text" [(ngModel)]="newUtente.email" name="email" />
+                                </clr-input-container>
+                                <clr-input-container>
+                                    <label>Password</label>
+                                    <input clrInput type="text" [(ngModel)]="newUtente.password" name="password"
+                                        required />
+                                    <clr-control-error>Campi Obbligatorio</clr-control-error>
+                                </clr-input-container>
+                                <button class="btn btn-primary btn-sm"
+                                    [disabled]="newUtente.invalid">Registrati</button>
+                            </form>
+                            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                            <div *ngIf="success" class="alert alert-success">{{success}}</div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-icon btn-success" aria-label="done"
+                            (click)="navigateToHome()">
+                            <clr-icon shape="cursor-hand-click"></clr-icon> RITORNA ALLA HOME
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
