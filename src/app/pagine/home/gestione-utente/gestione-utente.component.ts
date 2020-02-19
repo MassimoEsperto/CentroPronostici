@@ -347,7 +347,27 @@ updateScommesseAntepost(newScommessa){
   })
   }
 
-
+getRuoloStrng(rol)
+{
+  switch(rol) { 
+    case "1": { 
+       return"ADMIN" 
+       break; 
+    } 
+    case "2": { 
+      return "PLAYER"; 
+       break; 
+    } 
+    case "3": { 
+      return "VISITATORE"; 
+      break; 
+   } 
+    default: { 
+      return "VISITATORE"; 
+       break; 
+    } 
+ } 
+}
 
 successo(){
   this.success = SUCCESS;
