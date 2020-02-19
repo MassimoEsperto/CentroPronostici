@@ -12,6 +12,9 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
     <mat-nav-list>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
       <a mat-list-item [routerLink]="'/home/dashboard'" (click)="sidenav.toggle()">
         <clr-icon class="icone" shape="home"></clr-icon>Home
       </a>
@@ -51,15 +54,19 @@
       <a mat-list-item (click)="sidenav.toggle()" mat-list-item>
         <clr-icon class="icone" shape="window-close"></clr-icon>Close
       </a>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
     </mat-nav-list>
+    <img src="assets/img/scommesse.png" class="mx-auto d-block" style="width:200px"> 
   </mat-sidenav>
   <mat-sidenav-content>
     <div style="min-height: 88vh;padding:2%;background-color: rgb(219,219,219);">
       <router-outlet></router-outlet>
     </div>
-
   </mat-sidenav-content>
 </mat-sidenav-container>
+
 <mat-toolbar color='primary'>
   <span class='spacer'></span>
   <h3>© FantaEuropeo Maresca</h3>
