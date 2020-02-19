@@ -12,3 +12,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-left: -50px;
     margin-top: -50px;
  }
+
+ .btn{
+    border-radius: 15px; 
+   -moz-border-radius: 15px; /* firefox */
+    -webkit-border-radius: 15px; /* safari, chrome */
+}
+
+.inventory-body {
+    position: fixed;
+    min-width: 100%;
+
+    background-image: url("assets/img/gradiente.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    }
