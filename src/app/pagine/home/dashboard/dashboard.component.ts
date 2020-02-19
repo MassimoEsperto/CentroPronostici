@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-
+declare var require: any
+const FileSaver = require('file-saver');
 
 @Component({
   selector: 'app-dashboard',
@@ -8,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit{
-  ngOnInit() {
-  
+
+  ngOnInit() {}
+
+  downloadPdf(pdfUrl: string,pdfName: string) {
+ 
+   // const FileSaver = require('file-saver');
+    require('file-saver').saveAs(pdfUrl, pdfName);
   }
-  //loading:boolean=true;
-  
+
+   constructor() { }
 }
