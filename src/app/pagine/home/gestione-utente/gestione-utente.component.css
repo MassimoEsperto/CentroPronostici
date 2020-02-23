@@ -9,3 +9,8 @@
   .width3 {
     width: 55%;
   }
+
+  .margine-16{
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
