@@ -135,3 +135,14 @@
         </div>
     </clr-modal>
     </div>
+
+<clr-modal  [(clrModalOpen)]="avvisovalidate" [clrModalSize]="'sm'" [clrModalClosable]="false">
+      <h3 class="modal-title">Scheda non completa</h3>
+      <div class="modal-body">
+         <p>Per effettuare l'inserimento delle scheda 
+         bisogna inserire tutti i pronostici</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="avvisovalidate = false">OK</button>
+    </div>
+  </clr-modal>
