@@ -4,12 +4,10 @@
             <div>
                 <div class="card">
                     <div class="card-header">
-                        <b>Centro Pronostici di Maresca</b>
+                        Centro Pronostici di Maresca
                     </div>
                     <div class="card-block">
-                        <div class="card-title">
-                            Login
-                        </div>
+                        <div class="card-title"></div>
                         <div class="card-text">
 
                             <form clrForm #loggato="ngForm" (submit)="login(loggato)">
@@ -18,16 +16,14 @@
                                     <label>Username</label>
                                     <input clrInput type="text" [(ngModel)]="loggato.username" name="username"
                                         required />
-                                    <clr-control-error>Maccaron inserisci il tuo nome</clr-control-error>
                                 </clr-input-container>
                               
                                 <clr-input-container>
                                     <label>Password</label>
                                     <input clrInput type="password" [(ngModel)]="loggato.password" name="password"
                                         required />
-                                    <clr-control-error>Inserisci anche la password</clr-control-error>
                                 </clr-input-container>
-                                <button class="btn btn-primary btn-sm btn-block"
+                                <button class="btn btn-primary btn-block margine-16"
                                     [disabled]="loggato.invalid">Accedi</button>
                             </form>
                             <div *ngIf="error" class="alert alert-danger">{{error}}</div>
