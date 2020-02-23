@@ -16,6 +16,7 @@ export class ListaPronosticiComponent implements OnInit {
   constructor(private service: GestionePronosticiService,private combo: ComboService) { }
   pronostico:Pronostici[];
   schede:Schedina[];
+  id_schedina:number=0;
   partita_sel:Schedina=new Schedina(0,0,'',0,'','');
   error = '';
   success = '';
@@ -37,8 +38,14 @@ export class ListaPronosticiComponent implements OnInit {
   }
 
   onDeleteScheda(scheda){
+    this.id_schedina=scheda.id_schedina;
     console.log("scheda da eliminare",scheda);
-    this.deleteSchedina(scheda.id_schedina);
+   
+  }
+
+  deleteScheda(){
+    console.log("id_schedina",this.id_schedina);
+    this.deleteSchedina(this.id_schedina);
   }
 
   getListSchedine(){
