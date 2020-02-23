@@ -13,175 +13,192 @@ import { Combo } from 'src/app/classi/model/combo';
 })
 export class InserimentoPronosticoComponent implements OnInit {
 
-  constructor(private service: GestionePronosticiService,private combo: ComboService) { }
-  schede:Schedina[];
-  play:boolean=false;
-  loading:boolean=false;
+  constructor(private service: GestionePronosticiService, private combo: ComboService) { }
+  schede: Schedina[];
+  play: boolean = false;
+  loading: boolean = false;
+  avvisovalidate:boolean=false;
   error = '';
   success = '';
-  partita_sel:Schedina //la partita che viene selezionata
-  
-  id_schedina:number;
-  combosel:Combo;
+  partita_sel: Schedina //la partita che viene selezionata
+
+  id_schedina: number;
+  combosel: Combo;
 
   //per le multiselect
-  partita_sel1:Schedina 
-  partita_sel2:Schedina 
-  partita_sel3:Schedina 
-  partita_sel4:Schedina 
-  
+  partita_sel1: Schedina
+  partita_sel2: Schedina
+  partita_sel3: Schedina
+  partita_sel4: Schedina
+
   ngOnInit() {
     this.getCombo();
   }
 
-  nuovaScheda(){
+  nuovaScheda() {
     this.resetErrors();
-    this.loading=true;
-    let username=this.service.username();
+    this.loading = true;
+    let username = this.service.username();
 
-    this.service.newSchedina(username)    
-    .subscribe({
-  
-      next: (res: number) => {
-  
-        console.log("res",res);
-        this.id_schedina =Number(res);   
-        this.getSchedinaVuota();
-        this.play=true;
-       
-       
-      },
-      error: (error: any) => {
-  
-        // Stampa messaggio d'errore
-        this.error = error
-  
-      }
-    })
-  
-  }
+    this.service.newSchedina(username)
+      .subscribe({
 
-insertPronostico() {
- 
-    this.play=false;
-    this.loading=true;
+        next: (res: number) => {
 
-    
-this.service.insert(this.schede)
-.subscribe({
-   
-     next: (result: string) => {
-     
-       if(result['risposta']=='ko')
-       {
-        this.error = result['stato']
-        this.play=true;
-       }
-       else{
-        this.successo();
-       }
-    console.log("RISULTATO UINSERIMENTO: ",result);
-   
+          console.log("res", res);
+          this.id_schedina = Number(res);
+          this.getSchedinaVuota();
+          this.play = true;
 
-     },
-     error: (error: any) => {
- 
-       // Stampa messaggio d'errore
-       this.error = error
-       this.play=true;
- 
-     }
-   })
 
+        },
+        error: (error: any) => {
+
+          // Stampa messaggio d'errore
+          this.error = error
+
+        }
+      })
 
   }
 
-  getSchedinaVuota(){
-    let username=this.service.username();
+  insertPronostico() {
 
-   this.service.schedinaVuota(this.id_schedina ,username)
-   .subscribe({
-  
-    next: (result: Schedina[]) => {
-     
-      this.schede=result;
-      this.loading=false;
-    },
-    error: (error: any) => {
-
-      // Stampa messaggio d'errore
-      this.error = error
-
+    if (!this.validateSchede()) {
+      this.avvisovalidate=true;
+      return;
     }
-  })
 
-}
-  
+    this.play = false;
+    this.loading = true;
 
-getCombo(){
+    this.service.insert(this.schede)
+      .subscribe({
 
- this.combo.getCombo()
- .subscribe({
+        next: (result: string) => {
 
-  next: (result: Combo) => {
-    this.combosel=result;
-   console.log("combo:",this.combosel.cannonieri);
-  },
-  error: (error: any) => {
+          if (result['risposta'] == 'ko') {
+            this.error = result['stato']
+            this.play = true;
+          }
+          else {
+            this.successo();
+          }
+          console.log("RISULTATO UINSERIMENTO: ", result);
 
-    // Stampa messaggio d'errore
-    this.error = error
+
+        },
+        error: (error: any) => {
+
+          // Stampa messaggio d'errore
+          this.error = error
+          this.play = true;
+
+        }
+      })
+
 
   }
-})
 
-}
+  getSchedinaVuota() {
+    let username = this.service.username();
 
-  
-  private resetErrors(){
+    this.service.schedinaVuota(this.id_schedina, username)
+      .subscribe({
+
+        next: (result: Schedina[]) => {
+
+          this.schede = result;
+          this.loading = false;
+        },
+        error: (error: any) => {
+
+          // Stampa messaggio d'errore
+          this.error = error
+
+        }
+      })
+
+  }
+
+
+  getCombo() {
+
+    this.combo.getCombo()
+      .subscribe({
+
+        next: (result: Combo) => {
+          this.combosel = result;
+          console.log("combo:", this.combosel.cannonieri);
+        },
+        error: (error: any) => {
+
+          // Stampa messaggio d'errore
+          this.error = error
+
+        }
+      })
+
+  }
+
+
+  private resetErrors() {
     this.success = '';
-    this.error   = '';
+    this.error = '';
   }
-/**
- * 
- * @param indice 
- * in base alla partita selezionata compila il modal
- */
-  onEditMatch(indice){
-    this.partita_sel=this.schede[indice];
-  }
-
-  onEditMatchMultiple(indice){
-    this.partita_sel1=this.schede[indice];
-    this.partita_sel2=this.schede[indice-1];
-    this.partita_sel3=this.schede[indice-2];
-    this.partita_sel4=this.schede[indice-3];
-  }
-  onUpdateMatch(match){
+  /**
+   * 
+   * @param indice 
+   * in base alla partita selezionata compila il modal
+   */
+  onEditMatch(indice) {
+    this.partita_sel = this.schede[indice];
   }
 
-  machVisibile(match){
-    let num=match-2;
+  onEditMatchMultiple(indice) {
+    this.partita_sel1 = this.schede[indice];
+    this.partita_sel2 = this.schede[indice - 1];
+    this.partita_sel3 = this.schede[indice - 2];
+    this.partita_sel4 = this.schede[indice - 3];
+  }
+  onUpdateMatch(match) {
+  }
 
-    if(num%4==0)
-    return true
+  machVisibile(match) {
+    let num = match - 2;
+
+    if (num % 4 == 0)
+      return true
     else
-    return false
+      return false
   }
 
-  getItemsGirone(gir:string) {
-    let lung=gir.length;
-    let girone=gir.substring(lung-1,lung);
-   
+  getItemsGirone(gir: string) {
+    let lung = gir.length;
+    let girone = gir.substring(lung - 1, lung);
+
     return this.combosel.squadre.filter((item) => item.girone == girone);
   }
- 
-  successo(){
+
+  validateSchede() {
+    let validate: boolean = true;
+
+    this.schede.forEach(element => {
+      if (element.risultato == '') {
+        validate = false;
+        return;
+      }
+
+    });
+    return validate;
+  }
+
+  successo() {
     this.success = SUCCESS;
-    this.loading=false;
+    this.loading = false;
     setTimeout(() => {
       this.success = '';
     }, 5000);
-  
+
   }
 }
