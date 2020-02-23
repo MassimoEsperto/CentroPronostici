@@ -20,20 +20,25 @@ export class ListaPronosticiComponent implements OnInit {
   error = '';
   success = '';
   loading:boolean=true;
-  play:boolean=false;
+  bloccato:boolean=true;
+ // play:boolean=false;
  
   combosel:Combo;
 
   
   ngOnInit() {
+    this.getVariabile();
     this.getCombo();
-    this.getListSchedine();
   }
 
   onEditScheda(scheda){
     this.loading=true;
-    console.log("scheda",scheda);
     this.getSchedinaPiena(scheda.id_schedina);
+  }
+
+  onDeleteScheda(scheda){
+    console.log("scheda da eliminare",scheda);
+    this.deleteSchedina(scheda.id_schedina);
   }
 
   getListSchedine(){
@@ -46,6 +51,7 @@ export class ListaPronosticiComponent implements OnInit {
 
       this.pronostico=result;
       this.loading=false;
+  
     },
     error: (error: any) => {
 
@@ -58,7 +64,6 @@ export class ListaPronosticiComponent implements OnInit {
 }
 
 getSchedinaPiena(id_schedina:number){
-  let username=this.service.username();
 
  this.service.schedinaPiena(id_schedina)
  .subscribe({
@@ -68,7 +73,7 @@ getSchedinaPiena(id_schedina:number){
    
     this.schede=result;
     console.log("schedina piena",this.schede)
-    this.play=true;
+  //  this.play=true;
     this.loading=false;
   },
   error: (error: any) => {
@@ -80,6 +85,30 @@ getSchedinaPiena(id_schedina:number){
 })
 
 }
+
+deleteSchedina(id_schedina:number){
+
+  this.service.delete(id_schedina)
+  .subscribe({
+ 
+   next: (result: Pronostici[]) => {
+    
+    
+     this.pronostico=result;
+     console.log("schedina piena",this.pronostico)
+     
+     this.schede=null;
+     this.loading=false;
+   },
+   error: (error: any) => {
+ 
+     // Stampa messaggio d'errore
+     this.error = error
+ 
+   }
+ })
+ 
+ }
 
 
 
@@ -108,7 +137,7 @@ this.service.update(this.partita_sel)
 
      // Stampa messaggio d'errore
      this.error = error
-     this.play=true;
+ //    this.play=true;
 
    }
  })
@@ -143,6 +172,18 @@ getItemsGirone(gir:string) {
   return this.combosel.squadre.filter((item) => item.girone == girone);
 }
 
+getVariabile() {
+
+  this.service.getVariabile()
+    .subscribe({
+      next: (result: boolean) => {
+        this.bloccato = result;
+        this.getListSchedine();
+      },
+      error: (error: any) => {
+      }
+    })
+}
 
 successo(){
   this.success = SUCCESS;
