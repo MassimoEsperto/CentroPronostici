@@ -11,7 +11,7 @@
 </clr-alert>
 
 <div class="bottoni">
-<button *ngIf="!play" class="btn btn-success btn-block" (click)="nuovaScheda()">INSERISCI NUOVA SCHEDA</button>
+<button *ngIf="!play&&!bloccato" class="btn btn-success btn-block" (click)="nuovaScheda()">INSERISCI NUOVA SCHEDA</button>
 </div>
 
 <form *ngIf="play&&schede"  (ngSubmit)="insertPronostico()">
