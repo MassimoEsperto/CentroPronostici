@@ -4,18 +4,21 @@
     justify-content: center;
     align-items: center;
     padding: 10%;
-  }
-
- 
+}
 
 .card-header {
-    background-color: crimson;
-    color: cyan;
-    text-align: center;   
+    text-align: center;  
+    text-decoration-thickness: unset; 
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
 }
 
 .card-block{
     text-align: center;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
 }
 
 .btn-primary{
@@ -23,8 +26,17 @@
 }
 
 .card{
-    border-bottom-right-radius: 5%;
-    border-bottom-left-radius: 5%;
+    border-radius: 5%;
     border: ridge;
     margin-bottom: 10%;
+}
+
+.p{
+    font-family: Arial, Helvetica, sans-serif;
+    size: 5;
+}
+
+.margine-16{
+    margin-top: 32px;
+    margin-bottom: 16px;
 }
