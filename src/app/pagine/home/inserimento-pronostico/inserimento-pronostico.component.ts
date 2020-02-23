@@ -25,6 +25,8 @@ export class InserimentoPronosticoComponent implements OnInit {
   id_schedina: number;
   combosel: Combo;
 
+  bloccato:boolean=true;
+
   //per le multiselect
   partita_sel1: Schedina
   partita_sel2: Schedina
@@ -33,6 +35,7 @@ export class InserimentoPronosticoComponent implements OnInit {
 
   ngOnInit() {
     this.getCombo();
+    this.getVariabile();
   }
 
   nuovaScheda() {
@@ -191,6 +194,18 @@ export class InserimentoPronosticoComponent implements OnInit {
 
     });
     return validate;
+  }
+
+  getVariabile() {
+
+    this.service.getVariabile()
+      .subscribe({
+        next: (result: boolean) => {
+          this.bloccato = result;
+        },
+        error: (error: any) => {
+        }
+      })
   }
 
   successo() {
