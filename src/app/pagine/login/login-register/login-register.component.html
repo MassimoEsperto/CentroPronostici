@@ -4,21 +4,19 @@
             <div>
                 <div class="card">
                     <div class="card-header">
-                        <b>Centro Pronostici di Maresca</b>
-
+                        Centro Pronostici di Maresca          
                     </div>
                     <div class="card-block">
+                        <div class="card-title"></div>
                         <div class="card-title">
-                            Registrati Subito
-                        </div>
-                        <div class="card-text">
+                      
+                        <div class="card-text"></div>
                             <form clrForm #newUtente="ngForm" (submit)="registrati(newUtente)">
 
                                 <clr-input-container>
                                     <label>Username</label>
                                     <input clrInput type="text" [(ngModel)]="newUtente.username" name="username"
                                         required />
-                                    <clr-control-error>Campo Obbligatorio</clr-control-error>
                                 </clr-input-container>
                                 <clr-input-container>
                                     <label>Mail (Optional)</label>
@@ -28,9 +26,8 @@
                                     <label>Password</label>
                                     <input clrInput type="text" [(ngModel)]="newUtente.password" name="password"
                                         required />
-                                    <clr-control-error>Campi Obbligatorio</clr-control-error>
                                 </clr-input-container>
-                                <button class="btn btn-primary btn-sm"
+                                <button class="btn btn-primary btn-block margine-16"
                                     [disabled]="newUtente.invalid">Registrati</button>
                             </form>
                             <div *ngIf="error" class="alert alert-danger">{{error}}</div>
