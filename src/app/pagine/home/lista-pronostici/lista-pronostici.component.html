@@ -16,7 +16,7 @@
             <clr-icon shape="pencil" class="is-solid" (click)="onEditScheda(scheda)"></clr-icon>
         </clr-dg-cell>
         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
-            <clr-icon shape="trash" class="is-solid" (click)="onDeleteScheda(scheda)"></clr-icon>
+            <clr-icon shape="trash" class="is-solid" (click)="onDeleteScheda(scheda);confermaaModal=true"></clr-icon>
         </clr-dg-cell>
     </clr-dg-row>
 
@@ -155,3 +155,15 @@
     </clr-modal>
 
 </div>
+
+<clr-modal [(clrModalOpen)]="confermaaModal">
+    <h3 class="modal-title">Conferma</h3>
+    <div class="modal-body">
+      Sei sicuro di volerlo eliminare?    
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary"  style="float: right;" (click)="deleteScheda();confermaaModal = false">Effettua</button>
+        <button type="button" class="btn btn-outline" (click)="confermaaModal = false"
+            style="float: right;">Annulla</button>
+    </div>
+</clr-modal>
