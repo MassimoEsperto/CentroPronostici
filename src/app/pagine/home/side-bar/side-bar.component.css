@@ -35,3 +35,8 @@
 .icone{
    margin-right: 10px;
 }
+
+.mat-icon-button:focus{
+   border:none !important;
+   outline:none !important;
+}
