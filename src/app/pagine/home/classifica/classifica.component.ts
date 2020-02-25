@@ -3,22 +3,19 @@ import { Pronostici } from 'src/app/classi/model/pronostici';
 import { Schedina } from 'src/app/classi/model/schedina';
 import { GestionePronosticiService } from 'src/app/services/gestione-pronostici.service';
 import { ClrDatagridSortOrder } from '@clr/angular';
+import { Generale } from 'src/app/classi/utils/general-component';
 
 @Component({
   selector: 'app-classifica',
   templateUrl: './classifica.component.html',
   styleUrls: ['./classifica.component.css']
 })
-export class ClassificaComponent implements OnInit {
+export class ClassificaComponent extends Generale implements OnInit {
 
-  constructor(private service: GestionePronosticiService) { }
+  constructor(private service: GestionePronosticiService) {super() }
 
   classifica:Pronostici[];
   schede:Schedina[];
-
-  error = '';
-  success = '';
-  loading:boolean=true;
 
  // descSort = ClrDatagridSortOrder.DESC;
 
@@ -41,14 +38,11 @@ export class ClassificaComponent implements OnInit {
       
       
        this.schede=result;
-       console.log("schedina piena",this.schede)
-     //  this.play=true;
        this.loading=false;
      },
      error: (error: any) => {
    
-       // Stampa messaggio d'errore
-       this.error = error
+      this.stampaErrore(error);
    
      }
    })
