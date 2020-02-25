@@ -28,7 +28,7 @@ export class ListaPronosticiComponent implements OnInit {
 
   
   ngOnInit() {
-    this.getVariabile();
+    this.getBloccato();
     this.getCombo();
   }
 
@@ -43,12 +43,17 @@ export class ListaPronosticiComponent implements OnInit {
    
   }
 
+  onViewScheda(scheda){
+    this.loading=true;
+    this.getSchedinaFinale(scheda.id_schedina);
+  }
+
   deleteScheda(){
     console.log("id_schedina",this.id_schedina);
     this.deleteSchedina(this.id_schedina);
   }
 
-  getListSchedine(){
+  getListPronostici(){
     let username=this.service.username();
 
    this.service.list(username)
@@ -67,6 +72,28 @@ export class ListaPronosticiComponent implements OnInit {
 
     }
   })
+
+}
+
+getListPronosticiFinale(){
+  let username=this.service.username();
+
+ this.service.listFinale(username)
+ .subscribe({
+
+  next: (result: Pronostici[]) => {
+
+    this.pronostico=result;
+    this.loading=false;
+
+  },
+  error: (error: any) => {
+
+    // Stampa messaggio d'errore
+    this.error = error
+
+  }
+})
 
 }
 
@@ -92,6 +119,30 @@ getSchedinaPiena(id_schedina:number){
 })
 
 }
+
+
+getSchedinaFinale(id_schedina:number){
+
+  this.service.schedinaFinale(id_schedina)
+  .subscribe({
+ 
+   next: (result: Schedina[]) => {
+    
+    
+     this.schede=result;
+     console.log("schedina piena",this.schede)
+   //  this.play=true;
+     this.loading=false;
+   },
+   error: (error: any) => {
+ 
+     // Stampa messaggio d'errore
+     this.error = error
+ 
+   }
+ })
+ 
+ }
 
 deleteSchedina(id_schedina:number){
 
@@ -179,13 +230,21 @@ getItemsGirone(gir:string) {
   return this.combosel.squadre.filter((item) => item.girone == girone);
 }
 
-getVariabile() {
+getBloccato() {
 
-  this.service.getVariabile()
+  this.service.getBloccato()
     .subscribe({
       next: (result: boolean) => {
         this.bloccato = result;
-        this.getListSchedine();
+        if(this.bloccato)
+        {
+          this.getListPronosticiFinale();
+        }
+        else
+        {
+          this.getListPronostici();
+        }
+     
       },
       error: (error: any) => {
       }
