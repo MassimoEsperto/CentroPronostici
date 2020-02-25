@@ -4,9 +4,9 @@ header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization');
 // db credentials
 define('DB_HOST', 'localhost');
-define('DB_USER', 'oooooooooooo');
+define('DB_USER', 'marescafantaeuropeo');
 define('DB_PASS', '');
-define('DB_NAME', 'oooooooooo');
+define('DB_NAME', 'my_marescafantaeuropeo');
 
 
 // Connect with the database.
