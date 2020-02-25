@@ -13,6 +13,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
   scheda: Schedina[];
   schedaPiena: Schedina[];
+  schedaFinita: Schedina[];
   pronostico: Pronostici[];
 
   constructor(private http: HttpClient) { super(); }
@@ -68,6 +69,20 @@ export class GestionePronosticiService extends HttpSenderService {
         console.log('ritorno schedina');
         this.schedaPiena = res['data'];
         return this.schedaPiena;
+
+      }),
+        catchError(this.handleError));
+  }
+
+  schedinaFinale(id_schedina: number) {
+    const params = new HttpParams()
+      .set('id_schedina', id_schedina.toString());
+    console.log('schedina piena');
+    return this.http.get<Schedina[]>(`${this.buildURL("GestioneSchedina/schedinaFinale")}`, { params: params })
+      .pipe(map((res) => {
+        console.log('ritorno schedinaFinale');
+        this.schedaFinita = res['data'];
+        return this.schedaFinita;
 
       }),
         catchError(this.handleError));
@@ -147,21 +162,49 @@ export class GestionePronosticiService extends HttpSenderService {
         catchError(this.handleError));
   }
 
+  listFinale(username: string) {
+    const params = new HttpParams()
+      .set('username', username);
+
+    return this.http.get<Pronostici[]>(`${this.buildURL("GestionePronostici/listFinale")}`, { params: params })
+      .pipe(map((res) => {
+        console.log("res lista ", res['data']);
+        this.pronostico = res['data'];
+        return this.pronostico;
+
+      }),
+        catchError(this.handleError));
+  }
+
+
+  classifica() {
+
+    return this.http.get<Pronostici[]>(`${this.buildURL("GestionePronostici/classifica")}`)
+      .pipe(map((res) => {
+        console.log("res lista ", res['data']);
+        this.pronostico = res['data'];
+        return this.pronostico;
+
+      }),
+        catchError(this.handleError));
+  }
+
+
   /**
    * get e set della variabile che decide se si possano inserire ancora pronostici
    */
-  getVariabile(): Observable<boolean> {
-    return this.http.get(`${this.buildURL("GestionePronostici/getVariabile")}`).pipe(
+  getBloccato(): Observable<boolean> {
+    return this.http.get(`${this.buildURL("GestionePronostici/getBloccato")}`).pipe(
       map((res) => {
         return res['data'];
     }),
     catchError(this.handleError));
   }
-  setVariabile(variabile:number): Observable<boolean> {
+  setBloccato(variabile:number): Observable<boolean> {
     const params = new HttpParams()
       .set('variabile', variabile.toString());
 
-    return this.http.get(`${this.buildURL("GestionePronostici/setVariabile")}`, { params: params })
+    return this.http.get(`${this.buildURL("GestionePronostici/setBloccato")}`, { params: params })
       .pipe(map(res => {
         return res['data'];
       }),
