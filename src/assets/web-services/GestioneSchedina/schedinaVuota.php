@@ -18,8 +18,8 @@ $username = 	($_GET['username'] !== null && $_GET['username'] !== '')? mysqli_re
 
 $cars = [];
 $cr = 0;
-$sql1 = "SELECT id_partita,partita,{$id_schedina} as id_schedina,'{$username}' as username FROM calendario";
-$sql2 = "SELECT id_partita,scommessa,{$id_schedina} as id_schedina,'{$username}' as username FROM scommesse_antepost";
+$sql1 = "SELECT id_partita,partita,{$id_schedina} as id_schedina,'{$username}' as username FROM calendario  order by id_partita";
+$sql2 = "SELECT id_partita,scommessa,{$id_schedina} as id_schedina,'{$username}' as username FROM scommesse_antepost  order by id_partita";
 
 if($result = mysqli_query($con,$sql1))
 {
