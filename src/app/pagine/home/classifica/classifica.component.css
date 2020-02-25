@@ -6,3 +6,7 @@ h3 {
     text-align:center;
     font-weight: bold;
   }
+
+.limit-height clr-datagrid {
+    height: 240px;
+}
