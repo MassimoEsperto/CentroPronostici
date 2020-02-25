@@ -1,22 +1,19 @@
-import { User } from 'src/app/classi/model/user';
 import { Component, OnInit } from '@angular/core';
 import { GestionePronosticiService } from 'src/app/services/gestione-pronostici.service';
-import { SUCCESS } from 'src/app/classi/utils/costanti';
+import { Generale } from 'src/app/classi/utils/general-component';
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.css']
 })
-export class SideBarComponent implements OnInit {
+export class SideBarComponent extends Generale implements OnInit {
   username: string;
   isAdmin: boolean;
   isPlayer: boolean;
-  loading: boolean = true;
   variabile: boolean;
-  success = '';
 
-  constructor(private service: GestionePronosticiService) { }
+  constructor(private service: GestionePronosticiService) { super() }
 
   ngOnInit() {
     this.isAdmin = this.service.isadmin();
@@ -31,7 +28,6 @@ export class SideBarComponent implements OnInit {
     this.service.getBloccato()
       .subscribe({
         next: (result: boolean) => {
-          console.log("variabile ritorno ", result);
           this.variabile = result;
         },
         error: (error: any) => {
@@ -39,7 +35,7 @@ export class SideBarComponent implements OnInit {
       })
   }
 
-  setVariabile(choise:number) {
+  setVariabile(choise: number) {
 
     this.service.setBloccato(choise)
       .subscribe({
@@ -52,16 +48,9 @@ export class SideBarComponent implements OnInit {
   }
 
   onUpdateClosePronostici(chiusura) {
-    let scelta =(chiusura)?1:0;
-    console.log("scelta",scelta);
+    let scelta = (chiusura) ? 1 : 0;
     this.setVariabile(scelta);
   }
 
-  successo() {
-    this.success = SUCCESS;
-    setTimeout(() => {
-      this.success = '';
-    }, 5000);
 
-  }
 }
