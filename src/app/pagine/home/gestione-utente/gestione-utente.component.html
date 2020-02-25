@@ -57,19 +57,21 @@
                                 </select>
                                 <clr-control-error>Obbligatorio</clr-control-error>
                             </clr-select-container>
-                           
+
                             <br>
-                            <button class="btn btn-primary" [disabled]="newUtente.invalid" style="float: right;">Aggiorna</button>
-                            <button type="button" class="btn btn-outline" (click)="updateModal = false" style="float: right;">Annulla</button>
+                            <button class="btn btn-primary" [disabled]="newUtente.invalid"
+                                style="float: right;">Aggiorna</button>
+                            <button type="button" class="btn btn-outline" (click)="updateModal = false"
+                                style="float: right;">Annulla</button>
                         </form>
                     </div>
-   
+
                 </clr-modal>
 
             </clr-tab-content>
         </ng-template>
     </clr-tab>
-<!--
+    <!--
     <clr-tab>
         <button clrTabLink>Nuovo</button>
         <ng-template [(clrIfActive)]="managementActive">
@@ -111,7 +113,7 @@
         <button clrTabLink>Calendario</button>
         <ng-template [(clrIfActive)]="calendarioActive">
             <clr-tab-content>
-                
+
                 <clr-datagrid>
                     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50"></clr-dg-column>
                     <clr-dg-column>partita</clr-dg-column>
@@ -119,9 +121,11 @@
                     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">golt</clr-dg-column>
 
                     <clr-dg-row *clrDgItems="let match of partite;let i = index;" [clrDgItem]="match">
-                     
+
                         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
-                            <clr-icon shape="administrator" class="is-solid"(click)="onEditMatch(match);basic = true"></clr-icon></clr-dg-cell>
+                            <clr-icon shape="administrator" class="is-solid" (click)="onEditMatch(match);updateMatchModal = true">
+                            </clr-icon>
+                        </clr-dg-cell>
                         <clr-dg-cell>{{match.partita}}</clr-dg-cell>
                         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{match.goalc}}</clr-dg-cell>
                         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{match.goalt}}</clr-dg-cell>
@@ -129,10 +133,10 @@
 
                 </clr-datagrid>
 
-                <clr-modal [(clrModalOpen)]="basic" [clrModalClosable]="false">
+                <clr-modal [(clrModalOpen)]="updateMatchModal" [clrModalClosable]="false">
                     <h3 class="modal-title">AGGIORNA MATCH</h3>
                     <div class="modal-body">
-                        <form clrForm (submit)="onUpdateMatch(newMatch);basic = false">                            
+                        <form clrForm (submit)="onUpdateMatch(newMatch);updateMatchModal = false">
                             <clr-input-container>
                                 <label>Partita</label>
                                 <input clrInput type="text" [(ngModel)]="newMatch.partita" name="partita" required />
@@ -147,11 +151,13 @@
                                 <input clrInput type="text" [(ngModel)]="newMatch.goalt" name="goalt" required />
                             </clr-input-container>
                             <br>
-                            <button class="btn btn-primary" [disabled]="newMatch.invalid" style="float: right;">Aggiorna</button>
-                            <button type="button" class="btn btn-outline" (click)="basic = false" style="float: right;">Annulla</button>
+                            <button class="btn btn-primary" [disabled]="newMatch.invalid"
+                                style="float: right;">Aggiorna</button>
+                            <button type="button" class="btn btn-outline" (click)="updateMatchModal = false"
+                                style="float: right;">Annulla</button>
                         </form>
                     </div>
-   
+
                 </clr-modal>
             </clr-tab-content>
         </ng-template>
@@ -160,21 +166,25 @@
         <button clrTabLink>Antepost</button>
         <ng-template [(clrIfActive)]="scommesseActive">
             <clr-tab-content>
-                
+
                 <clr-datagrid>
                     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50"></clr-dg-column>
                     <clr-dg-column>scommessa</clr-dg-column>
                     <clr-dg-column>pronostico</clr-dg-column>
 
                     <clr-dg-row *clrDgItems="let match of altreScommesse;let i = index;" [clrDgItem]="match">
-                     
+
                         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
-                           
-                            <clr-icon *ngIf="match.id_partita==39||match.id_partita==41 ||match.id_partita==42" shape="administrator" class="is-solid"(click)="onEditScommesseAntepost(match);scquadreModal = true"></clr-icon>
-                            <clr-icon *ngIf="match.id_partita==40" shape="administrator" class="is-solid"(click)="onEditScommesseAntepost(match);cannonieriModal = true"></clr-icon>
-                            <clr-icon *ngIf="match.id_partita>42" shape="administrator" class="is-solid"(click)="onEditScommesseAntepost(match);gironiModal = true"></clr-icon>
+
+                            <clr-icon *ngIf="match.id_partita==39||match.id_partita==41 ||match.id_partita==42"
+                                shape="administrator" class="is-solid"
+                                (click)="onEditScommesseAntepost(match);scquadreModal = true"></clr-icon>
+                            <clr-icon *ngIf="match.id_partita==40" shape="administrator" class="is-solid"
+                                (click)="onEditScommesseAntepost(match);cannonieriModal = true"></clr-icon>
+                            <clr-icon *ngIf="match.id_partita>42" shape="administrator" class="is-solid"
+                                (click)="onEditScommesseAntepost(match);gironiModal = true"></clr-icon>
                         </clr-dg-cell>
-                            <clr-dg-cell>{{match.scommessa}}</clr-dg-cell>
+                        <clr-dg-cell>{{match.scommessa}}</clr-dg-cell>
                         <clr-dg-cell>{{match.risultato}}</clr-dg-cell>
                     </clr-dg-row>
 
@@ -183,78 +193,90 @@
                 <clr-modal [(clrModalOpen)]="altreModel" [clrModalClosable]="false">
                     <h3 class="modal-title">AGGIORNA SCOMMESSA</h3>
                     <div class="modal-body">
-                        <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);altreModel = false">                            
+                        <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);altreModel = false">
                             <clr-input-container>
                                 <label>Scommessa</label>
-                                <input clrInput type="text" [(ngModel)]="newAltreScommesse.scommessa" name="scommessa" required />
+                                <input clrInput type="text" [(ngModel)]="newAltreScommesse.scommessa" name="scommessa"
+                                    required />
                                 <clr-control-error>Obbligatorio</clr-control-error>
                             </clr-input-container>
                             <clr-input-container>
                                 <label>Pronostico</label>
-                                <input clrInput type="text" [(ngModel)]="newAltreScommesse.risultato" name="risultato" required />
+                                <input clrInput type="text" [(ngModel)]="newAltreScommesse.risultato" name="risultato"
+                                    required />
                             </clr-input-container>
-                           
+
                             <br>
-                            <button class="btn btn-primary" [disabled]="newAltreScommesse.invalid" style="float: right;">Aggiorna</button>
-                            <button type="button" class="btn btn-outline" (click)="altreModel = false" style="float: right;">Annulla</button>
+                            <button class="btn btn-primary" [disabled]="newAltreScommesse.invalid"
+                                style="float: right;">Aggiorna</button>
+                            <button type="button" class="btn btn-outline" (click)="altreModel = false"
+                                style="float: right;">Annulla</button>
                         </form>
                     </div>
-   
+
                 </clr-modal>
 
-                <clr-modal  [(clrModalOpen)]="scquadreModal" [clrModalClosable]="false">
+                <clr-modal [(clrModalOpen)]="scquadreModal" [clrModalClosable]="false">
                     <h3 class="modal-title">{{newAltreScommesse.scommessa}}</h3>
                     <div class="modal-body">
-                        <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);scquadreModal = false">                             
+                        <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);scquadreModal = false">
                             <clr-select-container>
                                 <label>Seleziona</label>
-                                <select clrSelect name="newAltreScommesse.risultato" [(ngModel)]="newAltreScommesse.risultato" >
-                                  <option *ngFor="let item of combosel.squadre" [value]="item.squadre">{{item.squadre}}</option>
+                                <select clrSelect name="newAltreScommesse.risultato"
+                                    [(ngModel)]="newAltreScommesse.risultato">
+                                    <option *ngFor="let item of combosel.squadre" [value]="item.squadre">
+                                        {{item.squadre}}</option>
                                 </select>
-                              </clr-select-container>
-                              <br>
-                            <button class="btn btn-primary" [disabled]="newAltreScommesse.invalid" style="float: right;">Aggiorna</button>
-                            <button type="button" class="btn btn-outline" (click)="scquadreModal = false" style="float: right;">Annulla</button>
+                            </clr-select-container>
+                            <br>
+                            <button class="btn btn-primary" [disabled]="newAltreScommesse.invalid"
+                                style="float: right;">Aggiorna</button>
+                            <button type="button" class="btn btn-outline" (click)="scquadreModal = false"
+                                style="float: right;">Annulla</button>
                         </form>
                     </div>
                 </clr-modal>
 
-                <clr-modal  [(clrModalOpen)]="gironiModal" [clrModalClosable]="false">
+                <clr-modal [(clrModalOpen)]="gironiModal" [clrModalClosable]="false">
                     <h3 class="modal-title">{{newAltreScommesse.scommessa}}</h3>
                     <div class="modal-body">
-                        <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);gironiModal = false">                             
+                        <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);gironiModal = false">
                             <clr-select-container>
                                 <label>Seleziona</label>
-                                <select clrSelect name="newAltreScommesse.risultato" [(ngModel)]="newAltreScommesse.risultato" >
-                                  <option *ngFor="let item of getItemsGirone(newAltreScommesse.scommessa)" [value]="item.squadre">{{item.squadre}}</option>
+                                <select clrSelect name="newAltreScommesse.risultato"
+                                    [(ngModel)]="newAltreScommesse.risultato">
+                                    <option *ngFor="let item of getItemsGirone(newAltreScommesse.scommessa)"
+                                        [value]="item.squadre">{{item.squadre}}</option>
                                 </select>
-                              </clr-select-container>
-                              <br>
-                              <button class="btn btn-primary" [disabled]="newAltreScommesse.invalid" style="float: right;">Aggiorna</button>
-                              <button type="button" class="btn btn-outline" (click)="gironiModal = false" style="float: right;">Annulla</button>
+                            </clr-select-container>
+                            <br>
+                            <button class="btn btn-primary" [disabled]="newAltreScommesse.invalid"
+                                style="float: right;">Aggiorna</button>
+                            <button type="button" class="btn btn-outline" (click)="gironiModal = false"
+                                style="float: right;">Annulla</button>
                         </form>
                     </div>
                 </clr-modal>
 
-                <clr-modal  [(clrModalOpen)]="cannonieriModal" [clrModalClosable]="false">
+                <clr-modal [(clrModalOpen)]="cannonieriModal" [clrModalClosable]="false">
                     <h3 class="modal-title">{{newAltreScommesse.scommessa}}</h3>
                     <div class="modal-body">
-                        <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);cannonieriModal = false">                             
+                        <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);cannonieriModal = false">
                             <clr-select-container>
                                 <label>Seleziona</label>
-                                <select clrSelect name="newAltreScommesse.risultato" [(ngModel)]="newAltreScommesse.risultato" >
-                                  <option *ngFor="let item of combosel.cannonieri" [value]="item">{{item}}</option>
+                                <select clrSelect name="newAltreScommesse.risultato"
+                                    [(ngModel)]="newAltreScommesse.risultato">
+                                    <option *ngFor="let item of combosel.cannonieri" [value]="item">{{item}}</option>
                                 </select>
-                              </clr-select-container>
-                              <br>
-                              <button class="btn btn-primary" [disabled]="newAltreScommesse.invalid" style="float: right;">Aggiorna</button>
-                              <button type="button" class="btn btn-outline" (click)="gironiModal = false" style="float: right;">Annulla</button>
+                            </clr-select-container>
+                            <br>
+                            <button class="btn btn-primary" [disabled]="newAltreScommesse.invalid"
+                                style="float: right;">Aggiorna</button>
+                            <button type="button" class="btn btn-outline" (click)="cannonieriModal = false"
+                                style="float: right;">Annulla</button>
                         </form>
                     </div>
                 </clr-modal>
-
-
-
 
             </clr-tab-content>
         </ng-template>
@@ -265,17 +287,18 @@
             <clr-tab-content>
                 <form class="clr-form" (submit)="onAddBomber(newBomber)">
                     <div class="clr-form-control">
-                      <label for="cannoniere" class="clr-control-label">Aggiungi Bomber</label>
-                      <div class="clr-control-container clr-error">
-                        <div class="clr-input-wrapper">
-                          <input clrInput placeholder="Cannoniere" type="text" [(ngModel)]="newBomber" name="newBomber" required />
+                        <label for="cannoniere" class="clr-control-label">Aggiungi Bomber</label>
+                        <div class="clr-control-container clr-error">
+                            <div class="clr-input-wrapper">
+                                <input clrInput placeholder="Cannoniere" type="text" [(ngModel)]="newBomber"
+                                    name="newBomber" required />
+                            </div>
+
                         </div>
-         
-                      </div>
                     </div>
                     <div class="margine-16">
-                    <button class="btn btn-primary btn-sm" [disabled]="newBomber==''">Aggiungi</button>
-                </div>
+                        <button class="btn btn-primary btn-sm" [disabled]="newBomber==''">Aggiungi</button>
+                    </div>
                 </form>
 
 
@@ -284,12 +307,12 @@
                     <clr-dg-column>cannoniere</clr-dg-column>
 
                     <clr-dg-row *clrDgItems="let bomber of combosel.cannonieri;let i = index;" [clrDgItem]="bomber">
-                     
+
                         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
-                            <clr-icon  shape="trash"  class="is-solid"(click)="onDeleteBomber(bomber)"></clr-icon>
+                            <clr-icon shape="trash" class="is-solid" (click)="onDeleteBomber(bomber)"></clr-icon>
                         </clr-dg-cell>
                         <clr-dg-cell>{{bomber}}</clr-dg-cell>
-                  
+
                     </clr-dg-row>
 
                 </clr-datagrid>
