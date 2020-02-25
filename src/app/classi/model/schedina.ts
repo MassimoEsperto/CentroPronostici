@@ -5,6 +5,7 @@ export class Schedina {
     tipo:number;
     risultato:string;
     username:string;
+    punteggio:number
    
       constructor(
         id_schedina:number,
@@ -12,6 +13,8 @@ export class Schedina {
         partita:string,
         tipo:number,
         risultato:string,
-        username:string) {}
+        username:string,
+        punteggio?:number
+        ) {}
     }
     
