@@ -5,7 +5,8 @@
     </button>
     <span>PRONOSTICI</span>
     <span class="filler"></span>
-    <span *ngIf="isAdmin">{{username.substring(0,7)}} <clr-icon shape="user" (click)="closePronostici = true"></clr-icon></span>
+    <span *ngIf="isAdmin">{{username.substring(0,7)}} <clr-icon shape="user" (click)="closePronostici = true">
+      </clr-icon></span>
     <span *ngIf="!isAdmin">{{username.substring(0,7)}} <clr-icon shape="user"></clr-icon></span>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -75,30 +76,30 @@
 </mat-toolbar>
 
 
-<clr-modal [(clrModalOpen)]="closePronostici"  [clrModalSize]="'sm'" [clrModalClosable]="false">
+<clr-modal [(clrModalOpen)]="closePronostici" [clrModalSize]="'sm'" [clrModalClosable]="false">
   <h3 class="modal-title">BLOCCA SBLOCCA</h3>
   <div class="modal-body">
     <clr-alert *ngIf="success" [clrAlertType]="'success'">
       <clr-alert-item>
-          <span class="alert-text">{{success}}</span>
+        <span class="alert-text">{{success}}</span>
       </clr-alert-item>
-  </clr-alert>
+    </clr-alert>
     <P>Questa opzione consente all'admin di bloccare e sbloccare l'inserimento e le modifiche di schedine</P>
-      <form clrForm (submit)="onUpdateClosePronostici(variabile)">
-        <clr-toggle-container clrInline>
-         
-          <clr-toggle-wrapper>
-              <input type="checkbox" clrToggle name="variabile"  [(ngModel)]="variabile" />
-              <label *ngIf="!variabile">BLOCCA</label>
-              <label *ngIf="variabile">SBLOCCA</label>
-          </clr-toggle-wrapper>
+    <form clrForm (submit)="onUpdateClosePronostici(variabile)">
+      <clr-toggle-container clrInline>
+
+        <clr-toggle-wrapper>
+          <input type="checkbox" clrToggle name="variabile" [(ngModel)]="variabile" />
+          <label *ngIf="!variabile">BLOCCA</label>
+          <label *ngIf="variabile">SBLOCCA</label>
+        </clr-toggle-wrapper>
       </clr-toggle-container>
       <p *ngIf="!variabile">PRONOSTICI SBLOCCATI!</p>
       <p *ngIf="variabile">TUOTTO BLOCCATO!</p>
-          <br>
-          <button class="btn btn-primary" style="float: right;">Aggiorna</button>
-          <button type="button" class="btn btn-outline" (click)="closePronostici = false"
-              style="float: right;">Chiudi</button>
-      </form>
+      <br>
+      <button class="btn btn-primary" style="float: right;">Aggiorna</button>
+      <button type="button" class="btn btn-outline" (click)="closePronostici = false"
+        style="float: right;">Chiudi</button>
+    </form>
   </div>
 </clr-modal>
