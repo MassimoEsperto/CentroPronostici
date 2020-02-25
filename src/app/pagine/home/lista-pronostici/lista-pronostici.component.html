@@ -1,7 +1,7 @@
 <h3>I MIEI PRONOSTICI</h3>
 
 <span *ngIf="loading" class="spinner"></span>
-
+<!-- SBLOCCATO-->
 <clr-datagrid *ngIf="pronostico&&!bloccato">
     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">num</clr-dg-column>
     <clr-dg-column>utente</clr-dg-column>
@@ -21,7 +21,7 @@
     </clr-dg-row>
 
 </clr-datagrid>
-
+<!-- BLOCCATO-->
 <clr-datagrid *ngIf="pronostico&&bloccato">
     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">num</clr-dg-column>
     <clr-dg-column>utente</clr-dg-column>
@@ -33,16 +33,16 @@
         <clr-dg-cell>{{scheda.id_utente}}</clr-dg-cell>
         <clr-dg-cell>{{scheda.tempo}}</clr-dg-cell>
         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
-            <clr-icon shape="eye" class="is-solid" (click)="onEditScheda(scheda)"></clr-icon>
+            <clr-icon shape="eye" class="is-solid" (click)="onViewScheda(scheda)"></clr-icon>
         </clr-dg-cell>
         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
-            0
+            {{scheda.punteggio}}
         </clr-dg-cell>
     </clr-dg-row>
 
 </clr-datagrid>
 <br>
-
+<!-- SBLOCCATO-->
 <clr-datagrid *ngIf="schede&&!bloccato">
     <clr-dg-column>scommessa</clr-dg-column>
     <clr-dg-column>risultato</clr-dg-column>
@@ -62,14 +62,17 @@
     </clr-dg-row>
 
 </clr-datagrid>
-
+<!-- BLOCCATO-->
 <clr-datagrid *ngIf="schede&&bloccato">
     <clr-dg-column>scommessa</clr-dg-column>
     <clr-dg-column>risultato</clr-dg-column>
+    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">punti</clr-dg-column>
 
     <clr-dg-row *clrDgItems="let match of schede;let i = index;" [clrDgItem]="match">
         <clr-dg-cell>{{match.partita}}</clr-dg-cell>
         <clr-dg-cell>{{match.risultato}}</clr-dg-cell>
+        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{match.punteggio}}</clr-dg-cell>
+        
     </clr-dg-row>
 
 </clr-datagrid>
@@ -78,7 +81,7 @@
 <!-- MODAL-->
 <div *ngIf="partita_sel&&combosel&&getItemsGirone(partita_sel.partita)">
 
-    <clr-modal [(clrModalOpen)]="risultatiModal">
+    <clr-modal [(clrModalOpen)]="risultatiModal" [clrModalClosable]="false">
         <h3 class="modal-title">{{partita_sel.partita}}</h3>
         <div class="modal-body">
             <form clrForm (submit)="onUpdateMatch(partita_sel);risultatiModal = false">
@@ -99,7 +102,7 @@
         </div>
     </clr-modal>
 
-    <clr-modal [(clrModalOpen)]="cannonieriModal">
+    <clr-modal [(clrModalOpen)]="cannonieriModal" [clrModalClosable]="false">
         <h3 class="modal-title">{{partita_sel.partita}}</h3>
         <div class="modal-body">
             <form clrForm (submit)="onUpdateMatch(partita_sel);cannonieriModal = false">
@@ -117,7 +120,7 @@
         </div>
     </clr-modal>
 
-    <clr-modal [(clrModalOpen)]="scquadreModal">
+    <clr-modal [(clrModalOpen)]="scquadreModal" [clrModalClosable]="false">
         <h3 class="modal-title">{{partita_sel.partita}}</h3>
         <div class="modal-body">
             <form clrForm (submit)="onUpdateMatch(partita_sel);scquadreModal = false">
@@ -135,7 +138,7 @@
         </div>
     </clr-modal>
 
-    <clr-modal [(clrModalOpen)]="gironiModal">
+    <clr-modal [(clrModalOpen)]="gironiModal" [clrModalClosable]="false">
         <h3 class="modal-title">{{partita_sel.partita}}</h3>
         <div class="modal-body">
             <form clrForm (submit)="onUpdateMatch(partita_sel);gironiModal = false">
@@ -156,7 +159,7 @@
 
 </div>
 
-<clr-modal [(clrModalOpen)]="confermaaModal">
+<clr-modal [(clrModalOpen)]="confermaaModal" [clrModalClosable]="false">
     <h3 class="modal-title">Conferma</h3>
     <div class="modal-body">
       Sei sicuro di volerlo eliminare?    
