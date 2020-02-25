@@ -1,31 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { GestionePronosticiService } from 'src/app/services/gestione-pronostici.service';
-import { SUCCESS } from 'src/app/classi/utils/costanti';
 import { Schedina } from 'src/app/classi/model/schedina';
-import { ClrLoadingState } from '@clr/angular';
 import { ComboService } from 'src/app/services/combo.service';
 import { Combo } from 'src/app/classi/model/combo';
+import { Generale } from 'src/app/classi/utils/general-component';
 
 @Component({
   selector: 'app-inserimento-pronostico',
   templateUrl: './inserimento-pronostico.component.html',
   styleUrls: ['./inserimento-pronostico.component.css']
 })
-export class InserimentoPronosticoComponent implements OnInit {
+export class InserimentoPronosticoComponent extends Generale implements OnInit {
 
-  constructor(private service: GestionePronosticiService, private combo: ComboService) { }
+  constructor(private service: GestionePronosticiService, private combo: ComboService) { super() }
   schede: Schedina[];
   play: boolean = false;
-  loading: boolean = false;
-  avvisovalidate:boolean=false;
-  error = '';
-  success = '';
+  avvisovalidate: boolean = false;
+
   partita_sel: Schedina //la partita che viene selezionata
 
   id_schedina: number;
   combosel: Combo;
 
-  bloccato:boolean=true;
+  bloccato: boolean = true;
 
   //per le multiselect
   partita_sel1: Schedina
@@ -48,17 +45,14 @@ export class InserimentoPronosticoComponent implements OnInit {
 
         next: (res: number) => {
 
-          console.log("res", res);
           this.id_schedina = Number(res);
           this.getSchedinaVuota();
           this.play = true;
 
-
         },
         error: (error: any) => {
 
-          // Stampa messaggio d'errore
-          this.error = error
+          this.stampaErrore(error);
 
         }
       })
@@ -68,7 +62,7 @@ export class InserimentoPronosticoComponent implements OnInit {
   insertPronostico() {
 
     if (!this.validateSchede()) {
-      this.avvisovalidate=true;
+      this.avvisovalidate = true;
       return;
     }
 
@@ -87,14 +81,12 @@ export class InserimentoPronosticoComponent implements OnInit {
           else {
             this.successo();
           }
-          console.log("RISULTATO UINSERIMENTO: ", result);
 
 
         },
         error: (error: any) => {
 
-          // Stampa messaggio d'errore
-          this.error = error
+          this.stampaErrore(error);
           this.play = true;
 
         }
@@ -116,8 +108,7 @@ export class InserimentoPronosticoComponent implements OnInit {
         },
         error: (error: any) => {
 
-          // Stampa messaggio d'errore
-          this.error = error
+          this.stampaErrore(error);
 
         }
       })
@@ -131,13 +122,13 @@ export class InserimentoPronosticoComponent implements OnInit {
       .subscribe({
 
         next: (result: Combo) => {
+
           this.combosel = result;
-          console.log("combo:", this.combosel.cannonieri);
+
         },
         error: (error: any) => {
 
-          // Stampa messaggio d'errore
-          this.error = error
+          this.stampaErrore(error);
 
         }
       })
@@ -145,10 +136,6 @@ export class InserimentoPronosticoComponent implements OnInit {
   }
 
 
-  private resetErrors() {
-    this.success = '';
-    this.error = '';
-  }
   /**
    * 
    * @param indice 
@@ -202,18 +189,11 @@ export class InserimentoPronosticoComponent implements OnInit {
       .subscribe({
         next: (result: boolean) => {
           this.bloccato = result;
+          this.loading = false;
         },
         error: (error: any) => {
         }
       })
   }
 
-  successo() {
-    this.success = SUCCESS;
-    this.loading = false;
-    setTimeout(() => {
-      this.success = '';
-    }, 5000);
-
-  }
 }
