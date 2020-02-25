@@ -3,7 +3,7 @@
 <span *ngIf="loading" class="spinner"></span>
 
 <clr-datagrid *ngIf="classifica">
-    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">num</clr-dg-column>
+    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50" >num</clr-dg-column>
     <clr-dg-column [clrDgField]="'id_utente'">utente</clr-dg-column>
     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">pt</clr-dg-column>
     <clr-dg-column >data</clr-dg-column>
@@ -31,13 +31,14 @@
 
 
 
-<clr-modal [(clrModalOpen)]="viewSchedaModal" [clrModalSize]="'xl'">
+<clr-modal [(clrModalOpen)]="viewSchedaModal&&schede" [clrModalSize]="'xl'">
     <h3 class="modal-title">SCHEDA SELEZIONATA</h3>
     <div class="modal-body">
+        <div class="limit-height">
         <clr-datagrid *ngIf="schede">
-            <clr-dg-column>scommessa</clr-dg-column>
-            <clr-dg-column>risultato</clr-dg-column>
-            <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">punti</clr-dg-column>
+            <clr-dg-column> <ng-container *clrDgHideableColumn="{hidden: false}">scommessa</ng-container></clr-dg-column>
+            <clr-dg-column> <ng-container *clrDgHideableColumn="{hidden: false}">risultato</ng-container></clr-dg-column>
+            <clr-dg-column [style.min-width.px]="50" [style.width.px]="50"> <ng-container *clrDgHideableColumn="{hidden: false}">punti</ng-container></clr-dg-column>
         
             <clr-dg-row *clrDgItems="let match of schede;let i = index;" [clrDgItem]="match">
                 <clr-dg-cell>{{match.partita}}</clr-dg-cell>
@@ -47,6 +48,7 @@
             </clr-dg-row>
         
         </clr-datagrid>   
+    </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline" (click)="viewSchedaModal = false"
