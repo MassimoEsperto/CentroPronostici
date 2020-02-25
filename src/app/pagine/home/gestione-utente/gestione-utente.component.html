@@ -34,7 +34,7 @@
                     <clr-dg-footer>{{totale}} utenti</clr-dg-footer>
                 </clr-datagrid>
 
-                <clr-modal [(clrModalOpen)]="updateModal">
+                <clr-modal [(clrModalOpen)]="updateModal" [clrModalClosable]="false">
                     <h3 class="modal-title">AGGIORNA UTENTE</h3>
                     <div class="modal-body">
                         <form *ngIf="options2" clrForm (submit)="onUpdateUtente(newUtente);updateModal = false">
@@ -129,7 +129,7 @@
 
                 </clr-datagrid>
 
-                <clr-modal [(clrModalOpen)]="basic">
+                <clr-modal [(clrModalOpen)]="basic" [clrModalClosable]="false">
                     <h3 class="modal-title">AGGIORNA MATCH</h3>
                     <div class="modal-body">
                         <form clrForm (submit)="onUpdateMatch(newMatch);basic = false">                            
@@ -180,7 +180,7 @@
 
                 </clr-datagrid>
 
-                <clr-modal [(clrModalOpen)]="altreModel">
+                <clr-modal [(clrModalOpen)]="altreModel" [clrModalClosable]="false">
                     <h3 class="modal-title">AGGIORNA SCOMMESSA</h3>
                     <div class="modal-body">
                         <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);altreModel = false">                            
@@ -202,7 +202,7 @@
    
                 </clr-modal>
 
-                <clr-modal  [(clrModalOpen)]="scquadreModal">
+                <clr-modal  [(clrModalOpen)]="scquadreModal" [clrModalClosable]="false">
                     <h3 class="modal-title">{{newAltreScommesse.scommessa}}</h3>
                     <div class="modal-body">
                         <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);scquadreModal = false">                             
@@ -219,7 +219,7 @@
                     </div>
                 </clr-modal>
 
-                <clr-modal  [(clrModalOpen)]="gironiModal">
+                <clr-modal  [(clrModalOpen)]="gironiModal" [clrModalClosable]="false">
                     <h3 class="modal-title">{{newAltreScommesse.scommessa}}</h3>
                     <div class="modal-body">
                         <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);gironiModal = false">                             
@@ -236,7 +236,7 @@
                     </div>
                 </clr-modal>
 
-                <clr-modal  [(clrModalOpen)]="cannonieriModal">
+                <clr-modal  [(clrModalOpen)]="cannonieriModal" [clrModalClosable]="false">
                     <h3 class="modal-title">{{newAltreScommesse.scommessa}}</h3>
                     <div class="modal-body">
                         <form clrForm (submit)="updateScommesseAntepost(newAltreScommesse);cannonieriModal = false">                             
