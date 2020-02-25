@@ -28,7 +28,7 @@ export class SideBarComponent implements OnInit {
 
   getVariabile() {
 
-    this.service.getVariabile()
+    this.service.getBloccato()
       .subscribe({
         next: (result: boolean) => {
           console.log("variabile ritorno ", result);
@@ -41,7 +41,7 @@ export class SideBarComponent implements OnInit {
 
   setVariabile(choise:number) {
 
-    this.service.setVariabile(choise)
+    this.service.setBloccato(choise)
       .subscribe({
         next: (result: boolean) => {
           this.successo();
