@@ -17,8 +17,8 @@ $id_schedina = 	($_GET['id_schedina'] !== null && $_GET['id_schedina'] !== '')? 
 
 $cr = 0;
 $cars = [];
-$sql1 ="SELECT c.id_partita,c.partita,u.id_schedina,u.id_utente as username,s.risultato FROM schedina_user u,schedina s,calendario c WHERE u.id_schedina={$id_schedina} and u.id_schedina=s.id_schedina and c.id_partita= s.id_partita";
-$sql2 ="SELECT c.id_partita,c.scommessa as partita,u.id_schedina,u.id_utente as username,s.risultato FROM schedina_user u,schedina s,scommesse_antepost c WHERE u.id_schedina={$id_schedina} and u.id_schedina=s.id_schedina and c.id_partita= s.id_partita";
+$sql1 ="SELECT c.id_partita,c.partita,u.id_schedina,u.id_utente as username,s.risultato FROM schedina_user u,schedina s,calendario c WHERE u.id_schedina={$id_schedina} and u.id_schedina=s.id_schedina and c.id_partita= s.id_partita order by c.id_partita";
+$sql2 ="SELECT c.id_partita,c.scommessa as partita,u.id_schedina,u.id_utente as username,s.risultato FROM schedina_user u,schedina s,scommesse_antepost c WHERE u.id_schedina={$id_schedina} and u.id_schedina=s.id_schedina and c.id_partita= s.id_partita  order by c.id_partita";
 
 
 if($result = mysqli_query($con,$sql1))
