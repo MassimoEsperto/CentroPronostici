@@ -198,7 +198,7 @@ export class InserimentoPronosticoComponent implements OnInit {
 
   getVariabile() {
 
-    this.service.getVariabile()
+    this.service.getBloccato()
       .subscribe({
         next: (result: boolean) => {
           this.bloccato = result;
