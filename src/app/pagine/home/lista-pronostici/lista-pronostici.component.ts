@@ -2,27 +2,24 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Pronostici } from 'src/app/classi/model/pronostici';
 import { GestionePronosticiService } from 'src/app/services/gestione-pronostici.service';
 import { Schedina } from 'src/app/classi/model/schedina';
-import { SUCCESS } from 'src/app/classi/utils/costanti';
 import { ComboService } from 'src/app/services/combo.service';
 import { Combo } from 'src/app/classi/model/combo';
+import { Generale } from 'src/app/classi/utils/general-component';
 
 @Component({
   selector: 'app-lista-pronostici',
   templateUrl: './lista-pronostici.component.html',
   styleUrls: ['./lista-pronostici.component.css']
 })
-export class ListaPronosticiComponent implements OnInit {
+export class ListaPronosticiComponent extends Generale implements OnInit {
 
-  constructor(private service: GestionePronosticiService,private combo: ComboService) { }
+  constructor(private service: GestionePronosticiService,private combo: ComboService) {super() }
   pronostico:Pronostici[];
   schede:Schedina[];
   id_schedina:number=0;
   partita_sel:Schedina=new Schedina(0,0,'',0,'','');
-  error = '';
-  success = '';
-  loading:boolean=true;
+  
   bloccato:boolean=true;
- // play:boolean=false;
  
   combosel:Combo;
 
@@ -38,9 +35,7 @@ export class ListaPronosticiComponent implements OnInit {
   }
 
   onDeleteScheda(scheda){
-    this.id_schedina=scheda.id_schedina;
-    console.log("scheda da eliminare",scheda);
-   
+    this.id_schedina=scheda.id_schedina; 
   }
 
   onViewScheda(scheda){
@@ -49,7 +44,6 @@ export class ListaPronosticiComponent implements OnInit {
   }
 
   deleteScheda(){
-    console.log("id_schedina",this.id_schedina);
     this.deleteSchedina(this.id_schedina);
   }
 
@@ -67,8 +61,7 @@ export class ListaPronosticiComponent implements OnInit {
     },
     error: (error: any) => {
 
-      // Stampa messaggio d'errore
-      this.error = error
+      this.stampaErrore(error);
 
     }
   })
@@ -89,8 +82,7 @@ getListPronosticiFinale(){
   },
   error: (error: any) => {
 
-    // Stampa messaggio d'errore
-    this.error = error
+    this.stampaErrore(error);
 
   }
 })
@@ -104,16 +96,12 @@ getSchedinaPiena(id_schedina:number){
 
   next: (result: Schedina[]) => {
    
-   
     this.schede=result;
-    console.log("schedina piena",this.schede)
-  //  this.play=true;
     this.loading=false;
   },
   error: (error: any) => {
 
-    // Stampa messaggio d'errore
-    this.error = error
+    this.stampaErrore(error);
 
   }
 })
@@ -127,17 +115,13 @@ getSchedinaFinale(id_schedina:number){
   .subscribe({
  
    next: (result: Schedina[]) => {
-    
-    
+     
      this.schede=result;
-     console.log("schedina piena",this.schede)
-   //  this.play=true;
      this.loading=false;
    },
    error: (error: any) => {
  
-     // Stampa messaggio d'errore
-     this.error = error
+    this.stampaErrore(error);
  
    }
  })
@@ -151,17 +135,13 @@ deleteSchedina(id_schedina:number){
  
    next: (result: Pronostici[]) => {
     
-    
-     this.pronostico=result;
-     console.log("schedina piena",this.pronostico)
-     
+     this.pronostico=result; 
      this.schede=null;
      this.loading=false;
    },
    error: (error: any) => {
  
-     // Stampa messaggio d'errore
-     this.error = error
+    this.stampaErrore(error);
  
    }
  })
@@ -175,8 +155,6 @@ onEditMatch(indice){
   this.partita_sel.id_schedina=this.schede[indice].id_schedina;
   this.partita_sel.risultato=this.schede[indice].risultato;
   this.partita_sel.partita=this.schede[indice].partita;
-  console.log("this.partita_sel.partita",this.partita_sel.partita);
-  console.log("this.schede[indice]",this.schede);
 }
 
 onUpdateMatch(partita){
@@ -187,15 +165,12 @@ this.service.update(this.partita_sel)
 .subscribe({
  
    next: (result: string) => {
-  console.log("elemento salvato:",result);
     this.successo();
 
    },
    error: (error: any) => {
 
-     // Stampa messaggio d'errore
-     this.error = error
- //    this.play=true;
+    this.stampaErrore(error);
 
    }
  })
@@ -208,13 +183,13 @@ getCombo(){
   .subscribe({
  
    next: (result: Combo) => {
+     
      this.combosel=result;
-    console.log("combo:",this.combosel.cannonieri);
+
    },
    error: (error: any) => {
  
-     // Stampa messaggio d'errore
-     this.error = error
+    this.stampaErrore(error);
  
    }
  })
@@ -251,13 +226,5 @@ getBloccato() {
     })
 }
 
-successo(){
-  this.success = SUCCESS;
-  this.loading=false;
-  setTimeout(() => {
-    this.success = '';
-  }, 5000);
-
-}
 
 }
