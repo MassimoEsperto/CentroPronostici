@@ -8,7 +8,7 @@ export class Generale {
 
     successo() {
         this.success = SUCCESS;
-
+        this.loading = false;
         setTimeout(() => {
             this.resetErrors();
         }, 5000);
@@ -21,6 +21,7 @@ export class Generale {
 
     stampaErrore(errore) {
         this.error = errore
+        this.loading = false;
     }
 
     getRuoloStrng(rol) {
