@@ -1,3 +1,14 @@
+<clr-alert *ngIf="success" [clrAlertType]="'success'">
+    <clr-alert-item>
+        <span class="alert-text">{{success}}</span>
+    </clr-alert-item>
+</clr-alert>
+<clr-alert *ngIf="error" [clrAlertType]="'warning'">
+    <clr-alert-item>
+        <span class="alert-text">{{error}}</span>
+    </clr-alert-item>
+</clr-alert>
+
 <h3>CLASSIFICA GENERALE</h3>
 
 <span *ngIf="loading" class="spinner"></span>
@@ -31,7 +42,7 @@
 
 
 
-<clr-modal [(clrModalOpen)]="viewSchedaModal&&schede" [clrModalSize]="'xl'">
+<clr-modal [(clrModalOpen)]="viewSchedaModal&&schede" [clrModalSize]="'xl'" [clrModalClosable]="false">
     <h3 class="modal-title">SCHEDA SELEZIONATA</h3>
     <div class="modal-body">
         <div class="limit-height">
