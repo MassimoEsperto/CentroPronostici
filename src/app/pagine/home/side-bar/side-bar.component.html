@@ -20,21 +20,21 @@
       <a mat-list-item [routerLink]="'/home/dashboard'" (click)="sidenav.toggle()">
         <clr-icon class="icone" shape="home"></clr-icon>Home
       </a>
-      <mat-divider></mat-divider>
-      <mat-divider></mat-divider>
-      <mat-divider></mat-divider>
+      <mat-divider *ngIf="isAdmin"></mat-divider>
+      <mat-divider *ngIf="isAdmin"></mat-divider>
+      <mat-divider *ngIf="isAdmin"></mat-divider>
       <a *ngIf="isAdmin" mat-list-item [routerLink]="'/home/gestione-utente'" (click)="sidenav.toggle()">
         <clr-icon class="icone" shape="user"></clr-icon>Gestione Admin
       </a>
-      <mat-divider></mat-divider>
-      <mat-divider></mat-divider>
-      <mat-divider></mat-divider>
+      <mat-divider *ngIf="isPlayer"></mat-divider>
+      <mat-divider *ngIf="isPlayer"></mat-divider>
+      <mat-divider *ngIf="isPlayer"></mat-divider>
       <a *ngIf="isPlayer" mat-list-item [routerLink]="'/home/lista-pronostici'" (click)="sidenav.toggle()">
         <clr-icon class="icone" shape="file-group"></clr-icon>Pronostici Peronali
       </a>
-      <mat-divider></mat-divider>
-      <mat-divider></mat-divider>
-      <mat-divider></mat-divider>
+      <mat-divider *ngIf="isPlayer"></mat-divider>
+      <mat-divider *ngIf="isPlayer"></mat-divider>
+      <mat-divider *ngIf="isPlayer"></mat-divider>
       <a *ngIf="isPlayer" mat-list-item [routerLink]="'/home/inserimento-pronostico'" (click)="sidenav.toggle()">
         <clr-icon class="icone" shape="copy-to-clipboard"></clr-icon>Insert Pronostico
       </a>
