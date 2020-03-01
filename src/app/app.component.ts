@@ -1,11 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ElementRef } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { slideInAnimation } from './animations';
 
 
 @Component({
   selector: 'app-root',
-  template: `<router-outlet></router-outlet>`
+  animations: [
+    slideInAnimation
+    // animation triggers go here
+  ],
+  template: ` <div [@routeAnimations]="prepareRoute(outlet)" >
+              <router-outlet #outlet="outlet"></router-outlet></div>`
   
 })
-export class AppComponent {
-  title = 'pronostichiamo';
+export class AppComponent implements AfterViewInit {
+ 
+  constructor(private elementRef: ElementRef){}
+
+  ngAfterViewInit()
+  {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#00b050';
+  }
+
+  prepareRoute(outlet: RouterOutlet) 
+  {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+
 }
