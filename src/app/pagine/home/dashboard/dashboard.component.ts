@@ -11,7 +11,12 @@ const FileSaver = require('file-saver');
 })
 export class DashboardComponent implements OnInit{
   username: string;
-  ngOnInit() {this.username = this.service.username()}
+  punti:any;
+  ngOnInit() {
+    this.username = this.service.username();
+    this.getPuntiPrevisti();
+  
+  }
 
   downloadPdf(pdfUrl: string,pdfName: string) {
  
@@ -20,4 +25,22 @@ export class DashboardComponent implements OnInit{
   }
 
    constructor(private service: GestionePronosticiService) { }
+
+
+   getPuntiPrevisti(){
+  
+    this.service.puntiPrevisti()
+    .subscribe({
+   
+     next: (result: any) => {
+   this.punti=result;
+       console.log("risultatoooooooo",this.punti);
+   
+     },
+     error: (error: any) => {
+   
+     }
+   })
+   
+   }
 }
