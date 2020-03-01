@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GestionePronosticiService } from 'src/app/services/gestione-pronostici.service';
 
 declare var require: any
 const FileSaver = require('file-saver');
@@ -9,8 +10,8 @@ const FileSaver = require('file-saver');
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit{
-
-  ngOnInit() {}
+  username: string;
+  ngOnInit() {this.username = this.service.username()}
 
   downloadPdf(pdfUrl: string,pdfName: string) {
  
@@ -18,5 +19,5 @@ export class DashboardComponent implements OnInit{
     require('file-saver').saveAs(pdfUrl, pdfName);
   }
 
-   constructor() { }
+   constructor(private service: GestionePronosticiService) { }
 }
