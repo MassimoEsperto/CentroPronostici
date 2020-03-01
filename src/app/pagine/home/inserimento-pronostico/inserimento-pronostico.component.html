@@ -11,6 +11,11 @@
 </clr-alert>
 
 <div class="bottoni">
+  <clr-alert *ngIf="bloccato" [clrAlertType]="'warning'" [clrAlertClosable]="false">
+    <clr-alert-item>
+      <span class="alert-text">Attualmente i sistemi sono sospesi</span>
+    </clr-alert-item>
+  </clr-alert>
   <button *ngIf="!play&&!bloccato" class="btn btn-defaul btn-block" (click)="nuovaScheda()">INSERISCI NUOVA
     SCHEDA</button>
 </div>
