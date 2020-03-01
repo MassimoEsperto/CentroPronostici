@@ -64,4 +64,18 @@
             </div>
         </div>
     </div>
+    <div class="clr-col-lg-6 clr-col-sm-9 clr-col-12 padtop">
+        <h3>PRONOSTICI VALIDI</h3>
+        <clr-datagrid *ngIf="punti">
+            <clr-dg-column>Pronostici</clr-dg-column>
+            <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">punti</clr-dg-column>
+           
+            <clr-dg-row *clrDgItems="let pt of punti">
+                <clr-dg-cell>{{pt.tipo}}</clr-dg-cell>
+                <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50"><span style="font-weight: bold;">{{pt.punti}}</span></clr-dg-cell>
+            </clr-dg-row>
+        </clr-datagrid>
+    </div>
 </div>
+
+
