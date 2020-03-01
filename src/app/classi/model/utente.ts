@@ -1,13 +1,13 @@
 export class Utente {
     username:string;
     email:string;
-    ruolo:number;
+    ruolo:string;
     password:string;
   
       constructor(
         username: string,
         email: string,
-        ruolo:   number,
+        ruolo:   string,
         password: string) {}
     }
     
