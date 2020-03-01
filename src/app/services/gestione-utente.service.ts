@@ -30,7 +30,7 @@ constructor(private http: HttpClient) {super(); }
     console.log(utente);
     console.log(JSON.stringify(utente));
 
-   return this.http.post(`${this.buildURL("GestioneUtenti/insert")}`, { data: utente })
+   return this.http.post(`${this.buildURL("GestioneUtenti/register")}`, { data: utente })
       .pipe(map((res) => {
         this.utenti.push(res['data']);
         return this.utenti;
