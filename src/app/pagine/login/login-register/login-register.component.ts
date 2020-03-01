@@ -3,6 +3,7 @@ import { Utente } from 'src/app/classi/model/utente';
 import { GestioneUtenteService } from 'src/app/services/gestione-utente.service';
 import { Router } from '@angular/router';
 import { Generale } from 'src/app/classi/utils/general-component';
+import { Ruolo } from 'src/app/classi/utils/enums';
 
 @Component({
   selector: 'app-login-register',
@@ -11,7 +12,7 @@ import { Generale } from 'src/app/classi/utils/general-component';
 })
 export class LoginRegisterComponent extends Generale implements OnInit {
 
-  newUtente: Utente = new Utente('', '', 2, '');
+  newUtente: Utente = new Utente('', '', '', '');
 
   utenti: Utente[];
   esistente: Boolean;
@@ -49,7 +50,7 @@ export class LoginRegisterComponent extends Generale implements OnInit {
       return;
     }
 
-    this.newUtente.ruolo = 3;//ruolo di partenza
+    this.newUtente.ruolo = Ruolo.VISITATORE;//ruolo di partenza
 
 
     this.utenteService.insert(this.newUtente)
