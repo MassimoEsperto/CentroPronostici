@@ -10,7 +10,58 @@
 </clr-alert>
 
 <span *ngIf="loading" class="spinner"></span>
-<h1>Ancora in lavorazione</h1>
 
-<img src="assets/img/download.png" (click)="downloadPdf('../../../../assets/download/FANTAEUROPEO.pdf','FANTAEUROPEO.pdf')" style="width:30%"> 
+<div class="clr-row">
+    <div class="clr-col-lg-6 clr-col-sm-9 clr-col-12">
+        <div class="card">
+            <div class="card-img">
+                <img src="assets/img/pronostici.jpg">
+            </div>
+            <div class="card-block">
+                <h4 class="card-title">Benvenuto {{username}} nel centro pronostici maresca</h4>
+                <p class="card-text">
+                    Di seguito alcune istruzioni per la compilazione di pronostici.
+                </p>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Per l'inserimento di nuovi pronostici:
+                    <ul class="list">
+                        <li>Apri il menu laterale Inserimento pronotici</li>
+                        <li>Aggiungi una nuova scheda che sarà associata al tuo account</li>
+                        <li>Compilare la scheda in tutte le sue voci e poi salva</li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    Per verificare o modificare i tuoi pronostici:
+                    <ul class="list">
+                        <li>Apri il menu laterale Pronostici Personale</li>
+                        <li>Nella lista che compare potrai eliminare o modificare le schede da te inserite
+                            precedentemente</li>
+                        <li>Una volta aperta la scheda potrai modificare ciascun risultato uno alla volta</li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    Per verificare la classifica totale una volta che saranno bloccati gli inserimenti:
+                    <ul class="list">
+                        <li>Apri il menu laterale Classifica</li>
+                        <li>Per ricercare solo i pronostici effettuati da un determinato account è prevista la
+                            possibilità di filtrare per ciascun account</li>
+                        <li>Selezionare poi la casella view per visualizzare l'intera schedina</li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    E' prevista la possibilità di effettuare il download del vecchio file per i nostalgici:
+                    <ul class="list">
+                        <img src="assets/img/download.png"
+                            (click)="downloadPdf('../../../../assets/download/FANTAEUROPEO.pdf','FANTAEUROPEO.pdf')"
+                            style="width:30%">
+                    </ul>
+                </li>
+            </ul>
+            <div class="card-footer">
 
+            </div>
+        </div>
+    </div>
+</div>
