@@ -4,6 +4,7 @@ import { LoginHomeComponent } from './pagine/login/login-home/login-home.compone
 import { LoginRegisterComponent } from './pagine/login/login-register/login-register.component';
 import { LoginSignInComponent } from './pagine/login/login-sign-in/login-sign-in.component';
 
+
 const routes: Routes = [
     { 
         path: '', 
@@ -12,15 +13,18 @@ const routes: Routes = [
     },
     {
         path: 'login',
-        component: LoginHomeComponent
+        component: LoginHomeComponent,
+        data: {animation: 'AboutPage'}
     },
     {
         path: 'sign-in',
-        component: LoginSignInComponent
+        component: LoginSignInComponent,
+        data: {animation: 'FilterPage'}
     },
     {
         path: 'register',
-        component: LoginRegisterComponent
+        component: LoginRegisterComponent,
+        data: {animation: 'HomePage'}
     }
 ];
 
