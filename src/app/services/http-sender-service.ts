@@ -1,6 +1,7 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { HttpErrorResponse } from '@angular/common/http'
 import { throwError } from 'rxjs'
 import { WS_BASE_URL } from '../classi/utils/costanti'
+import { Ruolo } from '../classi/utils/enums'
 
 export class HttpSenderService {
 
@@ -26,7 +27,7 @@ export class HttpSenderService {
 
   isadmin(){
     let ruolo= this.ruolo();
-    if(ruolo==1){
+    if(ruolo==Ruolo.ADMIN){
       return true
     }
     else
@@ -37,7 +38,7 @@ export class HttpSenderService {
     
   isPlayer(){
     let ruolo= this.ruolo();
-    if(ruolo==1 || ruolo==2){
+    if(ruolo==Ruolo.ADMIN || ruolo==Ruolo.VISITATORE){
       return true
     }
     else
