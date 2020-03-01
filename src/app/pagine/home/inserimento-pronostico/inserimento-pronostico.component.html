@@ -16,7 +16,7 @@
       <span class="alert-text">Attualmente i sistemi sono sospesi</span>
     </clr-alert-item>
   </clr-alert>
-  <button *ngIf="!play&&!bloccato" class="btn btn-defaul btn-block" (click)="nuovaScheda()">INSERISCI NUOVA
+  <button *ngIf="!play&&!bloccato&&!loading" class="btn btn-defaul btn-block" (click)="nuovaScheda()">INSERISCI NUOVA
     SCHEDA</button>
 </div>
 
