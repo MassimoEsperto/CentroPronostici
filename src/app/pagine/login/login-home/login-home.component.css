@@ -22,10 +22,16 @@
        
 .entrata{
     margin-top: 16px;
+    margin-right: 8px;
     text-align: right;
     color: black;
 }
        
 .componente{
 text-align: center;
+}
+
+.firma{
+    text-align: right;
+    margin: 16px;
 }
