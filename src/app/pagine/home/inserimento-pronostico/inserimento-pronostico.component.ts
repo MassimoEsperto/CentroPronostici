@@ -32,7 +32,7 @@ export class InserimentoPronosticoComponent extends Generale implements OnInit {
 
   ngOnInit() {
     this.getCombo();
-    this.getVariabile();
+    this.getBloccato();
   }
 
   nuovaScheda() {
@@ -183,7 +183,7 @@ export class InserimentoPronosticoComponent extends Generale implements OnInit {
     return validate;
   }
 
-  getVariabile() {
+  getBloccato() {
 
     this.service.getBloccato()
       .subscribe({
