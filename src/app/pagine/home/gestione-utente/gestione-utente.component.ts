@@ -7,6 +7,7 @@ import { ScommesseAntepost } from 'src/app/classi/model/scommesse-antepost';
 import { ComboService } from 'src/app/services/combo.service';
 import { Combo } from 'src/app/classi/model/combo';
 import { Generale } from 'src/app/classi/utils/general-component';
+import { risultato } from 'src/app/classi/utils/enums';
 
 @Component({
   selector: 'app-gestione-utente',
@@ -24,7 +25,7 @@ export class GestioneComponent extends Generale implements OnInit {
   options: boolean;
   options2: boolean;
 
-  newUtente: Utente = new Utente('', '', 0, 'password');
+  newUtente: Utente = new Utente('', '', '', 'password');
   newMatch: Calendario = new Calendario(1, '', null, 0, 0, '', '', '', '', '', '', '');
   newAltreScommesse: ScommesseAntepost = new ScommesseAntepost(1, '', '');
   combosel: Combo;
@@ -104,6 +105,7 @@ export class GestioneComponent extends Generale implements OnInit {
   }
 
   onUpdateMatch(newMatch) {
+    
     this.resetErrors();
     this.newMatch = newMatch;
 
@@ -111,28 +113,28 @@ export class GestioneComponent extends Generale implements OnInit {
     let golt: number = this.newMatch.goalt;
     let goltot = Number(golc) + Number(golt);
 
-    this.newMatch.risEsatto = golc + '-' + golt;
+    this.newMatch.risEsatto = golc > 4 || golt > 4 ? risultato.ALTRO : golc + '-' + golt;
     if (golc == golt) {
-      this.newMatch.risultato = 'X';
-      this.newMatch.doppiachance1 = '1X';
-      this.newMatch.doppiachance2 = 'X2';
+      this.newMatch.risultato = risultato.X;
+      this.newMatch.doppiachance1 = risultato.UNOX;
+      this.newMatch.doppiachance2 = risultato.XDUE;
     }
     else if (golc > golt) {
-      this.newMatch.risultato = '1';
-      this.newMatch.doppiachance1 = '1X';
-      this.newMatch.doppiachance2 = '12';
+      this.newMatch.risultato = risultato.UNO;
+      this.newMatch.doppiachance1 = risultato.UNOX;
+      this.newMatch.doppiachance2 = risultato.UNO_DUE;
     }
     else if (golc < golt) {
-      this.newMatch.risultato = '2';
-      this.newMatch.doppiachance1 = 'X2';
-      this.newMatch.doppiachance2 = '12';
+      this.newMatch.risultato = risultato.DUE;
+      this.newMatch.doppiachance1 = risultato.XDUE;
+      this.newMatch.doppiachance2 = risultato.UNO_DUE;
     }
 
-    this.newMatch.underOver = goltot > 2 ? 'OVER' : 'UNDER';
+    this.newMatch.underOver = goltot > 2 ? risultato.OVER : risultato.UNDER;
 
-    this.newMatch.pariDispari = goltot % 2 === 1 ? 'DISPARI' : 'PARI';
+    this.newMatch.pariDispari = goltot % 2 === 1 ? risultato.DISPARI : risultato.PARI;
 
-    this.newMatch.golNogol = golc > 0 && golt > 0 ? 'GOL' : 'NOGOL';
+    this.newMatch.golNogol = golc > 0 && golt > 0 ? risultato.GOL : risultato.NOGOL;
 
 
 
