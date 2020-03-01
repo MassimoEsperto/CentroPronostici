@@ -189,6 +189,17 @@ export class GestionePronosticiService extends HttpSenderService {
         catchError(this.handleError));
   }
 
+  puntiPrevisti() {
+
+    return this.http.get<any>(`${this.buildURL("GestionePronostici/puntiPrevisti")}`)
+      .pipe(map((res) => {
+
+        return res['data'];
+
+      }),
+        catchError(this.handleError));
+  }
+
 
   /**
    * get e set della variabile che decide se si possano inserire ancora pronostici
