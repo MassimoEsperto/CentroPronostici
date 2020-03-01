@@ -28,7 +28,7 @@
                         </clr-dg-action-overflow>
                         <clr-dg-cell>{{user.username}}</clr-dg-cell>
                         <clr-dg-cell>{{user.email}}</clr-dg-cell>
-                        <clr-dg-cell>{{getRuoloStrng(user.ruolo)}}</clr-dg-cell>
+                        <clr-dg-cell>{{user.ruolo}}</clr-dg-cell>
                     </clr-dg-row>
 
                     <clr-dg-footer>{{totale}} utenti</clr-dg-footer>
@@ -51,9 +51,9 @@
                             <clr-select-container>
                                 <label>Ruolo</label>
                                 <select clrSelect name="ruolo" [(ngModel)]="newUtente.ruolo" required>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Giocatore</option>
-                                    <option value="3">Visitatore</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="giocatore">Giocatore</option>
+                                    <option value="visitatore">Visitatore</option>
                                 </select>
                                 <clr-control-error>Obbligatorio</clr-control-error>
                             </clr-select-container>
@@ -136,7 +136,7 @@
                 <clr-modal [(clrModalOpen)]="updateMatchModal" [clrModalClosable]="false">
                     <h3 class="modal-title">AGGIORNA MATCH</h3>
                     <div class="modal-body">
-                        <form clrForm (submit)="onUpdateMatch(newMatch);updateMatchModal = false">
+                        <form clrForm  (submit)="onUpdateMatch(newMatch);updateMatchModal = false">
                             <clr-input-container>
                                 <label>Partita</label>
                                 <input clrInput type="text" [(ngModel)]="newMatch.partita" name="partita" required />
@@ -144,11 +144,11 @@
                             </clr-input-container>
                             <clr-input-container>
                                 <label>Goals casa</label>
-                                <input clrInput type="text" [(ngModel)]="newMatch.goalc" name="goalc" required />
+                                <input clrInput type="number" [(ngModel)]="newMatch.goalc" name="goalc" required />
                             </clr-input-container>
                             <clr-input-container>
                                 <label>Goals trasterta</label>
-                                <input clrInput type="text" [(ngModel)]="newMatch.goalt" name="goalt" required />
+                                <input clrInput type="number" [(ngModel)]="newMatch.goalt" name="goalt" required />
                             </clr-input-container>
                             <br>
                             <button class="btn btn-primary" [disabled]="newMatch.invalid"
