@@ -19,8 +19,8 @@
                                         required />
                                 </clr-input-container>
                                 <clr-input-container>
-                                    <label>Mail (Optional)</label>
-                                    <input clrInput type="text" [(ngModel)]="newUtente.email" name="email" />
+                                    <label>Mail</label>
+                                    <input clrInput type="email" [(ngModel)]="newUtente.email" name="email" #useremail="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
                                 </clr-input-container>
                                 <clr-input-container>
                                     <label>Password</label>
@@ -28,7 +28,7 @@
                                         required />
                                 </clr-input-container>
                                 <button class="btn btn-primary btn-block margine-16"
-                                    [disabled]="newUtente.invalid">Registrati</button>
+                                    [disabled]="newUtente.invalid && useremail.invalid">Registrati</button>
                             </form>
                             <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                             <div *ngIf="success" class="alert alert-success">{{success}}</div>
