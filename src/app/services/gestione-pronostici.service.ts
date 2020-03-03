@@ -30,7 +30,6 @@ export class GestionePronosticiService extends HttpSenderService {
 
     return this.http.get(`${this.buildURL("GestioneSchedina/newSchedina")}`, { params: params })
       .pipe(map((res) => {
-        console.log(res['data']);
 
         return res['data'].id_schedina;
       }),
@@ -48,11 +47,10 @@ export class GestionePronosticiService extends HttpSenderService {
   schedinaVuota(id_schedina: number, username: string) {
     const params = new HttpParams()
       .set('id_schedina', id_schedina.toString()).set('username', username);
-    console.log('schedina vuota');
+
     return this.http.get<Schedina[]>(`${this.buildURL("GestioneSchedina/schedinaVuota")}`, { params: params })
       .pipe(map((res) => {
-        console.log('ritorno schedina');
-        console.log("res: ", res['data']);
+
         this.scheda = res['data'];
         return this.scheda;
 
@@ -63,10 +61,10 @@ export class GestionePronosticiService extends HttpSenderService {
   schedinaPiena(id_schedina: number) {
     const params = new HttpParams()
       .set('id_schedina', id_schedina.toString());
-    console.log('schedina piena');
+
     return this.http.get<Schedina[]>(`${this.buildURL("GestioneSchedina/schedinaPiena")}`, { params: params })
       .pipe(map((res) => {
-        console.log('ritorno schedina');
+
         this.schedaPiena = res['data'];
         return this.schedaPiena;
 
@@ -77,10 +75,10 @@ export class GestionePronosticiService extends HttpSenderService {
   schedinaFinale(id_schedina: number) {
     const params = new HttpParams()
       .set('id_schedina', id_schedina.toString());
-    console.log('schedina piena');
+
     return this.http.get<Schedina[]>(`${this.buildURL("GestioneSchedina/schedinaFinale")}`, { params: params })
       .pipe(map((res) => {
-        console.log('ritorno schedinaFinale');
+
         this.schedaFinita = res['data'];
         return this.schedaFinita;
 
@@ -94,12 +92,11 @@ export class GestionePronosticiService extends HttpSenderService {
    * Inserimento dei pronostici
    */
   insert(pronostico: Schedina[]) {
-    console.log("pronostico", pronostico);
-    console.log(JSON.stringify(pronostico));
+  
 
     return this.http.post(`${this.buildURL("GestionePronostici/insert")}`, { data: pronostico })
       .pipe(map((res) => {
-        console.log("ritorno", res['data']);
+    
         return res['data'];
       }),
         catchError(this.handleError));
@@ -110,9 +107,7 @@ export class GestionePronosticiService extends HttpSenderService {
    * modifica del pronostico
    */
   update(pronostico: Schedina) {
-    console.log("pronostico", pronostico);
-    console.log(JSON.stringify(pronostico));
-
+  
     return this.http.post(`${this.buildURL("GestionePronostici/update")}`, { data: pronostico })
       .pipe(map((res) => {
         const scheda = this.schedaPiena.find((item) => {
@@ -128,18 +123,17 @@ export class GestionePronosticiService extends HttpSenderService {
         catchError(this.handleError));
   }
 
-  delete(id_schedina:number): Observable<Pronostici[]> {
+  delete(id_schedina: number): Observable<Pronostici[]> {
     const params = new HttpParams()
       .set('id_schedina', id_schedina.toString());
 
     return this.http.get(`${this.buildURL("GestioneSchedina/deleteSchedina")}`, { params: params })
       .pipe(map(res => {
-        console.log('delete effettuato');
-        console.log(res);
-        const filterid =this.pronostico = this.pronostico.filter(item => item.id_schedina !== id_schedina);    
+     
+        const filterid = this.pronostico = this.pronostico.filter(item => item.id_schedina !== id_schedina);
         return this.pronostico = filterid;
       }),
-      catchError(this.handleError));
+        catchError(this.handleError));
   }
 
   /**
@@ -154,7 +148,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
     return this.http.get<Pronostici[]>(`${this.buildURL("GestionePronostici/list")}`, { params: params })
       .pipe(map((res) => {
-        console.log("res lista ", res['data']);
+      
         this.pronostico = res['data'];
         return this.pronostico;
 
@@ -168,7 +162,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
     return this.http.get<Pronostici[]>(`${this.buildURL("GestionePronostici/listFinale")}`, { params: params })
       .pipe(map((res) => {
-        console.log("res lista ", res['data']);
+    
         this.pronostico = res['data'];
         return this.pronostico;
 
@@ -181,7 +175,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
     return this.http.get<Pronostici[]>(`${this.buildURL("GestionePronostici/classifica")}`)
       .pipe(map((res) => {
-        console.log("res lista ", res['data']);
+      
         this.pronostico = res['data'];
         return this.pronostico;
 
@@ -208,10 +202,10 @@ export class GestionePronosticiService extends HttpSenderService {
     return this.http.get(`${this.buildURL("GestionePronostici/getBloccato")}`).pipe(
       map((res) => {
         return res['data'];
-    }),
-    catchError(this.handleError));
+      }),
+      catchError(this.handleError));
   }
-  setBloccato(variabile:number): Observable<boolean> {
+  setBloccato(variabile: number): Observable<boolean> {
     const params = new HttpParams()
       .set('variabile', variabile.toString());
 
@@ -219,6 +213,6 @@ export class GestionePronosticiService extends HttpSenderService {
       .pipe(map(res => {
         return res['data'];
       }),
-      catchError(this.handleError));
+        catchError(this.handleError));
   }
 }
