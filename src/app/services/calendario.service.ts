@@ -23,7 +23,7 @@ export class CalendarioService extends HttpSenderService {
         map((res) => {
       
           this.calendario = res['data'];
-          console.log(res['data']);
+   
           return this.calendario;
       }),
       catchError(this.handleError));
@@ -34,7 +34,7 @@ export class CalendarioService extends HttpSenderService {
         map((res) => {
       
           this.altrescommesse = res['data'];
-          console.log("Antepost",res['data']);
+    
           return this.altrescommesse;
       }),
       catchError(this.handleError));
@@ -42,11 +42,10 @@ export class CalendarioService extends HttpSenderService {
 
     
     update(calendario: Calendario): Observable<Calendario[]> {
-      console.log('call servizio');
-      console.log(calendario);
+      
       return this.http.put(`${this.buildURL("GestioneCalendario/update")}`, { data: calendario })
         .pipe(map((res) => {
-          console.log('update effettuato');
+         
           const theMatch = this.calendario.find((item) => {
             return +item['id_partita'] === +calendario['id_partita'];
           });
@@ -76,7 +75,7 @@ export class CalendarioService extends HttpSenderService {
     }
 
     insertBomber(bomber: string): Observable<string> {
-      console.log(bomber);
+    
       const params = new HttpParams().set('nome', bomber);
   
      return this.http.get(`${this.buildURL("GestioneBomber/insert")}`, { params: params })
@@ -90,7 +89,7 @@ export class CalendarioService extends HttpSenderService {
     }
 
     deleteBomber(bomber: string): Observable<string> {
-      console.log(bomber);
+     
       const params = new HttpParams().set('nome', bomber);
   
      return this.http.get(`${this.buildURL("GestioneBomber/delete")}`, { params: params })
