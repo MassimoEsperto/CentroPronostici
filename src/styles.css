@@ -70,3 +70,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: white;
   font-family: Verdana, Geneva, Tahoma, sans-serif
 }
+
+
+.datagrid-row:nth-child(odd){
+  background-color:#80FFFF;
+  }
+
