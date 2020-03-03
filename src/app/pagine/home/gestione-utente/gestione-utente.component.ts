@@ -157,8 +157,6 @@ export class GestioneComponent extends Generale implements OnInit {
 
         next: (result: Calendario[]) => {
 
-          console.log('ritorno updaTE:' + this.newMatch.partita);
-          console.log(result);
           this.partite = result;
           this.successo();
         },
