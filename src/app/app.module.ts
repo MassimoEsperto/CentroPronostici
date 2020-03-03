@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RecuperaPasswordComponent } from './pagine/login/recupera-password/recupera-password.component';
 
 
 
@@ -18,7 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     LoginHomeComponent,
     LoginSignInComponent,
-    LoginRegisterComponent
+    LoginRegisterComponent,
+    RecuperaPasswordComponent
 
   ],
   imports: [
