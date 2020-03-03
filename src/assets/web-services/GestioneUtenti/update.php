@@ -42,6 +42,10 @@ if(isset($postdata) && !empty($postdata))
 	<td>".$ruolo."</td>
 	</tr>
 	</table>
+    <br>
+    <a href='http://marescafantaeuropeo.altervista.org/'>Visit Marescafantaeuropeo.com!</a>
+	</body>
+	</html>
 	</body>
 	</html>
 	";
