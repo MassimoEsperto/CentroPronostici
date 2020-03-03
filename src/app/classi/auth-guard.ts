@@ -13,16 +13,13 @@ export class AuthGuard implements CanActivate {
     }
 
     /**
-     * Determina se l'utente può accedere a determinate routes 
-     * in base alla presenza del token di autenticazione nella session
+     * se l'utente è loggato può accedere a determinate page 
      */
     canActivate(route: ActivatedRouteSnapshot): boolean {
-    console.log("this.auth.isLogged()",this.auth.isLogged())
+   
         if (this.auth.isLogged()) return true
 
-        // Se il token non è presente,
-        // Redirecta al login
-
+        //se non è loggato torna all login
         this.route.navigate(['/login'])
 
         return false
