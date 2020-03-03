@@ -19,7 +19,7 @@ constructor(private http: HttpClient) {super(); }
     return this.http.get(`${this.buildURL("GestioneUtenti/list")}`).pipe(
       map((res) => {
         this.utenti = res['data'];
-        console.log(res['data']);
+       
         return this.utenti;
     }),
     catchError(this.handleError));
@@ -27,8 +27,6 @@ constructor(private http: HttpClient) {super(); }
 
 
   insert(utente: Utente): Observable<Utente[]> {
-    console.log(utente);
-    console.log(JSON.stringify(utente));
 
    return this.http.post(`${this.buildURL("GestioneUtenti/register")}`, { data: utente })
       .pipe(map((res) => {
@@ -42,7 +40,7 @@ constructor(private http: HttpClient) {super(); }
   update(utente: Utente): Observable<Utente[]> {
     return this.http.put(`${this.buildURL("GestioneUtenti/update")}`, { data: utente })
       .pipe(map((res) => {
-        console.log('update effettuato');
+     
         const theUtente = this.utenti.find((item) => {
           return item['username'] === utente['username'];
         });
@@ -61,8 +59,7 @@ constructor(private http: HttpClient) {super(); }
 
     return this.http.get(`${this.buildURL("GestioneUtenti/delete")}`, { params: params })
       .pipe(map(res => {
-        console.log('delete effettuato');
-        console.log(res);
+  
         const filteredutenti =this.utenti = this.utenti.filter(item => item.username !== username);    
         return this.utenti = filteredutenti;
       }),
