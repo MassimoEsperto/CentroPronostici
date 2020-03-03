@@ -9,38 +9,37 @@ const FileSaver = require('file-saver');
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
   username: string;
-  punti:any;
+  punti: any;
   ngOnInit() {
     this.username = this.service.username();
     this.getPuntiPrevisti();
-  
+
   }
 
-  downloadPdf(pdfUrl: string,pdfName: string) {
- 
-   // const FileSaver = require('file-saver');
+  downloadPdf(pdfUrl: string, pdfName: string) {
+
+    // const FileSaver = require('file-saver');
     require('file-saver').saveAs(pdfUrl, pdfName);
   }
 
-   constructor(private service: GestionePronosticiService) { }
+  constructor(private service: GestionePronosticiService) { }
 
 
-   getPuntiPrevisti(){
-  
+  getPuntiPrevisti() {
+
     this.service.puntiPrevisti()
-    .subscribe({
-   
-     next: (result: any) => {
-   this.punti=result;
-       console.log("risultatoooooooo",this.punti);
-   
-     },
-     error: (error: any) => {
-   
-     }
-   })
-   
-   }
+      .subscribe({
+
+        next: (result: any) => {
+          this.punti = result;
+
+        },
+        error: (error: any) => {
+
+        }
+      })
+
+  }
 }
