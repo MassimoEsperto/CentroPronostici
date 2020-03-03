@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/classi/model/user';
+import { Token } from 'src/app/classi/model/token';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginSignInComponent implements OnInit {
 
-  utente: User;
+  utente: Token;
   error = '';
   isPresente: boolean;
 
@@ -35,6 +35,8 @@ export class LoginSignInComponent implements OnInit {
           this.utente = result;
 
           if (null != this.utente) {
+            this.utente.scadenza = this.scadenza().toString();
+
             this.service.setLogged(JSON.stringify(this.utente));
             this.router.navigate(['/home/dashboard']);
           }
@@ -52,6 +54,11 @@ export class LoginSignInComponent implements OnInit {
 
   }
 
+  scadenza() {
+    let primaDate = new Date();
+    primaDate.setHours(primaDate.getHours() + 2);
 
+    return primaDate;
+  }
 
 }
