@@ -1,3 +1,4 @@
+import { RecuperaPasswordComponent } from './pagine/login/recupera-password/recupera-password.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginHomeComponent } from './pagine/login/login-home/login-home.component';
@@ -25,7 +26,12 @@ const routes: Routes = [
         path: 'register',
         component: LoginRegisterComponent,
         data: {animation: 'HomePage'}
-    }
+    },
+    {
+        path: 'recupera-password',
+        component: RecuperaPasswordComponent,
+        data: {animation: 'HomePage'}
+    },
 ];
 
 @NgModule({
