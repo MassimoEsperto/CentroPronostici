@@ -71,8 +71,84 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-family: Verdana, Geneva, Tahoma, sans-serif
 }
 
+/*DATAGRID*/
 
 .datagrid-row:nth-child(odd){
   background-color:#80FFFF;
   }
 
+.datagrid-column{
+   height: 48px;
+   background-color:#005fd9 !important;/* background: crimson;*/
+   font-size: 0.56rem !important;
+}
+
+.datagrid-column-title{
+  color: white !important;
+  font-family: Metropolis,"Avenir Next","Helvetica Neue",Arial,sans-serif;
+}
+
+.datagrid{
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.datagrid-footer{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+
+
+  /*GESTIONE DEI TABS*/
+
+.tab-style>.nav {
+  box-shadow: none;
+  height: auto !important;
+}
+
+.tab-style>.nav .nav-item {
+  margin-right: 2px;
+}
+
+.tab-style>.nav .nav-link.active {
+  background-color: white !important;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.tab-style>.nav .nav-link {
+  font-weight: 600;
+  font-size: 0.56rem !important;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.tab-style>.nav .nav-link:hover, .tab-style>.nav .nav-link.active {
+  box-shadow: none;
+}
+
+.tab-style>section .tab-body {
+  background-color: white;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.tab-style>.nav .btn.btn-link {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0 !important;
+  background-color: rgb(165, 162, 162);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  white-space: normal;
+  line-height: 18px;
+  text-align: left;
+  height: 50px;
+}
+
+.tab-style>.nav .tab-n {
+  font-size: 1rem;
+  margin-right: 16px;
+}
