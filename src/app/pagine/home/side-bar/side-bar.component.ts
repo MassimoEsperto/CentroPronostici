@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GestionePronosticiService } from 'src/app/services/gestione-pronostici.service';
 import { Generale } from 'src/app/classi/utils/general-component';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -13,7 +15,7 @@ export class SideBarComponent extends Generale implements OnInit {
   isPlayer: boolean;
   variabile: boolean;
 
-  constructor(private service: GestionePronosticiService) { super() }
+  constructor(private router: Router, private authservice: AuthService,private service: GestionePronosticiService) { super() }
 
   ngOnInit() {
     this.isAdmin = this.service.isadmin();
@@ -22,6 +24,7 @@ export class SideBarComponent extends Generale implements OnInit {
     this.loading = true;
     this.getVariabile();
   }
+
 
   getVariabile() {
 
@@ -52,5 +55,9 @@ export class SideBarComponent extends Generale implements OnInit {
     this.setVariabile(scelta);
   }
 
+  logOut(){
+    this.authservice.logout();
+    this.router.navigate(['login']);
+  }
 
 }
