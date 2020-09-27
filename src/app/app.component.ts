@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 
@@ -13,14 +13,11 @@ import { slideInAnimation } from './animations';
               <router-outlet #outlet="outlet"></router-outlet></div>`
   
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit {
  
-  constructor(private elementRef: ElementRef){}
+  constructor(){}
 
-  ngAfterViewInit()
-  {
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#00b050';
-  }
+  ngOnInit(){}
 
   prepareRoute(outlet: RouterOutlet) 
   {
