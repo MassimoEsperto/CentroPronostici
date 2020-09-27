@@ -11,9 +11,7 @@ export class LoginHomeComponent implements AfterViewInit {
 
   constructor(private elementRef: ElementRef, private service: AuthService) { }
 
-  ngOnInit() {
-    this.service.logout();
-  }
+  ngOnInit() {}
   
   ngAfterViewInit() {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#1B98CE';
