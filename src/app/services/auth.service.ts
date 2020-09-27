@@ -60,6 +60,9 @@ export class AuthService extends HttpSenderService {
   isLogged(): boolean {
 
     let token = localStorage.getItem("tk-user")
+
+    if (!token) return false; //nel caso nn ci sia token
+    
     let now = new Date();
     let scadenza: Date = new Date(JSON.parse(localStorage.getItem("tk-user")).scadenza);
 
