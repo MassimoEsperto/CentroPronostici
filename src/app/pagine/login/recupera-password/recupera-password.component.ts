@@ -1,20 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { Token } from 'src/app/classi/model/token';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { SFONDO_HOME } from 'src/app/classi/utils/costanti';
 
 @Component({
   selector: 'app-recupera-password',
   templateUrl: './recupera-password.component.html',
   styleUrls: ['./recupera-password.component.css']
 })
-export class RecuperaPasswordComponent implements OnInit {
+export class RecuperaPasswordComponent implements AfterViewInit {
 
   utente: Token;
   error = '';
   success='';
 
-  constructor(private service: AuthService, private router: Router) { }
+  constructor(private service: AuthService, private router: Router,private elementRef: ElementRef) { }
+
+  ngAfterViewInit() {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = SFONDO_HOME
+  }
 
   ngOnInit() {}
 

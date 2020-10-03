@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { SFONDO_HOME } from 'src/app/classi/utils/costanti';
+
 
 @Component({
   selector: 'app-login-home',
@@ -9,12 +9,12 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginHomeComponent implements AfterViewInit {
 
-  constructor(private elementRef: ElementRef, private service: AuthService) { }
+  constructor(private elementRef: ElementRef) { }
 
   ngOnInit() {}
   
   ngAfterViewInit() {
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#1B98CE';
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = SFONDO_HOME
   }
 
 

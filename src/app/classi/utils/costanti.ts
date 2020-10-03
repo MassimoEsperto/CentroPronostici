@@ -13,3 +13,5 @@ export const REQUEST_RETRIES = 3
 
 // Risposta di successo
 export const SUCCESS = "Incredibile Ha Funzionato!"
+
+export const SFONDO_HOME = "#1B98CE"

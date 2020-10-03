@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Token } from 'src/app/classi/model/token';
+import { SFONDO_HOME } from 'src/app/classi/utils/costanti';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,14 +9,18 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login-sign-in.component.html',
   styleUrls: ['./login-sign-in.component.css']
 })
-export class LoginSignInComponent implements OnInit {
+export class LoginSignInComponent implements AfterViewInit {
 
   utente: Token;
   error = '';
   isPresente: boolean;
 
-  constructor(private router: Router, private service: AuthService) { }
+  constructor(private router: Router, private service: AuthService, private elementRef: ElementRef) { }
 
+  ngAfterViewInit() {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = SFONDO_HOME
+  }
+  
   ngOnInit() {
     this.isPresente = true;
   }

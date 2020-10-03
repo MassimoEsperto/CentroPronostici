@@ -1,24 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { Utente } from 'src/app/classi/model/utente';
 import { GestioneUtenteService } from 'src/app/services/gestione-utente.service';
 import { Router } from '@angular/router';
 import { Generale } from 'src/app/classi/utils/general-component';
 import { Ruolo } from 'src/app/classi/utils/enums';
+import { SFONDO_HOME } from 'src/app/classi/utils/costanti';
 
 @Component({
   selector: 'app-login-register',
   templateUrl: './login-register.component.html',
   styleUrls: ['./login-register.component.css']
 })
-export class LoginRegisterComponent extends Generale implements OnInit {
+export class LoginRegisterComponent extends Generale implements AfterViewInit {
 
   newUtente: Utente = new Utente('', '', '', '');
 
   utenti: Utente[];
   esistente: Boolean;
 
-  constructor(private utenteService: GestioneUtenteService, private router: Router) {
+  constructor(private utenteService: GestioneUtenteService,private elementRef: ElementRef, private router: Router) {
     super();
+  }
+
+  ngAfterViewInit() {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = SFONDO_HOME
   }
 
   ngOnInit() {
