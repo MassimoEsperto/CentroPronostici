@@ -65,7 +65,6 @@ export class GestioneComponent extends Generale implements OnInit {
   }
 
 
-  //crud calendario
   getCalendario() {
 
     this.calendarioService.getAll()
