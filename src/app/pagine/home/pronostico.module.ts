@@ -19,10 +19,19 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { InserimentoPronosticoComponent } from './inserimento-pronostico/inserimento-pronostico.component';
 import { ListaPronosticiComponent } from './lista-pronostici/lista-pronostici.component';
 import { ClassificaComponent } from './classifica/classifica.component';
+import { TimerDataComponent } from './timer-data/timer-data.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, GestioneComponent, SideBarComponent, InserimentoPronosticoComponent, ListaPronosticiComponent, ClassificaComponent],
+  declarations: [
+    DashboardComponent,
+    GestioneComponent,
+    SideBarComponent,
+    InserimentoPronosticoComponent,
+    ListaPronosticiComponent,
+    ClassificaComponent,
+    TimerDataComponent
+  ],
   imports: [
     CommonModule,
     PronosticoRoutingModule,
