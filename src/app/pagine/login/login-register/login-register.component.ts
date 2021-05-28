@@ -13,10 +13,11 @@ import { SFONDO_HOME } from 'src/app/classi/utils/costanti';
 })
 export class LoginRegisterComponent extends Generale implements AfterViewInit {
 
-  newUtente: Utente = new Utente('', '', '', '');
+  newUtente: Utente = new Utente('', '','0','', '',0);
 
   utenti: Utente[];
   esistente: Boolean;
+  loadingg:boolean=false;
 
   constructor(private utenteService: GestioneUtenteService,private elementRef: ElementRef, private router: Router) {
     super();
@@ -48,10 +49,12 @@ export class LoginRegisterComponent extends Generale implements AfterViewInit {
     //verifica le validazioni
     this.resetErrors();
     this.newUtente = newUtente.value;
+    this.loadingg=true;
 
     this.validate(this.newUtente.username);
     if (this.esistente) {
       this.error = 'Username già esistente';
+      this.loadingg=false;
       return;
     }
 
@@ -61,12 +64,14 @@ export class LoginRegisterComponent extends Generale implements AfterViewInit {
     this.utenteService.insert(this.newUtente)
       .subscribe(
         (res: Utente[]) => {
-
+          this.loadingg=false;
           this.utenti = res; // Update the list of utenti       
           this.successo(); // Inform the user      
           newUtente.reset(); // Reset the form
         },
-        (err) => this.error = err
+        (err) => {this.error = err
+          this.loadingg=false
+        }
       );
   }
 
