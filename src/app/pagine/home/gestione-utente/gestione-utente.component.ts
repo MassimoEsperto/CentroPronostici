@@ -25,7 +25,7 @@ export class GestioneComponent extends Generale implements OnInit {
   options: boolean;
   options2: boolean;
 
-  newUtente: Utente = new Utente('', '', '', 'password');
+  newUtente: Utente = new Utente('', '','0','', 'password', 0);
   newMatch: Calendario = new Calendario(1, '', null, 0, 0, '', '', '', '', '', '', '');
   newAltreScommesse: ScommesseAntepost = new ScommesseAntepost(1, '', '');
   combosel: Combo;
@@ -46,8 +46,10 @@ export class GestioneComponent extends Generale implements OnInit {
   //metodi edit
   onEditUser(newUser) {
     this.newUtente.email = newUser.email;
+    this.newUtente.cellulare = newUser.cellulare;
     this.newUtente.ruolo = newUser.ruolo;
     this.newUtente.username = newUser.username;
+    this.newUtente.versato = newUser.versato || 0;
     this.options2 = true;
   }
 
@@ -104,7 +106,7 @@ export class GestioneComponent extends Generale implements OnInit {
   }
 
   onUpdateMatch(newMatch) {
-    
+
     this.resetErrors();
     this.newMatch = newMatch;
 
@@ -268,7 +270,16 @@ export class GestioneComponent extends Generale implements OnInit {
     this.newUtente = newUtente;
     this.resetErrors();
 
-    this.utenteService.update({ username: this.newUtente.username, email: this.newUtente.email, ruolo: this.newUtente.ruolo, password: '' })
+    this.utenteService.update({
+      username: this.newUtente.username,
+      email: this.newUtente.email,
+      cellulare: this.newUtente.cellulare,
+      ruolo: this.newUtente.ruolo,
+      password: '',
+      versato: this.newUtente.versato,
+      schede: this.newUtente.schede
+    })
+
       .subscribe({
 
         next: (result: any) => {
