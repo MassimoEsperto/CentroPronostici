@@ -47,6 +47,8 @@ constructor(private http: HttpClient) {super(); }
         if (theUtente) {
           theUtente['ruolo'] = utente['ruolo'];
           theUtente['email'] = utente['email'];
+          theUtente['cellulare'] = utente['cellulare'];
+          theUtente['versato'] = utente['versato'];
         }
         return this.utenti;
       }),
