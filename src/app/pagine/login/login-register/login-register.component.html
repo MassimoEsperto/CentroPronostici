@@ -23,12 +23,16 @@
                                     <input clrInput type="email" [(ngModel)]="newUtente.email" name="email" #useremail="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
                                 </clr-input-container>
                                 <clr-input-container>
+                                    <label>Cellulare</label>
+                                    <input clrInput type="number" [(ngModel)]="newUtente.cellulare" name="cellulare" />
+                                </clr-input-container>
+                                <clr-input-container>
                                     <label>Password</label>
                                     <input clrInput type="text" [(ngModel)]="newUtente.password" name="password"
                                         required />
                                 </clr-input-container>
                                 <button class="btn btn-primary btn-block margine-16"
-                                    [disabled]="newUtente.invalid && useremail.invalid">Registrati</button>
+                                    [disabled]="newUtente.invalid || useremail.invalid ||loadingg">Registrati</button>
                             </form>
                             <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                             <div *ngIf="success" class="alert alert-success">{{success}}</div>
