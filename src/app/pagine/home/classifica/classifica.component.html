@@ -14,14 +14,14 @@
 <span *ngIf="loading" class="spinner"></span>
 
 <clr-datagrid *ngIf="classifica">
-    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">num</clr-dg-column>
+    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">pos</clr-dg-column>
     <clr-dg-column [clrDgField]="'id_utente'">utente</clr-dg-column>
     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">pt</clr-dg-column>
     <clr-dg-column>data</clr-dg-column>
     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">view</clr-dg-column>
 
-    <clr-dg-row *clrDgItems="let scheda of classifica;let i = index;" [clrDgItem]="match">
-        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{i+1}}</clr-dg-cell>
+    <clr-dg-row *clrDgItems="let scheda of classifica" [clrDgItem]="match">
+        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{scheda.indice}}</clr-dg-cell>
         <clr-dg-cell>{{scheda.id_utente}}</clr-dg-cell>
         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50"><span
                 style="font-weight: bold;">{{scheda.punteggio}}</span></clr-dg-cell>
