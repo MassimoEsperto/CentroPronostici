@@ -7,6 +7,8 @@ import { AuthGuard } from 'src/app/classi/auth-guard';
 import { InserimentoPronosticoComponent } from './inserimento-pronostico/inserimento-pronostico.component';
 import { ListaPronosticiComponent } from './lista-pronostici/lista-pronostici.component';
 import { ClassificaComponent } from './classifica/classifica.component';
+import { CreaCompetizioneComponent } from './crea-competizione/crea-competizione.component';
+import { GestioneCompetizioneComponent } from './gestione-competizione/gestione-competizione.component';
 
 
 const routes: Routes = [
@@ -22,6 +24,14 @@ const routes: Routes = [
             {
                 path: 'gestione-utente',
                 component: GestioneComponent
+            },
+            {
+                path: 'nuova-competizione',
+                component: CreaCompetizioneComponent
+            },
+            {
+                path: 'gestione-competizione',
+                component: GestioneCompetizioneComponent
             },
             {
                 path: 'inserimento-pronostico',
