@@ -26,6 +26,18 @@
       <a *ngIf="isAdmin" mat-list-item [routerLink]="'/home/gestione-utente'" (click)="sidenav.toggle()">
         <clr-icon class="icone" shape="user"></clr-icon>Gestione Admin
       </a>
+      <mat-divider *ngIf="isAdmin"></mat-divider>
+      <mat-divider *ngIf="isAdmin"></mat-divider>
+      <mat-divider *ngIf="isAdmin"></mat-divider>
+      <a *ngIf="isAdmin" mat-list-item [routerLink]="'/home/nuova-competizione'" (click)="sidenav.toggle()">
+        <clr-icon class="icone" shape="user"></clr-icon>Crea Competizione
+      </a>
+      <mat-divider *ngIf="isAdmin"></mat-divider>
+      <mat-divider *ngIf="isAdmin"></mat-divider>
+      <mat-divider *ngIf="isAdmin"></mat-divider>
+      <a *ngIf="isAdmin" mat-list-item [routerLink]="'/home/gestione-competizione'" (click)="sidenav.toggle()">
+        <clr-icon class="icone" shape="user"></clr-icon>Gestione Competizione
+      </a>
       <mat-divider *ngIf="isPlayer"></mat-divider>
       <mat-divider *ngIf="isPlayer"></mat-divider>
       <mat-divider *ngIf="isPlayer"></mat-divider>
