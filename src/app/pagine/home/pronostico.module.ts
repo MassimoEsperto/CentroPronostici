@@ -20,6 +20,17 @@ import { InserimentoPronosticoComponent } from './inserimento-pronostico/inserim
 import { ListaPronosticiComponent } from './lista-pronostici/lista-pronostici.component';
 import { ClassificaComponent } from './classifica/classifica.component';
 import { TimerDataComponent } from './timer-data/timer-data.component';
+import { CreaCompetizioneComponent } from './crea-competizione/crea-competizione.component';
+import { MatTabsModule } from '@angular/material';
+import { TabBomberComponent } from 'src/app/componenti/tab-bomber/tab-bomber.component';
+import { TabSquadreComponent } from 'src/app/componenti/tab-squadre/tab-squadre.component';
+import { TabAntepostComponent } from 'src/app/componenti/tab-antepost/tab-antepost.component';
+import { TabCalendarioComponent } from 'src/app/componenti/tab-calendario/tab-calendario.component';
+import { TabPuntiPrevistiComponent } from 'src/app/componenti/tab-punti-previsti/tab-punti-previsti.component';
+import { GestioneCompetizioneComponent } from './gestione-competizione/gestione-competizione.component';
+import { TabGironiComponent } from 'src/app/componenti/tab-gironi/tab-gironi.component';
+import { TabRisultatiComponent } from 'src/app/componenti/tab-risultati/tab-risultati.component';
+import { TabScommesseBaseComponent } from 'src/app/componenti/tab-scommesse-base/tab-scommesse-base.component';
 
 
 @NgModule({
@@ -30,7 +41,17 @@ import { TimerDataComponent } from './timer-data/timer-data.component';
     InserimentoPronosticoComponent,
     ListaPronosticiComponent,
     ClassificaComponent,
-    TimerDataComponent
+    TimerDataComponent,
+    CreaCompetizioneComponent,
+    GestioneCompetizioneComponent,
+    TabBomberComponent,
+    TabSquadreComponent,
+    TabAntepostComponent,
+    TabCalendarioComponent,
+    TabPuntiPrevistiComponent,
+    TabGironiComponent,
+    TabRisultatiComponent,
+    TabScommesseBaseComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +65,7 @@ import { TimerDataComponent } from './timer-data/timer-data.component';
     MatListModule,
     MatButtonModule,
     MatIconModule,
+    MatTabsModule,
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
