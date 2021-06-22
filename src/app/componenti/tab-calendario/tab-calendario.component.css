@@ -1,0 +1,17 @@
+.distanza{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.pr-16{
+    padding-right: 16;
+}
+
+.pb-16{
+    padding-bottom: 16px;
+}
+
+.pt-16{
+    padding-top: 16px;
+}
