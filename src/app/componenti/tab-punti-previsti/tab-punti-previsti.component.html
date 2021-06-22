@@ -1,0 +1,59 @@
+<clr-alert *ngIf="success" [clrAlertType]="'success'">
+    <clr-alert-item>
+        <span class="alert-text">{{success}}</span>
+    </clr-alert-item>
+</clr-alert>
+<clr-alert *ngIf="error" [clrAlertType]="'warning'">
+    <clr-alert-item>
+        <span class="alert-text">{{error}}</span>
+    </clr-alert-item>
+</clr-alert>
+
+
+<div *ngIf="isModifica" class="card">
+    <div class="card-header">
+        Modifica Punti Previsti
+    </div>
+    <div class="card-block">
+
+        <form clrForm clrLayout="vertical" (submit)="onModPunti(newPunti)">
+
+            <div class="clr-form-control pb-16">
+                <label class="clr-control-label">{{newTesto}}</label>
+                <div class="clr-control-container clr-error">
+                    <div class="clr-input-wrapper mb-16">
+                        <input clrInput placeholder="Punti" type="number"
+                            [(ngModel)]="newPunti" name="newPunti" required />
+                    </div>
+                </div>
+
+            </div>
+            <div class="pt-16">
+                <button class="btn btn-primary btn-sm" [disabled]="newPunti==0||!newPunti">Aggiungi</button>
+            </div>
+        </form>
+
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-primary btn-sm" (click)="closeModifica()">Annulla</button>
+    </div>
+
+
+</div>
+
+<clr-datagrid>
+    <clr-dg-column [style.min-width.px]="80" [style.width.px]="80">modifica</clr-dg-column>
+    <clr-dg-column>Tipo</clr-dg-column>
+    <clr-dg-column>valore</clr-dg-column>
+  
+    <clr-dg-row *clrDgItems="let punti of puntiPrevisti;let i = index;" [clrDgItem]="punti">
+
+        <clr-dg-cell [style.min-width.px]="80" [style.width.px]="80">
+            <clr-icon shape="pencil" class="is-solid" (click)="openModifica(punti)"></clr-icon>
+        </clr-dg-cell>
+        <clr-dg-cell>{{punti.descrizione}}</clr-dg-cell>
+        <clr-dg-cell>{{punti.valore}}</clr-dg-cell>
+      
+    </clr-dg-row>
+
+</clr-datagrid>
