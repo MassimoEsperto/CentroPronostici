@@ -54,7 +54,7 @@ export class GestioneComponent extends Generale implements OnInit {
   }
 
   onEditMatch(match) {
-    this.newMatch.id_partita = match.id_partita;
+    this.newMatch.id_evento = match.id_evento;
     this.newMatch.partita = match.partita;
     this.newMatch.goalc = match.goalc;
     this.newMatch.goalt = match.goalt;
@@ -141,7 +141,7 @@ export class GestioneComponent extends Generale implements OnInit {
 
 
     this.calendarioService.update({
-      id_partita: this.newMatch.id_partita,
+      id_evento: this.newMatch.id_evento,
       partita: this.newMatch.partita,
       data: null,
       goalc: this.newMatch.goalc,
@@ -263,6 +263,10 @@ export class GestioneComponent extends Generale implements OnInit {
 
         }
       })
+  }
+
+  onDeleteUtente(){
+    this.onDelete(this.newUtente);
   }
 
 
