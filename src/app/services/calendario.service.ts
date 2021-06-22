@@ -78,7 +78,7 @@ export class CalendarioService extends HttpSenderService {
     
       const params = new HttpParams().set('nome', bomber);
   
-     return this.http.get(`${this.buildURL("GestioneBomber/insert")}`, { params: params })
+     return this.http.get(`${this.buildURL("CreaCompetizione/setBomber")}`, { params: params })
         .pipe(map((res) => {
          
           let cannoniere=(res['data'].nome);
@@ -92,12 +92,40 @@ export class CalendarioService extends HttpSenderService {
      
       const params = new HttpParams().set('nome', bomber);
   
-     return this.http.get(`${this.buildURL("GestioneBomber/delete")}`, { params: params })
+     return this.http.get(`${this.buildURL("CreaCompetizione/delBomber")}`, { params: params })
         .pipe(map((res) => {
          
           let cannoniere=(res['data'].nome);
          
           return cannoniere;
+        }),
+        catchError(this.handleError));
+    }
+  
+    insertSquadra(nome: string,girone: string): Observable<any> {
+    
+      const params = new HttpParams().set('nome', nome).set('girone',girone);
+  
+     return this.http.get(`${this.buildURL("CreaCompetizione/setSquadra")}`, { params: params })
+        .pipe(map((res) => {
+         
+          let nome=(res['data'].nome);
+       
+          return {nome:nome,girone:girone};
+        }),
+        catchError(this.handleError));
+    }
+
+    deleteSquadra(nome: string): Observable<string> {
+     
+      const params = new HttpParams().set('nome', nome);
+  
+     return this.http.get(`${this.buildURL("CreaCompetizione/delSquadra")}`, { params: params })
+        .pipe(map((res) => {
+         
+          let element=(res['data'].nome);
+         
+          return element;
         }),
         catchError(this.handleError));
     }
