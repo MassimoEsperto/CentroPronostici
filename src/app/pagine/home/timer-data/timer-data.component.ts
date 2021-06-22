@@ -1,5 +1,7 @@
+import { GestionePronosticiService } from './../../../services/gestione-pronostici.service';
 
 import { Component, OnInit } from '@angular/core';
+
 
 
 @Component({
@@ -14,11 +16,13 @@ export class TimerDataComponent implements OnInit {
   private _days: number;
   private _hours: number;
   private _minutes: number;
+  bloccato: boolean = true;
 
-  constructor() { }
+  constructor(private service: GestionePronosticiService) { }
 
   ngOnInit() {
-    this._trialEndsAt = "2021-06-08";
+    this.getBloccato()
+    this._trialEndsAt = "2021-06-09";
     this.getCountdown();
     setTimeout(() => {
       this.getCountdown();
@@ -50,6 +54,16 @@ export class TimerDataComponent implements OnInit {
     return Math.floor((t / 1000 / 60) % 60);
   }
 
+  getBloccato() {
 
+    this.service.getBloccato()
+      .subscribe({
+        next: (result: boolean) => {
+          this.bloccato = result;
+        },
+        error: (error: any) => {
+        }
+      })
+  }
 
 }
