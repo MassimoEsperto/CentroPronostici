@@ -1,0 +1,56 @@
+<clr-alert *ngIf="success" [clrAlertType]="'success'">
+    <clr-alert-item>
+        <span class="alert-text">{{success}}</span>
+    </clr-alert-item>
+</clr-alert>
+<clr-alert *ngIf="error" [clrAlertType]="'warning'">
+    <clr-alert-item>
+        <span class="alert-text">{{error}}</span>
+    </clr-alert-item>
+</clr-alert>
+
+<div class="clr-row">
+    <div class="clr-col-12">
+        <div class="card">
+            <div class="card-header">
+                Aggiungi Girone
+            </div>
+            <form class="clr-form" (submit)="onAddGirone(girone)">
+                <div class="card-block">
+                    <div class="clr-form-control">
+                        <label for="cannoniere" class="clr-control-label">Inserisci il nome e aggiorna
+                            li lista!</label>
+                        <div class="clr-control-container clr-error">
+                           
+                            <clr-select-container>
+                                <label>Girone</label>
+                                <select clrSelect name="girone" [(ngModel)]="girone">
+                                    <option *ngFor="let item of gironi" value="{{item.girone}}">{{item.girone}}</option>
+                                </select>
+                            </clr-select-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary btn-sm" [disabled]="girone==''">Aggiungi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<clr-datagrid>
+  <clr-dg-column [style.width.px]="80">elimina</clr-dg-column>
+  <clr-dg-column>Tipo</clr-dg-column>
+  <clr-dg-column>Gironi</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let gironi of gironiAntepost;let i = index;" [clrDgItem]="gironi">
+
+      <clr-dg-cell [style.width.px]="80">
+          <clr-icon shape="trash" class="is-solid" (click)="onDelGirone(gironi.girone)"></clr-icon>
+      </clr-dg-cell>
+      <clr-dg-cell>{{gironi.testo}}</clr-dg-cell>
+      <clr-dg-cell>{{gironi.girone}}</clr-dg-cell>
+
+  </clr-dg-row>
+
+</clr-datagrid>
