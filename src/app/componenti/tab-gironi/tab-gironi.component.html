@@ -1,0 +1,51 @@
+<clr-alert *ngIf="success" [clrAlertType]="'success'">
+    <clr-alert-item>
+        <span class="alert-text">{{success}}</span>
+    </clr-alert-item>
+</clr-alert>
+<clr-alert *ngIf="error" [clrAlertType]="'warning'">
+    <clr-alert-item>
+        <span class="alert-text">{{error}}</span>
+    </clr-alert-item>
+</clr-alert>
+
+<clr-datagrid>
+    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50"></clr-dg-column>
+    <clr-dg-column>partita</clr-dg-column>
+    <clr-dg-column>risultato</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let element of gironi;let i = index;" [clrDgItem]="element">
+
+        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
+            <clr-icon shape="administrator" class="is-solid"
+                (click)="onEditSelected(element);updateMatchModal = true">
+            </clr-icon>
+        </clr-dg-cell>
+        <clr-dg-cell>{{element.descrizione}}</clr-dg-cell>
+        <clr-dg-cell>{{element.risultato}}</clr-dg-cell>
+    </clr-dg-row>
+
+</clr-datagrid>
+<!--
+<clr-modal [(clrModalOpen)]="updateMatchModal" [clrModalClosable]="false">
+    <h3 class="modal-title">Partita {{newSelected.partita}}</h3>
+    <div class="modal-body">
+        <form clrForm (submit)="onUpdateMatch(newSelected);updateMatchModal = false">
+            <clr-input-container>
+                <label>Goals casa</label>
+                <input clrInput type="number" [(ngModel)]="newSelected.goalc" name="goalc" required />
+            </clr-input-container>
+            <clr-input-container>
+                <label>Goals trasterta</label>
+                <input clrInput type="number" [(ngModel)]="newSelected.goalt" name="goalt" required />
+            </clr-input-container>
+            <br>
+            <button class="btn btn-primary" [disabled]="newSelected.goalt==null||newSelected.goalc==null"
+                style="float: right;">Aggiorna</button>
+            <button type="button" class="btn btn-outline" (click)="updateMatchModal = false"
+                style="float: right;">Annulla</button>
+        </form>
+    </div>
+
+</clr-modal>
+-->
