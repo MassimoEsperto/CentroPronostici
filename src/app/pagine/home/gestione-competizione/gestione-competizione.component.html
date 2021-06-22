@@ -1,0 +1,41 @@
+<span *ngIf="loading" class="spinner"></span>
+<clr-alert *ngIf="success" [clrAlertType]="'success'">
+    <clr-alert-item>
+        <span class="alert-text">{{success}}</span>
+    </clr-alert-item>
+</clr-alert>
+<clr-alert *ngIf="error" [clrAlertType]="'warning'">
+    <clr-alert-item>
+        <span class="alert-text">{{error}}</span>
+    </clr-alert-item>
+</clr-alert>
+
+<div *ngIf="!loading" class="page">
+
+    <mat-tab-group backgroundColor="primary" mat-align-tabs="center">
+
+        <mat-tab label="RISULTATI">
+            <div class="pt-16 pl-8 pr-8 tabula">
+                <tab-risultati></tab-risultati>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="GIRONI">
+            <div class="pt-16 tabula">
+                <tab-gironi [squadre]="combosel.squadre"></tab-gironi>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="FISSE">
+            <div class="pt-16 tabula">
+                <tab-scommesse-base></tab-scommesse-base>
+            </div>
+        </mat-tab>
+
+
+
+    </mat-tab-group>
+
+
+
+</div>
