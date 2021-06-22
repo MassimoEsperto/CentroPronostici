@@ -27,7 +27,7 @@
                     <clr-dg-row *clrDgItems="let user of utenti;let i = index;" [clrDgItem]="user">
                         <clr-dg-action-overflow>
                             <button class="action-item" (click)="onEditUser(user);updateModal = true">Modifica</button>
-                            <button class="action-item" (click)="onDelete(user)">Elimina</button>
+                            <button class="action-item" (click)="onEditUser(user);deleteModal = true">Elimina</button>
                         </clr-dg-action-overflow>
                         <clr-dg-cell>{{user.username}}</clr-dg-cell>
                         <clr-dg-cell>{{user.email}}</clr-dg-cell>
@@ -86,6 +86,19 @@
                         </form>
                     </div>
 
+                </clr-modal>
+
+                <clr-modal [(clrModalOpen)]="deleteModal" [clrModalClosable]="false">
+                    <h3 class="modal-title">ELIMINA UTENTE</h3>
+                    <div class="modal-body">
+                        <h3>Sei Sicuro?</h3>
+                        <br>
+                        <button class="btn btn-primary" (click)="onDeleteUtente();deleteModal = false"
+                            style="float: right;">SI</button>
+                        <button type="button" class="btn btn-outline" (click)="deleteModal = false"
+                            style="float: right;">NO</button>
+
+                    </div>
                 </clr-modal>
 
             </clr-tab-content>
@@ -335,12 +348,12 @@
                     </div>
                 </div>
                 <clr-datagrid>
-                    <clr-dg-column [style.min-width.px]="80" [style.width.px]="80">elimina</clr-dg-column>
+                    <clr-dg-column [style.width.px]="80">elimina</clr-dg-column>
                     <clr-dg-column>cannoniere</clr-dg-column>
 
                     <clr-dg-row *clrDgItems="let bomber of combosel.cannonieri;let i = index;" [clrDgItem]="bomber">
 
-                        <clr-dg-cell [style.min-width.px]="80" [style.width.px]="80">
+                        <clr-dg-cell [style.width.px]="80">
                             <clr-icon shape="trash" class="is-solid" (click)="onDeleteBomber(bomber)"></clr-icon>
                         </clr-dg-cell>
                         <clr-dg-cell>{{bomber}}</clr-dg-cell>
