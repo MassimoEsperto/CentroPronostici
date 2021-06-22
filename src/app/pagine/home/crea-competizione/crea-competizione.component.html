@@ -1,0 +1,51 @@
+<span *ngIf="loading" class="spinner"></span>
+<clr-alert *ngIf="success" [clrAlertType]="'success'">
+    <clr-alert-item>
+        <span class="alert-text">{{success}}</span>
+    </clr-alert-item>
+</clr-alert>
+<clr-alert *ngIf="error" [clrAlertType]="'warning'">
+    <clr-alert-item>
+        <span class="alert-text">{{error}}</span>
+    </clr-alert-item>
+</clr-alert>
+
+<div *ngIf="!loading" class="page">
+
+    <mat-tab-group backgroundColor="primary" mat-align-tabs="center">
+  
+      <mat-tab label="SQUADRE">
+        <div class="pt-16 pl-8 pr-8 tabula">
+          <tab-squadre [squadre]="combosel.squadre"></tab-squadre>
+        </div>
+      </mat-tab>
+      
+      <mat-tab label="CANNONIERI">
+        <div class="pt-16 tabula">
+            <tab-bomber [cannonieri]="combosel.cannonieri"></tab-bomber>        
+        </div>
+      </mat-tab>
+      
+      <mat-tab label="CALENDARIO">
+        <div class="pt-16 tabula">
+          <tab-calendario [squadre]="combosel.squadre"></tab-calendario>
+        </div>
+      </mat-tab>
+  
+      <mat-tab label="GIRONI">
+        <div class="pt-16 tabula">
+          <tab-antepost [gironi]="combosel.squadre"></tab-antepost>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="PUNTEGGI">
+        <div class="pt-16 tabula">
+          <tab-punti-previsti></tab-punti-previsti>
+        </div>
+      </mat-tab>
+  
+    </mat-tab-group>
+  
+  
+  
+  </div>
