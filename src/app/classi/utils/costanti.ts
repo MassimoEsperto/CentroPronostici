@@ -3,7 +3,7 @@
 // Versione applicazione
 export const VERSION = "0.0.2"
 
-export const WS_BASE_URL =  `http://marescafantaeuropeo.altervista.org/pronostici/webServices`
+export const WS_BASE_URL =  `http://marescafantaeuropeo.altervista.org/pronostici2021/webServices`
 
 // Timeout richieste POST
 export const REQUEST_TIMEOUT = 2*60*1000 // 2 minuti
