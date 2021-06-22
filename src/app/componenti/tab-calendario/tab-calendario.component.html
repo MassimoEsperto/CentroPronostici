@@ -1,0 +1,117 @@
+<clr-alert *ngIf="success" [clrAlertType]="'success'">
+    <clr-alert-item>
+        <span class="alert-text">{{success}}</span>
+    </clr-alert-item>
+</clr-alert>
+<clr-alert *ngIf="error" [clrAlertType]="'warning'">
+    <clr-alert-item>
+        <span class="alert-text">{{error}}</span>
+    </clr-alert-item>
+</clr-alert>
+
+
+<div *ngIf="!isModifica" class="card">
+    <div class="card-header">
+        Aggiungi Partita
+    </div>
+    <div class="card-block">
+
+        <form clrForm clrLayout="vertical" (submit)="onAddPartita(casa,trasferta,data)">
+
+            <div class="clr-form-control pb-16">
+
+
+                <clr-select-container>
+                    <label>Casa</label>
+                    <select clrSelect name="casa" [(ngModel)]="casa">
+                        <option *ngFor="let item of squadre" value="{{item.nome}}">{{item.nome}}</option>
+                    </select>
+                </clr-select-container>
+
+                <clr-select-container>
+                    <label>Trasterta</label>
+                    <select clrSelect name="trasferta" [(ngModel)]="trasferta">
+                        <option *ngFor="let item of squadre" value="{{item.nome}}">{{item.nome}}</option>
+                    </select>
+                </clr-select-container>
+
+                <clr-date-container>
+                    <label>Data Evento</label>
+                    <input type="date" [(ngModel)]="data" name="data" clrDate />
+                </clr-date-container>
+
+            </div>
+            <div class="pt-16">
+                <button class="btn btn-primary btn-sm" [disabled]="casa==''||trasferta==''||!data">Aggiungi</button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+
+<div *ngIf="isModifica" class="card">
+    <div class="card-header">
+        Aggiungi Partita
+    </div>
+    <div class="card-block">
+
+        <form clrForm clrLayout="vertical" (submit)="onModPartita(casa,trasferta,data)">
+
+            <div class="clr-form-control pb-16">
+
+
+                <clr-select-container>
+                    <label>Casa</label>
+                    <select clrSelect name="casa" [(ngModel)]="casa">
+                        <option *ngFor="let item of squadre" value="{{item.nome}}">{{item.nome}}</option>
+                    </select>
+                </clr-select-container>
+
+                <clr-select-container>
+                    <label>Trasterta</label>
+                    <select clrSelect name="trasferta" [(ngModel)]="trasferta">
+                        <option *ngFor="let item of squadre" value="{{item.nome}}">{{item.nome}}</option>
+                    </select>
+                </clr-select-container>
+
+                <clr-date-container>
+                    <label>Data Evento</label>
+                    <input type="date" [(ngModel)]="data" name="data" clrDate />
+                </clr-date-container>
+
+            </div>
+            <div class="pt-16">
+                <button class="btn btn-primary btn-sm" [disabled]="casa==''||trasferta==''||!data">Aggiungi</button>
+            </div>
+        </form>
+
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-primary btn-sm" (click)="closeModifica()">Annulla</button>
+    </div>
+
+
+</div>
+
+<clr-datagrid>
+    <clr-dg-column [style.min-width.px]="80" [style.width.px]="80">elimina</clr-dg-column>
+    <clr-dg-column [style.min-width.px]="80" [style.width.px]="80">modifica</clr-dg-column>
+    <clr-dg-column>Partita</clr-dg-column>
+    <clr-dg-column>Girone</clr-dg-column>
+    <clr-dg-column>Data</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let partita of calendario;let i = index;" [clrDgItem]="partita">
+
+        <clr-dg-cell [style.min-width.px]="80" [style.width.px]="80">
+            <clr-icon shape="trash" class="is-solid" (click)="onDelete(partita.id_evento)"></clr-icon>
+        </clr-dg-cell>
+        <clr-dg-cell [style.min-width.px]="80" [style.width.px]="80">
+            <clr-icon shape="pencil" class="is-solid" (click)="openModifica(partita)"></clr-icon>
+        </clr-dg-cell>
+        <clr-dg-cell>{{partita.partita}}</clr-dg-cell>
+        <clr-dg-cell>{{partita.girone}}</clr-dg-cell>
+        <clr-dg-cell>{{partita.data}}</clr-dg-cell>
+    </clr-dg-row>
+
+</clr-datagrid>
