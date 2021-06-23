@@ -12,7 +12,7 @@ $pass = ($_GET['pass'] !== null && $_GET['pass'] !== '')? mysqli_real_escape_str
       die('valori non prelevati'. mysqli_error($con));
   }
 
-$sql = "select username,email,ruolo from utenti where password = '{$pass}' and username='{$user}'"; 
+$sql = "select username,email,ruolo from utenti  where password = '{$pass}' and username='{$user}'"; 
 
 $result = mysqli_query( $con , $sql );
 
