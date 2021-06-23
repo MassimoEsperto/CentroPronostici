@@ -19,51 +19,50 @@ export class TabSquadreComponent extends Generale implements OnInit {
   ngOnInit() {
   }
 
-    //CRUD 
-    onAddSquadra(nome: string,girone: string) {
+  //CRUD 
+  onAddSquadra(nome: string, girone: string) {
 
-      this.resetErrors();
-      let gir=girone.toUpperCase()
-  
-      this.creaService.insertSquadra(nome,gir)
-        .subscribe({
-  
-          next: (result: any) => {
-  
-            this.squadre.push(result);
-            this.newTeam = '';
-  
-          },
-          error: (error: any) => {
-  
-            this.stampaErrore(error);
-  
+    this.resetErrors();
+    let gir = girone.toUpperCase()
+
+    this.creaService.insertSquadra(nome, gir)
+      .subscribe({
+
+        next: (result: any) => {
+
+          this.squadre.push(result);
+          this.newTeam = '';
+
+        },
+        error: (error: any) => {
+
+          this.stampaErrore(error);
+
+        }
+      })
+  }
+
+  onDeleteSquadra(input: any) {
+
+    this.resetErrors();
+
+    this.creaService.deleteSquadra(input.nome)
+      .subscribe({
+
+        next: (result: string) => {
+
+          const index: number = this.squadre.findIndex(i => i.nome == result);
+          if (index !== -1) {
+            this.squadre.splice(index, 1);
           }
-        })
-    }
-  
-    onDeleteSquadra(input: any) {
-  
-      this.resetErrors();
-      console.log("delete",input)
-  
-      this.creaService.deleteSquadra(input.nome)
-        .subscribe({
-  
-          next: (result: string) => {
-  
-            const index: number = this.squadre.findIndex(i => i.nome == result);
-            if (index !== -1) {
-              this.squadre.splice(index, 1);
-            }
-  
-  
-          },
-          error: (error: any) => {
-  
-            this.stampaErrore(error);
-  
-          }
-        })
-    }
+
+
+        },
+        error: (error: any) => {
+
+          this.stampaErrore(error);
+
+        }
+      })
+  }
 }
