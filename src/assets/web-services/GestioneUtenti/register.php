@@ -21,6 +21,8 @@ if(isset($postdata) && !empty($postdata))
   $email = mysqli_real_escape_string($con, trim($request->data->email)); 
   $ruolo = mysqli_real_escape_string($con, trim($request->data->ruolo)); 
   $pass = mysqli_real_escape_string($con, trim($request->data->password)); 
+  $cellulare = mysqli_real_escape_string($con, trim($request->data->cellulare)); 
+  //$cellulare = mysqli_real_escape_string($con, (int)$request->data->cellulare);
   
   $subject = "Richiesta Iscrizione fantaeuropeo";
 
@@ -31,14 +33,17 @@ if(isset($postdata) && !empty($postdata))
 	</head>
 	<body>
 	<p>Richiesta Iscrizione fantaeuropeo!</p>
+    <a href='https://chat.whatsapp.com/GMZ7WGfE1yo9hpxiyoeUq5'>Gruppo WhatsApp</a>
 	<table>
 	<tr>
 	<th>Username</th>
 	<th>Email</th>
+    <th>Cellulare</th>
 	</tr>
 	<tr>
 	<td>".$username."</td>
 	<td>".$email."</td>
+    <td>".$cellulare."</td>
 	</tr>
 	</table>
 	</body>
@@ -58,7 +63,7 @@ if(isset($postdata) && !empty($postdata))
 
 
   // Store.
-  $sql = "INSERT INTO `utenti`(`username`,`email`,`ruolo`,`password`) VALUES ('{$username}','{$email}','{$ruolo}','{$pass}')";
+  $sql = "INSERT INTO `utenti`(`username`,`email`,`cellulare`,`ruolo`,`password`) VALUES ('{$username}','{$email}','{$cellulare}','{$ruolo}','{$pass}')";
   
   
   
@@ -69,7 +74,8 @@ if(isset($postdata) && !empty($postdata))
     $car = [
       'username' => $username,
       'email' => $email,
-      'ruolo' => $ruolo
+      'email' => $email,
+      'cellulare' => $cellulare
     ];
     echo json_encode(['data'=>$car]);
 	mail($emailTo,$subject,$message,$headers);
