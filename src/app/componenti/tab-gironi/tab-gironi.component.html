@@ -26,21 +26,19 @@
     </clr-dg-row>
 
 </clr-datagrid>
-<!--
-<clr-modal [(clrModalOpen)]="updateMatchModal" [clrModalClosable]="false">
-    <h3 class="modal-title">Partita {{newSelected.partita}}</h3>
+
+<clr-modal *ngIf="newSelected" [(clrModalOpen)]="updateMatchModal" [clrModalClosable]="false">
+    <h3 class="modal-title">{{newSelected.descrizione}}</h3>
     <div class="modal-body">
-        <form clrForm (submit)="onUpdateMatch(newSelected);updateMatchModal = false">
-            <clr-input-container>
-                <label>Goals casa</label>
-                <input clrInput type="number" [(ngModel)]="newSelected.goalc" name="goalc" required />
-            </clr-input-container>
-            <clr-input-container>
-                <label>Goals trasterta</label>
-                <input clrInput type="number" [(ngModel)]="newSelected.goalt" name="goalt" required />
-            </clr-input-container>
+        <form clrForm (submit)="onUpdateSelected(newSelected);updateMatchModal = false">        
+            <clr-select-container>
+                <label>Squadra</label>
+                <select clrSelect name="newSelected.squadra" [(ngModel)]="newSelected.squadra">
+                    <option *ngFor="let item of squadreGirone" value="{{item.nome}}">{{item.nome}}</option>
+                </select>
+            </clr-select-container>
             <br>
-            <button class="btn btn-primary" [disabled]="newSelected.goalt==null||newSelected.goalc==null"
+            <button class="btn btn-primary" [disabled]="!newSelected.squadra"
                 style="float: right;">Aggiorna</button>
             <button type="button" class="btn btn-outline" (click)="updateMatchModal = false"
                 style="float: right;">Annulla</button>
@@ -48,4 +46,3 @@
     </div>
 
 </clr-modal>
--->
