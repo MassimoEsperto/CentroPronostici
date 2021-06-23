@@ -26,17 +26,17 @@
       <a *ngIf="isAdmin" mat-list-item [routerLink]="'/home/gestione-utente'" (click)="sidenav.toggle()">
         <clr-icon class="icone" shape="user"></clr-icon>Gestione Admin
       </a>
-      <mat-divider *ngIf="isAdmin"></mat-divider>
-      <mat-divider *ngIf="isAdmin"></mat-divider>
-      <mat-divider *ngIf="isAdmin"></mat-divider>
-      <a *ngIf="isAdmin" mat-list-item [routerLink]="'/home/nuova-competizione'" (click)="sidenav.toggle()">
-        <clr-icon class="icone" shape="user"></clr-icon>Crea Competizione
+      <mat-divider *ngIf="isAdmin&&!variabile"></mat-divider>
+      <mat-divider *ngIf="isAdmin&&!variabile"></mat-divider>
+      <mat-divider *ngIf="isAdmin&&!variabile"></mat-divider>
+      <a *ngIf="isAdmin&&!variabile" mat-list-item [routerLink]="'/home/nuova-competizione'" (click)="sidenav.toggle()">
+        <clr-icon class="icone" shape="cog"></clr-icon>Crea Competizione
       </a>
       <mat-divider *ngIf="isAdmin"></mat-divider>
       <mat-divider *ngIf="isAdmin"></mat-divider>
       <mat-divider *ngIf="isAdmin"></mat-divider>
       <a *ngIf="isAdmin" mat-list-item [routerLink]="'/home/gestione-competizione'" (click)="sidenav.toggle()">
-        <clr-icon class="icone" shape="user"></clr-icon>Gestione Competizione
+        <clr-icon class="icone" shape="event"></clr-icon>Gestione Competizione
       </a>
       <mat-divider *ngIf="isPlayer"></mat-divider>
       <mat-divider *ngIf="isPlayer"></mat-divider>
