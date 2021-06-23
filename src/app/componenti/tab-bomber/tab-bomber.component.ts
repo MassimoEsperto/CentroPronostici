@@ -16,12 +16,10 @@ export class TabBomberComponent extends Generale implements OnInit {
     super();
   }
 
-  ngOnInit() {
-    console.log("cannonieri",this.cannonieri)
-  }
+  ngOnInit() { }
 
-   //CRUD CAPOCANNONIERE
-   onAddBomber(bomber: string) {
+  //CRUD CAPOCANNONIERE
+  onAddBomber(bomber: string) {
 
     this.resetErrors();
 
