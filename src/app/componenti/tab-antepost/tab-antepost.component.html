@@ -18,17 +18,14 @@
             <form class="clr-form" (submit)="onAddGirone(girone)">
                 <div class="card-block">
                     <div class="clr-form-control">
-                        <label for="cannoniere" class="clr-control-label">Inserisci il nome e aggiorna
-                            li lista!</label>
-                        <div class="clr-control-container clr-error">
-                           
+                      
                             <clr-select-container>
                                 <label>Girone</label>
                                 <select clrSelect name="girone" [(ngModel)]="girone">
                                     <option *ngFor="let item of gironi" value="{{item.girone}}">{{item.girone}}</option>
                                 </select>
                             </clr-select-container>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="card-footer">
