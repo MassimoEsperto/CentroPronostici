@@ -31,8 +31,6 @@ export class GestioneCompetizioneComponent extends Generale implements OnInit {
 
         next: (result: Combo) => {
           this.combosel = result;
-          console.log("combo",result)
-
         },
         error: (error: any) => {
 
