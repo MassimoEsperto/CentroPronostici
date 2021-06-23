@@ -103,8 +103,6 @@ export class CreaCompetizioneService extends HttpSenderService {
   
   setPartita(partita: Partita): Observable<Partita[]> {
 
-    console.log("partita",partita)
-
     return this.http.post(`${this.buildURL("CreaCompetizione/setPartita")}`, { data: partita })
        .pipe(map((res) => {
          return res['data'];
@@ -113,8 +111,6 @@ export class CreaCompetizioneService extends HttpSenderService {
    }
  
    updPartita(partita: Partita): Observable<Partita[]> {
-
-    console.log("partita",partita)
 
     return this.http.post(`${this.buildURL("CreaCompetizione/updPartita")}`, { data: partita })
        .pipe(map((res) => {
