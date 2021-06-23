@@ -31,7 +31,6 @@ export class CreaCompetizioneComponent extends Generale implements OnInit {
 
         next: (result: Combo) => {
           this.combosel = result;
-          console.log("combo",result)
 
         },
         error: (error: any) => {
