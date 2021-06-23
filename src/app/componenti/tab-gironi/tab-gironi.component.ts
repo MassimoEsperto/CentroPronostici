@@ -10,24 +10,26 @@ import { GestioneCompetizioneService } from 'src/app/services/gestione-competizi
 export class TabGironiComponent extends Generale implements OnInit {
 
   @Input() squadre: any;
-  gironi:any;
-  newSelected:any;
-  
+  gironi: any;
+  newSelected: any;
+  squadreGirone: any;
+
   constructor(private gestioneService: GestioneCompetizioneService) {
     super();
   }
 
   ngOnInit() {
-    console.log("TabGironiComponent",this.squadre)
     this.getScommesseGironi()
   }
 
-  onEditSelected(element){
-console.log("onEditSelected",element)
+  onEditSelected(element) {
+    this.newSelected = element
+    this.squadreGirone = this.squadre.filter(i => i.girone == element.girone);
+
   }
 
-   //CRUD 
-   getScommesseGironi() {
+  //CRUD 
+  getScommesseGironi() {
 
     this.resetErrors();
 
@@ -37,7 +39,7 @@ console.log("onEditSelected",element)
         next: (result: any) => {
 
           this.gironi = result
-          console.log("getScommesseGironi",result)
+
         },
         error: (error: any) => {
 
@@ -45,5 +47,28 @@ console.log("onEditSelected",element)
 
         }
       })
+  }
+
+  onUpdateSelected(element) {
+
+    this.gestioneService.updScommesseGirone({
+      id_evento: element.id_evento,
+      scommessa: element.descrizione,
+      risultato: element.squadra
+    })
+      .subscribe({
+
+        next: (result: any) => {
+
+          this.getScommesseGironi()
+          this.successo();
+        },
+        error: (error: any) => {
+
+          this.stampaErrore(error);
+
+        }
+      })
+
   }
 }
