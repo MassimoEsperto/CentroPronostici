@@ -49,6 +49,7 @@ if($result = mysqli_query($con,$sql))
     $schede[$index]['id_schedina'] = $row['id_schedina'];
     $schede[$index]['tempo'] = $row['tempo'];
 	$schede[$index]['punteggio'] = $row['pt'];
+    $schede[$index]['indice'] = $index+1;
     $index++;
   }
     
