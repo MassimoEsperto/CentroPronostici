@@ -21,11 +21,14 @@ $sql = "SELECT DISTINCT p.tipo,p.punti FROM  ";
   $sql .="		UNION ";
   $sql .="		SELECT id_partita as id, ";
   $sql .="		CASE ";
-  $sql .="			 WHEN id_partita =43 THEN 'Piazzamento girone' ";
+  $sql .="			 WHEN id_partita =46 THEN 'Prima Girone' ";
+  $sql .="			 WHEN id_partita =44 THEN 'Seconda Girone' ";
+  $sql .="			 WHEN id_partita =45 THEN 'Terza Girone' ";
+  $sql .="			 WHEN id_partita =43 THEN 'Ultima Girone' ";
   $sql .="			ELSE scommessa";
   $sql .="		END as tipo, ";
   $sql .="		punti_previsti as punti ";
-  $sql .="		 FROM scommesse_antepost LIMIT 18) as p order by p.punti DESC ";
+  $sql .="		 FROM scommesse_antepost LIMIT 21) as p order by p.punti DESC ";
 
 
 
