@@ -54,7 +54,7 @@ else
 	</tr>
 	</table>
     <br>
-    <a href='http://marescafantaeuropeo.altervista.org/'>Visit Marescafantaeuropeo.com!</a>
+    <a href='http://marescafantaeuropeo.altervista.org/pronostici2021/'>Visit Marescafantaeuropeo.com!</a>
 	</body>
 	</html>
 	";
