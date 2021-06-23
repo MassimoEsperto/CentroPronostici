@@ -1,0 +1,95 @@
+<clr-alert *ngIf="success" [clrAlertType]="'success'">
+    <clr-alert-item>
+        <span class="alert-text">{{success}}</span>
+    </clr-alert-item>
+</clr-alert>
+<clr-alert *ngIf="error" [clrAlertType]="'warning'">
+    <clr-alert-item>
+        <span class="alert-text">{{error}}</span>
+    </clr-alert-item>
+</clr-alert>
+
+<clr-datagrid>
+    <clr-dg-column [clrDgField]="'username'">username</clr-dg-column>
+    <clr-dg-column [clrDgField]="'email'">email</clr-dg-column>
+    <clr-dg-column [clrDgField]="'cellulare'">cellulare</clr-dg-column>
+    <clr-dg-column [clrDgField]="'ruolo'">ruolo</clr-dg-column>
+    <clr-dg-column [clrDgField]="'versato'">versato</clr-dg-column>
+    <clr-dg-column [clrDgField]="'schede'">schede</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let user of utenti;let i = index;" [clrDgItem]="user">
+        <clr-dg-action-overflow>
+            <button class="action-item" (click)="onEditUser(user);updateModal = true">Modifica</button>
+            <button class="action-item" (click)="onEditUser(user);deleteModal = true">Elimina</button>
+        </clr-dg-action-overflow>
+        <clr-dg-cell>{{user.username}}</clr-dg-cell>
+        <clr-dg-cell>{{user.email}}</clr-dg-cell>
+        <clr-dg-cell>{{user.cellulare}}</clr-dg-cell>
+        <clr-dg-cell>{{user.ruolo}}</clr-dg-cell>
+        <clr-dg-cell>€ {{user.versato}}</clr-dg-cell>
+        <clr-dg-cell>{{user.schede||0}}</clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-footer>
+        <clr-dg-pagination #pagination [clrDgPageSize]="20">
+            <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Utenti per pagina</clr-dg-page-size>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            di {{pagination.totalItems}} utenti
+        </clr-dg-pagination>
+    </clr-dg-footer>
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="updateModal" [clrModalClosable]="false">
+    <h3 class="modal-title">AGGIORNA UTENTE</h3>
+    <div class="modal-body">
+        <form *ngIf="options2" clrForm (submit)="onUpdateUtente(newUtente);updateModal = false">
+            <label>MODIFICA UTENTE</label>
+            <clr-input-container>
+                <label>Username</label>
+                <input clrInput type="text" [(ngModel)]="newUtente.username" name="username" required />
+                <clr-control-error>Obbligatorio</clr-control-error>
+            </clr-input-container>
+            <clr-input-container>
+                <label>Mail (Optional)</label>
+                <input clrInput type="text" [(ngModel)]="newUtente.email" name="email" />
+            </clr-input-container>
+            <clr-input-container>
+                <label>Cellulare</label>
+                <input clrInput type="number" [(ngModel)]="newUtente.cellulare" name="cellulare" />
+            </clr-input-container>
+            <clr-input-container>
+                <label>Versato</label>
+                <input clrInput type="number" [(ngModel)]="newUtente.versato" name="versato" />
+            </clr-input-container>
+            <clr-select-container>
+                <label>Ruolo</label>
+                <select clrSelect name="ruolo" [(ngModel)]="newUtente.ruolo" required>
+                    <option value="admin">Admin</option>
+                    <option value="giocatore">Giocatore</option>
+                    <option value="visitatore">Visitatore</option>
+                </select>
+                <clr-control-error>Obbligatorio</clr-control-error>
+            </clr-select-container>
+
+            <br>
+            <button class="btn btn-primary" [disabled]="newUtente.invalid"
+                style="float: right;">Aggiorna</button>
+            <button type="button" class="btn btn-outline" (click)="updateModal = false"
+                style="float: right;">Annulla</button>
+        </form>
+    </div>
+
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="deleteModal" [clrModalClosable]="false">
+    <h3 class="modal-title">ELIMINA UTENTE</h3>
+    <div class="modal-body">
+        <h3>Sei Sicuro?</h3>
+        <br>
+        <button class="btn btn-primary" (click)="onDeleteUtente();deleteModal = false"
+            style="float: right;">SI</button>
+        <button type="button" class="btn btn-outline" (click)="deleteModal = false"
+            style="float: right;">NO</button>
+
+    </div>
+</clr-modal>
