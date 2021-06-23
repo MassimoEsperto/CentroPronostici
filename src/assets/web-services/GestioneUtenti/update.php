@@ -20,6 +20,8 @@ if(isset($postdata) && !empty($postdata))
   $username = mysqli_real_escape_string($con, trim($request->data->username));
   $email = mysqli_real_escape_string($con, trim($request->data->email)); 
   $ruolo = mysqli_real_escape_string($con, trim($request->data->ruolo)); 
+  $versato = mysqli_real_escape_string($con, (int)$request->data->versato);
+  $cellulare = mysqli_real_escape_string($con, trim($request->data->cellulare)); 
   
    $subject = "Modifica account";
 
@@ -34,16 +36,24 @@ if(isset($postdata) && !empty($postdata))
 	<tr>
 	<th>Username</th>
 	<th>Email</th>
+    <th>Cellulare</th>
 	<th>Ruolo</th>
+    <th>Versato</th>
 	</tr>
 	<tr>
 	<td>".$username."</td>
 	<td>".$email."</td>
+    <td>".$cellulare."</td>
 	<td>".$ruolo."</td>
+    <td>".$versato."</td>
+  
 	</tr>
 	</table>
     <br>
-    <a href='http://marescafantaeuropeo.altervista.org/'>Visit Marescafantaeuropeo.com!</a>
+    <a href='http://marescafantaeuropeo.altervista.org/pronostici2021/'>Visit Marescafantaeuropeo.com!</a>
+    <br>
+    <a href='https://chat.whatsapp.com/GMZ7WGfE1yo9hpxiyoeUq5'>Gruppo WhatsApp</a>
+    <br>
 	</body>
 	</html>
 	</body>
@@ -58,7 +68,7 @@ if(isset($postdata) && !empty($postdata))
 	$headers .= 'From: <pronostici@fantaeuropeo.com>' . "\r\n";
 
    // Update.
-  $sql = "UPDATE `utenti` SET `email`='{$email}',`ruolo`='{$ruolo}' WHERE `username` = '{$username}' LIMIT 1";
+  $sql = "UPDATE `utenti` SET `email`='{$email}',`cellulare`='{$cellulare}',`ruolo`='{$ruolo}',`versato`={$versato} WHERE `username` = '{$username}' LIMIT 1";
 
   if(mysqli_query($con,$sql))
   {
@@ -66,7 +76,9 @@ if(isset($postdata) && !empty($postdata))
     $car = [
       'username' => $username,
       'email' => $email,
-      'ruolo' => $ruolo
+      'cellulare' => $cellulare,
+      'ruolo' => $ruolo,
+      'versato' => $versato
     ];
     echo json_encode(['data'=>$car]);
 	mail($email,$subject,$message,$headers);
