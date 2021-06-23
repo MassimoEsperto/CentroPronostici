@@ -61,7 +61,7 @@ export class GestioneComponent extends Generale implements OnInit {
   }
 
   onEditScommesseAntepost(scommesse) {
-    this.newAltreScommesse.id_partita = scommesse.id_partita;
+    this.newAltreScommesse.id_evento = scommesse.id_partita;
     this.newAltreScommesse.scommessa = scommesse.scommessa;
     this.newAltreScommesse.risultato = scommesse.risultato;
   }
@@ -176,7 +176,7 @@ export class GestioneComponent extends Generale implements OnInit {
     this.resetErrors();
 
     this.calendarioService.updateScommesseAntepost({
-      id_partita: this.newAltreScommesse.id_partita,
+      id_evento: this.newAltreScommesse.id_evento,
       scommessa: this.newAltreScommesse.scommessa,
       risultato: this.newAltreScommesse.risultato
     })
