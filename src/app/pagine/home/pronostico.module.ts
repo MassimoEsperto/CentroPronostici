@@ -31,6 +31,7 @@ import { GestioneCompetizioneComponent } from './gestione-competizione/gestione-
 import { TabGironiComponent } from 'src/app/componenti/tab-gironi/tab-gironi.component';
 import { TabRisultatiComponent } from 'src/app/componenti/tab-risultati/tab-risultati.component';
 import { TabScommesseBaseComponent } from 'src/app/componenti/tab-scommesse-base/tab-scommesse-base.component';
+import { TabUtentiComponent } from 'src/app/componenti/tab-utenti/tab-utenti.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { TabScommesseBaseComponent } from 'src/app/componenti/tab-scommesse-base
     TabPuntiPrevistiComponent,
     TabGironiComponent,
     TabRisultatiComponent,
-    TabScommesseBaseComponent
+    TabScommesseBaseComponent,
+    TabUtentiComponent
   ],
   imports: [
     CommonModule,
