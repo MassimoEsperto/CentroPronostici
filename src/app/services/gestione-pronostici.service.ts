@@ -215,4 +215,46 @@ export class GestionePronosticiService extends HttpSenderService {
       }),
         catchError(this.handleError));
   }
+
+
+
+
+/*---------------------- NUOVI-------------------------*/ 
+getSchedaDaCompilare() {
+
+  return this.http.get<any>(`${this.buildURL("PronosticiUtente/getSchedaDaCompilare")}`)
+    .pipe(map((res) => {
+
+      return res['data'];
+
+    }),
+      catchError(this.handleError));
+}
+
+getIdSchedina(username: string) {
+  const params = new HttpParams().set('username', username);
+
+  return this.http.get(`${this.buildURL("PronosticiUtente/getIdScheda")}`, { params: params })
+    .pipe(map((res) => {
+
+      return res['data'].id_schedina;
+    }),
+      catchError(this.handleError));
+}
+
+setScheda(pronostico: any) {
+  
+
+  return this.http.post(`${this.buildURL("PronosticiUtente/setScheda")}`, { data: pronostico })
+    .pipe(map((res) => {
+  
+      return res['data'];
+    }),
+      catchError(this.handleError));
+}
+
+
+
+
+
 }
