@@ -9,6 +9,7 @@ import { ListaPronosticiComponent } from './lista-pronostici/lista-pronostici.co
 import { ClassificaComponent } from './classifica/classifica.component';
 import { CreaCompetizioneComponent } from './crea-competizione/crea-competizione.component';
 import { GestioneCompetizioneComponent } from './gestione-competizione/gestione-competizione.component';
+import { PronosticiUtenteComponent } from './pronostici-utente/pronostici-utente.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,10 @@ const routes: Routes = [
             {
                 path: 'lista-pronostici',
                 component: ListaPronosticiComponent
+            },
+            {
+                path: 'pronostici-utente',
+                component: PronosticiUtenteComponent
             },
             {
                 path: 'classifica',
