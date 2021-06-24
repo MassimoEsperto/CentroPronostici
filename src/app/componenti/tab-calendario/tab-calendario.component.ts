@@ -11,6 +11,7 @@ import { CreaCompetizioneService } from 'src/app/services/crea-competizione.serv
 export class TabCalendarioComponent extends Generale implements OnInit {
 
   @Input() squadre: any;
+  associabili = []
   calendario: Partita[] = [];
   casa = '';
   trasferta = '';
@@ -24,6 +25,13 @@ export class TabCalendarioComponent extends Generale implements OnInit {
   ngOnInit() {
     this.getCalendario()
   }
+
+  onChangeSelect(element) {
+    let girone = this.squadre.find(i => i.nome == element).girone;
+    this.associabili = this.squadre.filter(i => i.girone == girone && i.nome != element);
+  }
+
+
 
   onAddPartita(casa: string, trasferta: string, data) {
 
@@ -94,6 +102,7 @@ export class TabCalendarioComponent extends Generale implements OnInit {
 
           this.casa = '';
           this.trasferta = '';
+          this.associabili = []
           this.getCalendario()
 
         },
