@@ -23,7 +23,7 @@
 
                 <clr-select-container>
                     <label>Casa</label>
-                    <select clrSelect name="casa" [(ngModel)]="casa">
+                    <select clrSelect name="casa" [(ngModel)]="casa" (change)="onChangeSelect($event.target.value)">
                         <option *ngFor="let item of squadre" value="{{item.nome}}">{{item.nome}}</option>
                     </select>
                 </clr-select-container>
@@ -31,7 +31,7 @@
                 <clr-select-container>
                     <label>Trasterta</label>
                     <select clrSelect name="trasferta" [(ngModel)]="trasferta">
-                        <option *ngFor="let item of squadre" value="{{item.nome}}">{{item.nome}}</option>
+                        <option *ngFor="let item of associabili" value="{{item.nome}}">{{item.nome}}</option>
                     </select>
                 </clr-select-container>
 
