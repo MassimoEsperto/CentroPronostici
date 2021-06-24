@@ -18,7 +18,7 @@ coombosel:Combo;
   
    getCombo(): Observable<Combo> {
     
-    return this.http.get(`${this.buildURL("GestioneScommesse/lookups")}`).pipe(
+    return this.http.get(`${this.buildURL("PronosticiUtente/lookups")}`).pipe(
       map((res) => {
         this.coombosel=res['data'];
         
