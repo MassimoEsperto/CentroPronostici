@@ -1,0 +1,69 @@
+<clr-alert *ngIf="success" [clrAlertType]="'success'">
+  <clr-alert-item>
+      <span class="alert-text">{{success}}</span>
+  </clr-alert-item>
+</clr-alert>
+<clr-alert *ngIf="error" [clrAlertType]="'warning'">
+  <clr-alert-item>
+      <span class="alert-text">{{error}}</span>
+  </clr-alert-item>
+</clr-alert>
+<div>
+  <button class="btn btn-defaul btn-block" (click)="onAnnulla()">Annulla</button>
+</div>
+
+<form *ngIf="scheda" (ngSubmit)="confermaScheda()">
+  <clr-datagrid>
+    <clr-dg-column>Evento</clr-dg-column>
+    <clr-dg-column>Risultato</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let element of scheda;" [clrDgItem]="element">
+
+      <clr-dg-cell>{{element.descrizione}}</clr-dg-cell>
+      <clr-dg-cell *ngIf="element.tipo==1" (click)="onEditRisultati(element);risultatiModal = true">
+        {{element.risultato}}
+      </clr-dg-cell>
+      <clr-dg-cell *ngIf="element.tipo==2&&element.gruppo!='C'">
+        <select class="selectBox" name="risultato" [(ngModel)]="element.risultato">
+          <option *ngFor="let item of combo.squadre" [value]="item.nome">{{item.nome}}</option>
+        </select>
+      </clr-dg-cell>
+      <clr-dg-cell *ngIf="element.tipo==2&&element.gruppo=='C'">
+        <select class="selectBox" name="risultato" [(ngModel)]="element.risultato">
+          <option *ngFor="let item of combo.cannonieri" [value]="item">{{item}}</option>
+        </select>
+      </clr-dg-cell>
+      <clr-dg-cell *ngIf="element.tipo==3">
+        <select class="selectBox" name="risultato" [(ngModel)]="element.risultato">
+          <option *ngFor="let item of getSquadreByGirone(element.girone)" [value]="item.nome">{{item.nome}}</option>
+        </select>
+      </clr-dg-cell>
+
+    </clr-dg-row>
+
+  </clr-datagrid>
+  <div class="bottoni">
+    <button [clrLoading]="submitBtnState" [disabled]="isAviable()" class="btn btn-primary btn-block"
+      clrButton="submit">Aggiungi</button>
+  </div>
+
+
+</form>
+<div *ngIf="selected" class="modali">
+  <clr-modal [(clrModalOpen)]="risultatiModal">
+    <h3 class="modal-title">{{selected.descrizione}}</h3>
+    <div class="modal-body">
+      <form clrForm (submit)="risultatiModal = false">
+        <clr-radio-container clrInline>
+          <label>Risultati Match</label>
+          <clr-radio-wrapper *ngFor="let ris of combo.risultati">
+            <input type="radio" clrRadio name="selected.risultato" [value]="ris" [(ngModel)]="selected.risultato" />
+            <label>{{ris}}</label>
+          </clr-radio-wrapper>
+        </clr-radio-container>
+      </form>
+    </div>
+  </clr-modal>
+
+
+</div>
