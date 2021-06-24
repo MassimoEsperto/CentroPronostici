@@ -50,6 +50,12 @@
       <a *ngIf="isPlayer" mat-list-item [routerLink]="'/home/inserimento-pronostico'" (click)="sidenav.toggle()">
         <clr-icon class="icone" shape="copy-to-clipboard"></clr-icon>Insert Pronostico
       </a>
+      <mat-divider *ngIf="isPlayer"></mat-divider>
+      <mat-divider *ngIf="isPlayer"></mat-divider>
+      <mat-divider *ngIf="isPlayer"></mat-divider>
+      <a *ngIf="isPlayer" mat-list-item [routerLink]="'/home/pronostici-utente'" (click)="sidenav.toggle()">
+        <clr-icon class="icone" shape="copy-to-clipboard"></clr-icon>Pronostici Utente
+      </a>
       <mat-divider></mat-divider>
       <mat-divider></mat-divider>
       <mat-divider></mat-divider>
