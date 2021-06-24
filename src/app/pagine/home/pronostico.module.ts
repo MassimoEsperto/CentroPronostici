@@ -32,6 +32,8 @@ import { TabGironiComponent } from 'src/app/componenti/tab-gironi/tab-gironi.com
 import { TabRisultatiComponent } from 'src/app/componenti/tab-risultati/tab-risultati.component';
 import { TabScommesseBaseComponent } from 'src/app/componenti/tab-scommesse-base/tab-scommesse-base.component';
 import { TabUtentiComponent } from 'src/app/componenti/tab-utenti/tab-utenti.component';
+import { PronosticiUtenteComponent } from './pronostici-utente/pronostici-utente.component';
+import { InserimentoSchedaComponent } from 'src/app/componenti/inserimento-scheda/inserimento-scheda.component';
 
 
 @NgModule({
@@ -53,7 +55,9 @@ import { TabUtentiComponent } from 'src/app/componenti/tab-utenti/tab-utenti.com
     TabGironiComponent,
     TabRisultatiComponent,
     TabScommesseBaseComponent,
-    TabUtentiComponent
+    TabUtentiComponent,
+    PronosticiUtenteComponent,
+    InserimentoSchedaComponent
   ],
   imports: [
     CommonModule,
