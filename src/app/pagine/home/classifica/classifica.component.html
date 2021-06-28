@@ -16,12 +16,12 @@
 <clr-datagrid *ngIf="classifica">
     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">pos</clr-dg-column>
     <clr-dg-column [clrDgField]="'id_utente'">utente</clr-dg-column>
-    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">pt</clr-dg-column>
+    <clr-dg-column [clrDgField]="'punteggio'" [clrDgColType]="'number'"  [style.min-width.px]="50" [style.width.px]="50">pt</clr-dg-column>
     <clr-dg-column>data</clr-dg-column>
     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">view</clr-dg-column>
 
     <clr-dg-row *clrDgItems="let scheda of classifica" [clrDgItem]="match">
-        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{scheda.indice}}</clr-dg-cell>
+        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{scheda.posizione}}</clr-dg-cell>
         <clr-dg-cell>{{scheda.id_utente}}</clr-dg-cell>
         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50"><span
                 style="font-weight: bold;">{{scheda.punteggio}}</span></clr-dg-cell>
@@ -33,7 +33,7 @@
     </clr-dg-row>
     <-- Inside the full datagrid declaration -->
         <clr-dg-footer>
-            <clr-dg-pagination #pagination [clrDgPageSize]="10">
+            <clr-dg-pagination #pagination [clrDgPageSize]="20">
                 <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Schede per pagina</clr-dg-page-size>
                 {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
                 di {{pagination.totalItems}} schede
@@ -49,17 +49,17 @@
         <div class="limit-height">
             <clr-datagrid *ngIf="schede">
                 <clr-dg-column>
-                    <ng-container *clrDgHideableColumn="{hidden: false}">scommessa</ng-container>
+                    <ng-container *clrDgHideableColumn="{hidden: false}">desc</ng-container>
                 </clr-dg-column>
                 <clr-dg-column>
-                    <ng-container *clrDgHideableColumn="{hidden: false}">risultato</ng-container>
+                    <ng-container *clrDgHideableColumn="{hidden: false}">ris</ng-container>
                 </clr-dg-column>
                 <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">
-                    <ng-container *clrDgHideableColumn="{hidden: false}">punti</ng-container>
+                    <ng-container *clrDgHideableColumn="{hidden: false}">pt</ng-container>
                 </clr-dg-column>
 
                 <clr-dg-row *clrDgItems="let match of schede;let i = index;" [clrDgItem]="match">
-                    <clr-dg-cell>{{match.partita}}</clr-dg-cell>
+                    <clr-dg-cell>{{match.descrizione}}</clr-dg-cell>
                     <clr-dg-cell>{{match.risultato}}</clr-dg-cell>
                     <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{match.punteggio}}</clr-dg-cell>
 
