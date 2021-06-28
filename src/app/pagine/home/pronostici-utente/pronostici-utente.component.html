@@ -1,3 +1,43 @@
-<div *ngIf="!viewHome">
-<inserimento-scheda *ngIf="combosel" [combo]="combosel" (ritono)="viewScheda($event)"></inserimento-scheda>
+<span *ngIf="loading" class="spinner"></span>
+<clr-alert *ngIf="success" [clrAlertType]="'success'">
+  <clr-alert-item>
+    <span class="alert-text">{{success}}</span>
+  </clr-alert-item>
+</clr-alert>
+<clr-alert *ngIf="error" [clrAlertType]="'warning'">
+  <clr-alert-item>
+    <span class="alert-text">{{error}}</span>
+  </clr-alert-item>
+</clr-alert>
+
+<div *ngIf="bloccato" class="bottoni">
+  <clr-alert [clrAlertType]="'warning'" [clrAlertClosable]="false">
+    <clr-alert-item>
+      <span class="alert-text">Attualmente i sistemi sono sospesi</span>
+    </clr-alert-item>
+  </clr-alert>
+</div>
+
+<div *ngIf="!bloccato&&!viewSchedaDaCompilare" class="bottoni">
+  <button class="btn btn-defaul btn-block" (click)="nuovaScheda()">INSERISCI NUOVA
+    SCHEDA</button>
+  <button *ngIf="!loading" class="btn btn-defaul btn-block" (click)="randomScheda()">GENERA RANDOM
+  </button>
+  <button *ngIf="!loading" class="btn btn-defaul btn-block" (click)="nuovaScheda()">COPIA SCHEDA
+  </button>
+</div>
+
+
+
+<div *ngIf="viewSchedaDaCompilare">
+  <inserimento-scheda *ngIf="combosel" [combo]="combosel" [scheda]="scheda" (ritono)="viewScheda($event)">
+  </inserimento-scheda>
+</div>
+
+<div *ngIf="!bloccato&&pronostici.length">
+  <modifica-schede [pronostici]="pronostici" [combo]="combosel"></modifica-schede>
+</div>
+
+<div *ngIf="bloccato&&pronostici.length">
+  <visualizza-schede [pronostici]="pronostici"></visualizza-schede>
 </div>
