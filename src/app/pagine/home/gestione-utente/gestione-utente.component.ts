@@ -116,17 +116,17 @@ export class GestioneComponent extends Generale implements OnInit {
 
     this.newMatch.risEsatto = golc > 4 || golt > 4 ? risultato.ALTRO : golc + '-' + golt;
     if (golc == golt) {
-      this.newMatch.risultato = risultato.X;
+      this.newMatch.fisso = risultato.X;
       this.newMatch.doppiachance1 = risultato.UNOX;
       this.newMatch.doppiachance2 = risultato.XDUE;
     }
     else if (golc > golt) {
-      this.newMatch.risultato = risultato.UNO;
+      this.newMatch.fisso = risultato.UNO;
       this.newMatch.doppiachance1 = risultato.UNOX;
       this.newMatch.doppiachance2 = risultato.UNO_DUE;
     }
     else if (golc < golt) {
-      this.newMatch.risultato = risultato.DUE;
+      this.newMatch.fisso = risultato.DUE;
       this.newMatch.doppiachance1 = risultato.XDUE;
       this.newMatch.doppiachance2 = risultato.UNO_DUE;
     }
@@ -146,7 +146,7 @@ export class GestioneComponent extends Generale implements OnInit {
       data: null,
       goalc: this.newMatch.goalc,
       goalt: this.newMatch.goalt,
-      risultato: this.newMatch.risultato,
+      fisso: this.newMatch.fisso,
       doppiachance1: this.newMatch.doppiachance1,
       doppiachance2: this.newMatch.doppiachance2,
       underOver: this.newMatch.underOver,
