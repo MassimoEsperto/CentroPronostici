@@ -92,11 +92,11 @@ export class GestionePronosticiService extends HttpSenderService {
    * Inserimento dei pronostici
    */
   insert(pronostico: Schedina[]) {
-  
+
 
     return this.http.post(`${this.buildURL("GestionePronostici/insert")}`, { data: pronostico })
       .pipe(map((res) => {
-    
+
         return res['data'];
       }),
         catchError(this.handleError));
@@ -107,7 +107,7 @@ export class GestionePronosticiService extends HttpSenderService {
    * modifica del pronostico
    */
   update(pronostico: Schedina) {
-  
+
     return this.http.post(`${this.buildURL("GestionePronostici/update")}`, { data: pronostico })
       .pipe(map((res) => {
         const scheda = this.schedaPiena.find((item) => {
@@ -129,7 +129,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
     return this.http.get(`${this.buildURL("GestioneSchedina/deleteSchedina")}`, { params: params })
       .pipe(map(res => {
-     
+
         const filterid = this.pronostico = this.pronostico.filter(item => item.id_schedina !== id_schedina);
         return this.pronostico = filterid;
       }),
@@ -148,7 +148,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
     return this.http.get<Pronostici[]>(`${this.buildURL("GestionePronostici/list")}`, { params: params })
       .pipe(map((res) => {
-      
+
         this.pronostico = res['data'];
         return this.pronostico;
 
@@ -162,7 +162,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
     return this.http.get<Pronostici[]>(`${this.buildURL("GestionePronostici/listFinale")}`, { params: params })
       .pipe(map((res) => {
-    
+
         this.pronostico = res['data'];
         return this.pronostico;
 
@@ -175,7 +175,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
     return this.http.get<Pronostici[]>(`${this.buildURL("GestionePronostici/classifica")}`)
       .pipe(map((res) => {
-      
+
         this.pronostico = res['data'];
         return this.pronostico;
 
@@ -219,42 +219,99 @@ export class GestionePronosticiService extends HttpSenderService {
 
 
 
-/*---------------------- NUOVI-------------------------*/ 
-getSchedaDaCompilare() {
+  /*---------------------- NUOVI-------------------------*/
 
-  return this.http.get<any>(`${this.buildURL("PronosticiUtente/getSchedaDaCompilare")}`)
-    .pipe(map((res) => {
+  getSchedaDaCompilare() {
 
-      return res['data'];
+    return this.http.get<any>(`${this.buildURL("PronosticiUtente/getSchedaDaCompilare")}`)
+      .pipe(map((res) => {
+        console.log("getSchedaDaCompilare", res['data'])
+        return res['data'];
 
-    }),
-      catchError(this.handleError));
-}
+      }),
+        catchError(this.handleError));
+  }
 
-getIdSchedina(username: string) {
-  const params = new HttpParams().set('username', username);
+  getIdSchedina(username: string) {
+    const params = new HttpParams().set('username', username);
 
-  return this.http.get(`${this.buildURL("PronosticiUtente/getIdScheda")}`, { params: params })
-    .pipe(map((res) => {
+    return this.http.get(`${this.buildURL("PronosticiUtente/getIdScheda")}`, { params: params })
+      .pipe(map((res) => {
 
-      return res['data'].id_schedina;
-    }),
-      catchError(this.handleError));
-}
+        return res['data'].id_schedina;
+      }),
+        catchError(this.handleError));
+  }
 
-setScheda(pronostico: any) {
-  
+  getSchedaCompilata(id_schedina: string) {
 
-  return this.http.post(`${this.buildURL("PronosticiUtente/setScheda")}`, { data: pronostico })
-    .pipe(map((res) => {
-  
-      return res['data'];
-    }),
-      catchError(this.handleError));
-}
+    const params = new HttpParams().set('id_schedina', id_schedina);
+
+    return this.http.get(`${this.buildURL("PronosticiUtente/getSchedaCompilata")}`, { params: params })
+      .pipe(map((res) => {
+
+        return res['data'];
+      }),
+        catchError(this.handleError));
+  }
 
 
 
+  setScheda(pronostico: any) {
 
+    return this.http.post(`${this.buildURL("PronosticiUtente/setScheda")}`, { data: pronostico })
+      .pipe(map((res) => {
+
+        return res['data'];
+      }),
+        catchError(this.handleError));
+  }
+
+  delScheda(id_schedina: number) {
+
+    const params = new HttpParams().set('id_schedina', id_schedina.toString());
+
+    return this.http.get(`${this.buildURL("PronosticiUtente/delScheda")}`, { params: params })
+      .pipe(map(res => {
+
+        return res['data'];
+
+      }),
+        catchError(this.handleError));
+  }
+
+  updEventoScheda(pronostico: any) {
+
+    return this.http.post(`${this.buildURL("PronosticiUtente/updEventoScheda")}`, { data: pronostico })
+      .pipe(map((res) => {
+
+        return res['data'];
+      }),
+        catchError(this.handleError));
+  }
+
+  getClassificaByUtente(username: string) {
+
+    const params = new HttpParams().set('username', username);
+
+    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getClassificaByUtente")}`, { params: params })
+      .pipe(map((res) => {
+
+        return res['data'];
+
+      }),
+        catchError(this.handleError));
+  }
+
+  getClassificaGenerale() {
+
+    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getClassificaGenerale")}`)
+      .pipe(map((res) => {
+
+        return res['data'];
+
+      }),
+        catchError(this.handleError));
+  }
 
 }
