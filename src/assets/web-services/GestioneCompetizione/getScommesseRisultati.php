@@ -5,7 +5,7 @@
 require '../connect_local.php';
     
 $list = [];
-$sql = "SELECT id_evento,tipo,partita,risesatto FROM _scommesse_risultati";
+$sql = "SELECT id_evento,tipo,partita,risesatto FROM _scommesse_risultati order by id_evento ";
 
 if($result = mysqli_query($con,$sql))
 {
