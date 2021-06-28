@@ -12,10 +12,10 @@ import { Generale } from 'src/app/classi/utils/general-component';
 })
 export class ClassificaComponent extends Generale implements OnInit {
 
-  constructor(private service: GestionePronosticiService) {super() }
+  constructor(private pronosticiService: GestionePronosticiService) {super() }
 
-  classifica:Pronostici[];
-  schede:Schedina[];
+  classifica:any[];
+  schede:any[];
 
  // descSort = ClrDatagridSortOrder.DESC;
 
@@ -26,16 +26,16 @@ export class ClassificaComponent extends Generale implements OnInit {
 
   onViewScheda(scheda){
     this.loading=true;
-    this.getSchedinaFinale(scheda.id_schedina);
+    this.getSchedaCompilata(scheda.id_schedina);
   }
 
-  getSchedinaFinale(id_schedina:number){
 
-    this.service.schedinaFinale(id_schedina)
+  getSchedaCompilata(id_schedina:number){
+
+    this.pronosticiService.getSchedaCompilata(id_schedina.toString())
     .subscribe({
    
-     next: (result: Schedina[]) => {
-      
+     next: (result: any[]) => {
       
        this.schede=result;
        this.loading=false;
@@ -51,10 +51,10 @@ export class ClassificaComponent extends Generale implements OnInit {
 
   getClassifica(){
   
-   this.service.classifica()
+   this.pronosticiService.getClassificaGenerale()
    .subscribe({
   
-    next: (result: Pronostici[]) => {
+    next: (result: any[]) => {
   
       this.classifica=result;
       this.loading=false;
