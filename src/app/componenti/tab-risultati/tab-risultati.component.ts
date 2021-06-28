@@ -60,17 +60,17 @@ export class TabRisultatiComponent extends Generale implements OnInit {
 
     this.newSelected.risEsatto = golc > 4 || golt > 4 ? risultato.ALTRO : golc + '-' + golt;
     if (golc == golt) {
-      this.newSelected.risultato = risultato.X;
+      this.newSelected.fisso = risultato.X;
       this.newSelected.doppiachance1 = risultato.UNOX;
       this.newSelected.doppiachance2 = risultato.XDUE;
     }
     else if (golc > golt) {
-      this.newSelected.risultato = risultato.UNO;
+      this.newSelected.fisso = risultato.UNO;
       this.newSelected.doppiachance1 = risultato.UNOX;
       this.newSelected.doppiachance2 = risultato.UNO_DUE;
     }
     else if (golc < golt) {
-      this.newSelected.risultato = risultato.DUE;
+      this.newSelected.fisso = risultato.DUE;
       this.newSelected.doppiachance1 = risultato.XDUE;
       this.newSelected.doppiachance2 = risultato.UNO_DUE;
     }
@@ -90,7 +90,7 @@ export class TabRisultatiComponent extends Generale implements OnInit {
       data: null,
       goalc: this.newSelected.goalc,
       goalt: this.newSelected.goalt,
-      risultato: this.newSelected.risultato,
+      fisso: this.newSelected.fisso,
       doppiachance1: this.newSelected.doppiachance1,
       doppiachance2: this.newSelected.doppiachance2,
       underOver: this.newSelected.underOver,
