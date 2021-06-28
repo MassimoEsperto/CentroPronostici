@@ -11,26 +11,24 @@ import { GestionePronosticiService } from 'src/app/services/gestione-pronostici.
 export class InserimentoSchedaComponent extends Generale implements OnInit {
 
   @Input() combo: any;
-  @Output() ritono= new EventEmitter();
-  scheda: any = []
+  @Output() ritono = new EventEmitter();
+  @Input() scheda: any = []
   selected: any
-  submitBtnState:boolean=false
+  submitBtnState: boolean = false
 
 
   constructor(private pronosticiService: GestionePronosticiService) { super() }
 
   ngOnInit() {
-    console.log("combo", this.combo)
-
-    this.getSchedaDaCompilare()
+    console.log("this.scheda", this.scheda)
   }
 
   isAviable(): boolean {
     return this.scheda.some(i => i.risultato == "");
   }
 
-  onAnnulla(){
-    this.ritono.emit(true)
+  onAnnulla() {
+    this.ritono.emit(false)
   }
 
   onEditRisultati(ele) {
@@ -39,89 +37,14 @@ export class InserimentoSchedaComponent extends Generale implements OnInit {
     this.selected = ele
   }
 
-  getSquadreByGirone(girone){
+  getSquadreByGirone(girone) {
     let teams = this.combo.squadre.filter(i => i.girone == girone);
     return teams
   }
 
-  //CRUD 
-  getSchedaDaCompilare() {
-
-    this.resetErrors();
-
-    this.pronosticiService.getSchedaDaCompilare()
-      .subscribe({
-
-        next: (result: string) => {
-
-          this.scheda = result
-          console.log("this.scheda", this.scheda)
-        },
-        error: (error: any) => {
-
-          this.stampaErrore(error);
-
-        }
-      })
-  }
-
   confermaScheda() {
-    this.resetErrors();
-    this.submitBtnState = true;
-    let username = this.pronosticiService.username();
-
-    this.pronosticiService.getIdSchedina(username)
-      .subscribe({
-
-        next: (res: number) => {
-
-          let payload = {
-            id_schedina: Number(res),
-            scheda: this.scheda
-          }
-          console.log("payload", payload)
-          this.insertScheda(payload)
-
-        },
-        error: (error: any) => {
-
-          this.stampaErrore(error);
-
-        }
-      })
-
+    this.ritono.emit(this.scheda)
   }
-
-  insertScheda(payload: any) {
-
-    this.loading = true;
-
-    this.pronosticiService.setScheda(payload)
-    .pipe(finalize(() => {
-      this.submitBtnState = false;
-    }))
-      .subscribe({
-        
-        next: (result: string) => {
-
-          if (result['risposta'] == 'ko') {
-            this.error = result['stato']
-          }
-          else {
-            this.successo();
-          }
-
-        },
-        error: (error: any) => {
-
-          this.stampaErrore(error);
-
-        }
-      })
-
-
-  }
-
 
 
 }
