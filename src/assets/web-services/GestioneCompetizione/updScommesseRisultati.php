@@ -13,7 +13,7 @@ if(isset($postdata) && !empty($postdata))
   $goalc = mysqli_real_escape_string($con, (int)$request->data->goalc);
   $goalt = mysqli_real_escape_string($con, (int)$request->data->goalt);
 
-  $risultato = mysqli_real_escape_string($con, trim($request->data->risultato));
+  $fisso = mysqli_real_escape_string($con, trim($request->data->fisso));
   $doppiachance1 = mysqli_real_escape_string($con, trim($request->data->doppiachance1));
   $doppiachance2 = mysqli_real_escape_string($con, trim($request->data->doppiachance2));
   $underOver = mysqli_real_escape_string($con, trim($request->data->underOver));
@@ -23,7 +23,7 @@ if(isset($postdata) && !empty($postdata))
     
    // Update.
   $sql = "UPDATE `_scommesse_risultati` SET `goalc`={$goalc},`goalt`={$goalt}, ";
-  $sql .="`risultato`='{$risultato}',`doppiachance1`='{$doppiachance1}',`doppiachance2`='{$doppiachance2}', ";
+  $sql .="`fisso`='{$fisso}',`doppiachance1`='{$doppiachance1}',`doppiachance2`='{$doppiachance2}', ";
   $sql .="`underover`='{$underOver}',`risesatto`='{$risEsatto}',`paridispari`='{$pariDispari}', ";
   $sql .="`golnogol`='{$golNogol}' ";
   $sql .=" WHERE `id_evento` = {$id_evento} LIMIT 1";
