@@ -19,7 +19,7 @@
 
     <clr-dg-row *clrDgItems="let element of scheda;" [clrDgItem]="element">
 
-      <clr-dg-cell>{{element.descrizione}}</clr-dg-cell>
+      <clr-dg-cell>{{element.descrizione}} {{element.girone}}</clr-dg-cell>
       <clr-dg-cell *ngIf="element.tipo==1" (click)="onEditRisultati(element);risultatiModal = true">
         {{element.risultato}}
       </clr-dg-cell>
