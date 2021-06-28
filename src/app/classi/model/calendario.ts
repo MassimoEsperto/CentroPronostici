@@ -4,7 +4,7 @@ export class Calendario {
     data:Date;
     goalc:number;
     goalt:number;
-    risultato:string;
+    fisso:string;
     doppiachance1:string;
     doppiachance2:string;
     underOver:string;
