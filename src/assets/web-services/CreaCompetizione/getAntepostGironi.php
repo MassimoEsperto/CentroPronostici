@@ -3,7 +3,7 @@
 require '../connect_local.php';
     
 $element = [];
-$sql = "SELECT distinct girone FROM `_scommesse_antepost_gironi` ";
+$sql = "SELECT distinct girone FROM `_scommesse_antepost_gironi` order by id_evento";
 
 if($result = mysqli_query($con,$sql))
 {
