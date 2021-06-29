@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { GestionePronosticiService } from 'src/app/services/gestione-pronostici.service';
+import { Generale } from 'src/app/classi/utils/general-component';
+import { CommonService } from 'src/app/services/common.service';
+import { CreaCompetizioneService } from 'src/app/services/crea-competizione.service';
 
 declare var require: any
 const FileSaver = require('file-saver');
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent extends Generale implements OnInit {
+
   username: string;
-  punti: any;
+  puntiPrevisti: any;
+  opzioni: any;
+  htmlToAdd:string
+
   ngOnInit() {
-    this.username = this.service.username();
+    this.username = this.competizioneService.username();
     this.getPuntiPrevisti();
 
   }
@@ -24,22 +30,41 @@ export class DashboardComponent implements OnInit {
     require('file-saver').saveAs(pdfUrl, pdfName);
   }
 
-  constructor(private service: GestionePronosticiService) { }
+  constructor(private commonService: CommonService,
+    private competizioneService: CreaCompetizioneService) {
+    super();
+  }
 
 
   getPuntiPrevisti() {
 
-    this.service.puntiPrevisti()
+    this.loading=true
+
+    this.competizioneService.getPuntiPrevisti()
       .subscribe({
 
         next: (result: any) => {
-          this.punti = result;
-
+          this.puntiPrevisti = result;
+          this.getOpzioni()
         },
         error: (error: any) => {
 
         }
       })
 
+  }
+
+  getOpzioni() {
+
+    this.commonService.getOpzioni()
+      .subscribe({
+        next: (result: any) => {
+          this.loading=false
+          this.opzioni = result;
+          this.htmlToAdd=result.testo
+        },
+        error: (error: any) => {
+        }
+      })
   }
 }
