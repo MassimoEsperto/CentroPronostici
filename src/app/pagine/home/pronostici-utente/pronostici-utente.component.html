@@ -19,11 +19,11 @@
 </div>
 
 <div *ngIf="!bloccato&&!viewSchedaDaCompilare" class="bottoni">
-  <button class="btn btn-defaul btn-block" (click)="nuovaScheda()">INSERISCI NUOVA
+  <button class="btn btn-defaul btn-block" [disabled]="disableBtn" (click)="nuovaScheda()">INSERISCI NUOVA
     SCHEDA</button>
-  <button *ngIf="!loading" class="btn btn-defaul btn-block" (click)="randomScheda()">GENERA RANDOM
+  <button [disabled]="disableBtn" class="btn btn-defaul btn-block" (click)="randomScheda()">GENERA RANDOM
   </button>
-  <button *ngIf="!loading" class="btn btn-defaul btn-block" (click)="nuovaScheda()">COPIA SCHEDA
+  <button  [disabled]="disableBtn" class="btn btn-defaul btn-block" (click)="copiaModal = true">COPIA SCHEDA
   </button>
 </div>
 
@@ -41,3 +41,22 @@
 <div *ngIf="bloccato&&pronostici.length">
   <visualizza-schede [pronostici]="pronostici"></visualizza-schede>
 </div>
+
+<clr-modal [(clrModalOpen)]="copiaModal" [clrModalClosable]="false">
+  <h3 class="modal-title">COPIA SCHEDA</h3>
+  <div class="modal-body">
+    <form clrForm (submit)="copiaScheda(id_copia);copiaModal = false">
+      <clr-select-container>
+        <label>Seleziona</label>
+        <select clrSelect name="id_copia" [(ngModel)]="id_copia">
+          <option *ngFor="let item of pronostici" [value]="item.id_schedina">
+            {{item.id_schedina}}</option>
+        </select>
+      </clr-select-container>
+      <br>
+      <button class="btn btn-primary" [disabled]="!id_copia" style="float: right;">Copia</button>
+      <button type="button" class="btn btn-outline" (click)="copiaModal = false" style="float: right;">Annulla</button>
+    </form>
+
+  </div>
+</clr-modal>
