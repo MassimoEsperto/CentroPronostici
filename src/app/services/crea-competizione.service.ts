@@ -177,5 +177,15 @@ export class CreaCompetizioneService extends HttpSenderService {
       catchError(this.handleError));
   }
 
+
+  getAllSchede(): Observable<any> {
+
+    return this.http.get(`${this.buildURL("CreaCompetizione/getAllSchede")}`)
+       .pipe(map((res) => {
+      
+         return res['data']
+       }),
+       catchError(this.handleError));
+   }
  
 }
