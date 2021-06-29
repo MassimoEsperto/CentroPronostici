@@ -52,7 +52,7 @@ export class TabEliminaSchedeComponent extends Generale implements OnInit {
         next: (res: any) => {
 
           this.pronostici = res
-          console.log("this.pronostici", this.pronostici)
+ 
         },
         error: (error: any) => {
 
