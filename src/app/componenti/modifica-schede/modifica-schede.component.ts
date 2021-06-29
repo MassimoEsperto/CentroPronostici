@@ -18,7 +18,7 @@ export class ModificaSchedeComponent extends Generale implements OnInit {
   evento_selected: any
   viewModScheda: boolean = false
 
-  constructor(private commonService: CommonService, private pronosticiService: GestionePronosticiService) {
+  constructor(private pronosticiService: GestionePronosticiService) {
     super();
   }
 
