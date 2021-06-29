@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { Combo } from 'src/app/classi/model/combo';
 import { SchedaModo } from 'src/app/classi/utils/enums';
 import { Generale } from 'src/app/classi/utils/general-component';
-import { ComboService } from 'src/app/services/combo.service';
 import { CommonService } from 'src/app/services/common.service';
 import { GestionePronosticiService } from 'src/app/services/gestione-pronostici.service';
 
