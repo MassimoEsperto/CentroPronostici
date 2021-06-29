@@ -33,18 +33,15 @@ export class CommonService extends HttpSenderService {
       catchError(this.handleError));
     }
 
-    updOpzioni(blocco:string,scadenza: string,testo: string) {
-      
-      const params = new HttpParams().set('blocco', blocco)
-      .set('scadenza', scadenza).set('testo', testo)
-    
-      return this.http.get(`${this.buildURL("GestioneCompetizione/updOpzioni")}`, { params: params })
-        .pipe(map((res) => {
-    
-          return res['data'];
-        }),
-          catchError(this.handleError));
-    }
+    updOpzioni(opzioni: any){
+
+      return this.http.post(`${this.buildURL("GestioneCompetizione/updOpzioni")}`, { data: opzioni })
+         .pipe(map((res) => {
+           return res['data'];
+         }),
+         catchError(this.handleError));
+     }
+   
   
   }
   
