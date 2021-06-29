@@ -232,8 +232,8 @@ export class GestionePronosticiService extends HttpSenderService {
         catchError(this.handleError));
   }
 
-  getIdSchedina(username: string) {
-    const params = new HttpParams().set('username', username);
+  getIdSchedina(username: string,desc: string) {
+    const params = new HttpParams().set('username', username).set('descrizione', desc);
 
     return this.http.get(`${this.buildURL("PronosticiUtente/getIdScheda")}`, { params: params })
       .pipe(map((res) => {
