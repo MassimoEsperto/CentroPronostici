@@ -20,3 +20,9 @@ export enum Ruolo {
     GIOCATORE = "giocatore",
     VISITATORE = "visitatore",
 }
+
+export enum SchedaModo {
+    COMPILATA = "Compilata",
+    COPIATA = "Copiata",
+    RANDOM = "Random",
+}
