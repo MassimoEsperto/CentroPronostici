@@ -36,6 +36,7 @@ import { PronosticiUtenteComponent } from './pronostici-utente/pronostici-utente
 import { InserimentoSchedaComponent } from 'src/app/componenti/inserimento-scheda/inserimento-scheda.component';
 import { ModificaSchedeComponent } from 'src/app/componenti/modifica-schede/modifica-schede.component';
 import { VisualizzaSchedeComponent } from 'src/app/componenti/visualizza-schede/visualizza-schede.component';
+import { TabEliminaSchedeComponent } from '../../componenti/tab-elimina-schede/tab-elimina-schede.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { VisualizzaSchedeComponent } from 'src/app/componenti/visualizza-schede/
     PronosticiUtenteComponent,
     InserimentoSchedaComponent,
     ModificaSchedeComponent,
-    VisualizzaSchedeComponent
+    VisualizzaSchedeComponent,
+    TabEliminaSchedeComponent
   ],
   imports: [
     CommonModule,
