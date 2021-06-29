@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { Combo } from 'src/app/classi/model/combo';
+import { SchedaModo } from 'src/app/classi/utils/enums';
 import { Generale } from 'src/app/classi/utils/general-component';
 import { ComboService } from 'src/app/services/combo.service';
 import { CommonService } from 'src/app/services/common.service';
@@ -18,6 +19,8 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
   bloccato: boolean = false
   scheda: any = []
   pronostici: any = []
+  id_copia: number
+  disableBtn: boolean = true
 
   constructor(private commonService: CommonService, private pronosticiService: GestionePronosticiService) {
     super();
@@ -32,14 +35,19 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
 
   viewScheda(event) {
     if (event) {
-      this.getIdSchedina(event);
-    }else{
+      this.getIdSchedina(event, SchedaModo.COMPILATA);
+    } else {
       this.viewSchedaDaCompilare = false
     }
   }
 
   nuovaScheda() {
     this.viewSchedaDaCompilare = true
+  }
+
+  copiaScheda(id_copia) {
+    this.disableBtn=true
+    this.getSchedaCompilata(id_copia)
   }
 
   randomScheda() {
@@ -56,7 +64,7 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
       }
       list.push(tmp)
     }
-    this.getIdSchedina(list)
+    this.getIdSchedina(list, SchedaModo.RANDOM)
   }
 
   getRisultatoRandom(tipo: string, gruppo: string, girone: string, list) {
@@ -78,7 +86,7 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
       case "3":
         let inizio = this.combosel.squadre.filter(i => i.girone == girone);
         let presenti = list.filter(i => i.girone == girone);
- 
+
         let teams = []
         for (let ele of inizio) {
           let esiste = presenti.some(i => i['risultato'] == ele['nome']);
@@ -148,12 +156,14 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
   }
 
 
-  getIdSchedina(scheda) {
+  getIdSchedina(scheda, desc) {
+
     this.resetErrors();
- 
+    this.disableBtn=true
+
     let username = this.pronosticiService.username();
 
-    this.pronosticiService.getIdSchedina(username)
+    this.pronosticiService.getIdSchedina(username, desc)
       .subscribe({
 
         next: (res: number) => {
@@ -162,7 +172,7 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
             id_schedina: Number(res),
             scheda: scheda
           }
-         
+
           this.insertScheda(payload)
 
         },
@@ -180,11 +190,11 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
     this.loading = true;
 
     this.pronosticiService.setScheda(payload)
-    .pipe(finalize(() => {
-      
-    }))
+      .pipe(finalize(() => {
+
+      }))
       .subscribe({
-        
+
         next: (result: string) => {
 
           if (result['risposta'] == 'ko') {
@@ -206,16 +216,18 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
 
   getClassificaByUtente() {
     this.resetErrors();
- 
+
     let username = this.pronosticiService.username();
+    this.pronostici = []
 
     this.pronosticiService.getClassificaByUtente(username)
       .subscribe({
 
         next: (res: any) => {
 
-          this.pronostici=res
-          console.log("this.pronostici",this.pronostici)
+          this.pronostici = res
+          this.disableBtn=false
+
         },
         error: (error: any) => {
 
@@ -225,5 +237,25 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
       })
 
   }
+
+  getSchedaCompilata(id_schedina: number) {
+
+    this.pronosticiService.getSchedaCompilata(id_schedina.toString())
+      .subscribe({
+
+        next: (result: any) => {
+
+          let scheda_selected = result
+          this.getIdSchedina(scheda_selected, SchedaModo.COPIATA)
+        },
+        error: (error: any) => {
+
+          this.stampaErrore(error);
+
+        }
+      })
+
+  }
+
 
 }
