@@ -15,11 +15,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { SideBarComponent } from './side-bar/side-bar.component';
+import { SideBarComponent } from '../../componenti/side-bar/side-bar.component';
 import { InserimentoPronosticoComponent } from './inserimento-pronostico/inserimento-pronostico.component';
 import { ListaPronosticiComponent } from './lista-pronostici/lista-pronostici.component';
 import { ClassificaComponent } from './classifica/classifica.component';
-import { TimerDataComponent } from './timer-data/timer-data.component';
+import { TimerDataComponent } from '../../componenti/timer-data/timer-data.component';
 import { CreaCompetizioneComponent } from './crea-competizione/crea-competizione.component';
 import { MatTabsModule } from '@angular/material';
 import { TabBomberComponent } from 'src/app/componenti/tab-bomber/tab-bomber.component';
