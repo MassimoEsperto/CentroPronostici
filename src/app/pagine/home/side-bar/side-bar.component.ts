@@ -3,6 +3,7 @@ import { GestionePronosticiService } from 'src/app/services/gestione-pronostici.
 import { Generale } from 'src/app/classi/utils/general-component';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -15,7 +16,7 @@ export class SideBarComponent extends Generale implements OnInit {
   isPlayer: boolean;
   variabile: boolean;
 
-  constructor(private router: Router, private authservice: AuthService,private service: GestionePronosticiService) { super() }
+  constructor(private router: Router, private authservice: AuthService,private service: GestionePronosticiService,private commonService: CommonService) { super() }
 
   ngOnInit() {
     this.isAdmin = this.service.isadmin();
@@ -28,10 +29,10 @@ export class SideBarComponent extends Generale implements OnInit {
 
   getVariabile() {
 
-    this.service.getBloccato()
+    this.commonService.getOpzioni()
       .subscribe({
-        next: (result: boolean) => {
-          this.variabile = result;
+        next: (result: any) => {
+          this.variabile = result.valore;
         },
         error: (error: any) => {
         }
