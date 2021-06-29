@@ -1,4 +1,4 @@
-import { SideBarComponent } from './side-bar/side-bar.component';
+import { SideBarComponent } from '../../componenti/side-bar/side-bar.component';
 import { GestioneComponent } from './gestione-utente/gestione-utente.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
