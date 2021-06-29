@@ -7,7 +7,6 @@ import { PronosticoRoutingModule } from './pronostico-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ClrIconModule } from '@clr/angular';
 import { ClarityModule } from "@clr/angular";
-import { GestioneComponent } from './gestione-utente/gestione-utente.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -16,8 +15,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 import { SideBarComponent } from '../../componenti/side-bar/side-bar.component';
-import { InserimentoPronosticoComponent } from './inserimento-pronostico/inserimento-pronostico.component';
-import { ListaPronosticiComponent } from './lista-pronostici/lista-pronostici.component';
 import { ClassificaComponent } from './classifica/classifica.component';
 import { TimerDataComponent } from '../../componenti/timer-data/timer-data.component';
 import { CreaCompetizioneComponent } from './crea-competizione/crea-competizione.component';
@@ -42,10 +39,7 @@ import { TabEliminaSchedeComponent } from '../../componenti/tab-elimina-schede/t
 @NgModule({
   declarations: [
     DashboardComponent,
-    GestioneComponent,
     SideBarComponent,
-    InserimentoPronosticoComponent,
-    ListaPronosticiComponent,
     ClassificaComponent,
     TimerDataComponent,
     CreaCompetizioneComponent,
