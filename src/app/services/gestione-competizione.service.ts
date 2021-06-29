@@ -1,8 +1,8 @@
 import { ScommesseAntepost } from 'src/app/classi/model/scommesse-antepost';
 import { Injectable } from '@angular/core';
 import { Calendario } from '../classi/model/calendario';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { HttpSenderService } from './http-sender-service';
 
@@ -10,9 +10,6 @@ import { HttpSenderService } from './http-sender-service';
   providedIn: 'root'
 })
 export class GestioneCompetizioneService extends HttpSenderService {
-
-  calendario: Calendario[];
-  altrescommesse: ScommesseAntepost[];
 
   constructor(private http: HttpClient) {
     super();
@@ -87,25 +84,5 @@ export class GestioneCompetizioneService extends HttpSenderService {
         catchError(this.handleError));
   }
 
-    /**
-   * get e set della variabile che decide se si possano inserire ancora pronostici
-   */
-     getBloccato(): Observable<boolean> {
-      return this.http.get(`${this.buildURL("GestioneCompetizione/getBlocco")}`).pipe(
-        map((res) => {
-          return res['data'];
-        }),
-        catchError(this.handleError));
-    }
-    setBloccato(variabile: number): Observable<boolean> {
-      const params = new HttpParams()
-        .set('variabile', variabile.toString());
-  
-      return this.http.get(`${this.buildURL("GestioneCompetizione/updBlocco")}`, { params: params })
-        .pipe(map(res => {
-          return res['data'];
-        }),
-          catchError(this.handleError));
-    }
 
 }
