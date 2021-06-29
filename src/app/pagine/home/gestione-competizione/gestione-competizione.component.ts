@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { Combo } from 'src/app/classi/model/combo';
 import { Generale } from 'src/app/classi/utils/general-component';
-import { ComboService } from 'src/app/services/combo.service';
+import { CommonService } from 'src/app/services/common.service';
+
 
 @Component({
   selector: 'gestione-competizione',
@@ -13,7 +14,7 @@ export class GestioneCompetizioneComponent extends Generale implements OnInit {
 
   combosel: Combo;
  
-  constructor(private combo: ComboService) {
+  constructor(private combo: CommonService) {
     super();
   }
 
