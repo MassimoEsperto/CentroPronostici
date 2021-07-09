@@ -11,59 +11,42 @@ import { HttpSenderService } from './http-sender-service';
 })
 export class GestioneUtenteService extends HttpSenderService {
  
-utenti: Utente[];
 
 constructor(private http: HttpClient) {super(); }
 
-  getAll(): Observable<Utente[]> {
-    return this.http.get(`${this.buildURL("GestioneUtenti/list")}`).pipe(
+  getUtenti(): Observable<Utente[]> {
+    return this.http.get(`${this.buildURL("GestioneUtenti/getUtenti")}`).pipe(
       map((res) => {
-        this.utenti = res['data'];
-       
-        return this.utenti;
+        return res['data'];
     }),
     catchError(this.handleError));
   }
 
 
-  insert(utente: Utente): Observable<Utente[]> {
+  insert(utente: Utente) {
 
    return this.http.post(`${this.buildURL("GestioneUtenti/register")}`, { data: utente })
       .pipe(map((res) => {
-        this.utenti.push(res['data']);
-        return this.utenti;
+        return res['data'];
       }),
       catchError(this.handleError));
   }
 
 
-  update(utente: Utente): Observable<Utente[]> {
-    return this.http.put(`${this.buildURL("GestioneUtenti/update")}`, { data: utente })
+  update(utente: Utente) {
+    return this.http.put(`${this.buildURL("GestioneUtenti/updUtente")}`, { data: utente })
       .pipe(map((res) => {
-     
-        const theUtente = this.utenti.find((item) => {
-          return item['username'] === utente['username'];
-        });
-        if (theUtente) {
-          theUtente['ruolo'] = utente['ruolo'];
-          theUtente['email'] = utente['email'];
-          theUtente['cellulare'] = utente['cellulare'];
-          theUtente['versato'] = utente['versato'];
-        }
-        return this.utenti;
+        return res['data'];
       }),
       catchError(this.handleError));
   }
 
-  delete(username:string): Observable<Utente[]> {
-    const params = new HttpParams()
-      .set('username', username);
+  delete(username:string) {
+    const params = new HttpParams().set('username', username);
 
-    return this.http.get(`${this.buildURL("GestioneUtenti/delete")}`, { params: params })
+    return this.http.get(`${this.buildURL("GestioneUtenti/delUtente")}`, { params: params })
       .pipe(map(res => {
-  
-        const filteredutenti =this.utenti = this.utenti.filter(item => item.username !== username);    
-        return this.utenti = filteredutenti;
+        return res['data'];
       }),
       catchError(this.handleError));
   }
