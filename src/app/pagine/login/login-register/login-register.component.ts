@@ -13,7 +13,7 @@ import { SFONDO_HOME } from 'src/app/classi/utils/costanti';
 })
 export class LoginRegisterComponent extends Generale implements AfterViewInit {
 
-  newUtente: Utente = new Utente('', '','0','', '',0);
+  newUtente: Utente = new Utente('', '', '', '','0','', '',0);
 
   utenti: Utente[];
   esistente: Boolean;
@@ -34,7 +34,7 @@ export class LoginRegisterComponent extends Generale implements AfterViewInit {
   //crud method
 
   getUtenti(): void {
-    this.utenteService.getAll().subscribe(
+    this.utenteService.getUtenti().subscribe(
       (res: Utente[]) => {
 
         this.utenti = res;
