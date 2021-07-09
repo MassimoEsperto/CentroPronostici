@@ -1,13 +1,13 @@
-<mat-toolbar color="primary">
+<mat-toolbar style="background-color:#880E4F;color: cyan;">
   <mat-toolbar-row>
     <button mat-icon-button class="gap">
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
     <span>PRONOSTICI</span>
     <span class="filler"></span>
-    <span *ngIf="isAdmin">{{username.substring(0,7)}} <clr-icon shape="user" (click)="opzioniModal = true">
+    <span *ngIf="isAdmin">{{username}} <clr-icon shape="user" (click)="opzioniModal = true">
       </clr-icon></span>
-    <span *ngIf="!isAdmin">{{username.substring(0,7)}} <clr-icon shape="user"></clr-icon></span>
+    <span *ngIf="!isAdmin">{{username}} <clr-icon shape="user"></clr-icon></span>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -69,9 +69,9 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<mat-toolbar color='primary'>
+<mat-toolbar style="background-color: #AD1457;">
   <span class='spacer'></span>
-  <h3>© FantaEuropeo Maresca</h3>
+  <h3 style="color: blanchedalmond;">© FantaEuropeo Maresca</h3>
   <span class='spacer'></span>
 </mat-toolbar>
 
