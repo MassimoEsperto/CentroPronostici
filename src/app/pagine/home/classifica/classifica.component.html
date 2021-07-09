@@ -22,7 +22,7 @@
 
     <clr-dg-row *clrDgItems="let scheda of classifica" [clrDgItem]="match">
         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{scheda.posizione}}</clr-dg-cell>
-        <clr-dg-cell>{{scheda.id_utente}}</clr-dg-cell>
+        <clr-dg-cell>{{scheda.id_utente}}-{{scheda.id_schedina}}</clr-dg-cell>
         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50"><span
                 style="font-weight: bold;">{{scheda.punteggio}}</span></clr-dg-cell>
         <clr-dg-cell>{{scheda.tempo}}</clr-dg-cell>
@@ -31,7 +31,7 @@
         </clr-dg-cell>
 
     </clr-dg-row>
-    <-- Inside the full datagrid declaration -->
+   
         <clr-dg-footer>
             <clr-dg-pagination #pagination [clrDgPageSize]="20">
                 <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Schede per pagina</clr-dg-page-size>
