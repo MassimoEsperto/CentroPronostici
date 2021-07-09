@@ -32,13 +32,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     outline:none !important;
 }
 
-.inventory-body {
-  position: fixed;
-  min-width: 100%;
-
+.inventory-body  {
+  min-height: 100vh;
   background-image: url("assets/img/gradiente.gif");
-  background-size: cover;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .clr-input {
