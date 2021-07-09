@@ -4,6 +4,7 @@ require '../connect_local.php';
 
 // Extract, validate and sanitize the id.
 $username = ($_GET['username'] !== null && $_GET['username'] !== '')? mysqli_real_escape_string($con, trim($_GET['username'])) : false;
+$descrizione = ($_GET['descrizione'] !== null && $_GET['descrizione'] !== '')? mysqli_real_escape_string($con, trim($_GET['descrizione'])) : false;
 
 
 if(!$username)
@@ -12,7 +13,7 @@ if(!$username)
 }
 
 // Delete.
- $sql = "INSERT INTO `_schedina_user`(`utente_id`) VALUES ('{$username}')";
+ $sql = "INSERT INTO `_schedina_user`(`utente_id`,`descrizione`) VALUES ('{$username}','{$descrizione}')";
 
 if(mysqli_query($con, $sql))
 {
