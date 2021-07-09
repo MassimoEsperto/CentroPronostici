@@ -24,7 +24,7 @@ $pass='';
 
 
 
-$sql = "select password from utenti where email = '{$email}' and username='{$user}' LIMIT 1"; 
+$sql = "select password from _utenti where email = '{$email}' and username='{$user}' LIMIT 1"; 
 
 $result = mysqli_query( $con , $sql );
 
