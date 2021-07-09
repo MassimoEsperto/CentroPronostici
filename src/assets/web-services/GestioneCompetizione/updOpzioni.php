@@ -1,41 +1,31 @@
 <?php
-
 require '../connect_local.php';
 
-$blocco = ($_GET['blocco'] !== null && $_GET['blocco'] !== '')? mysqli_real_escape_string($con,(int)$_GET['blocco']) : false;
+// Get the posted data.
+$postdata = file_get_contents("php://input");
 
-$scadenza = ($_GET['scadenza'] !== null && $_GET['scadenza'] !== '')? mysqli_real_escape_string($con, trim($_GET['scadenza'])) : false;
-
-$testo = ($_GET['testo'] !== null && $_GET['testo'] !== '')? mysqli_real_escape_string($con, trim($_GET['testo'])) : false;
-
-
-$sql = "UPDATE `_opzioni` SET `open`={$variabile}";
-
-// Validate.
-if(!$blocco && $blocco!=0 )
+if(isset($postdata) && !empty($postdata))
 {
-   die('valori non prelevati'. mysqli_error($con));
-}
+  // Extract the data.
+  $request = json_decode($postdata);
 
-if($scadenza)
-{
-	$sql .= ",`scadenza`='{$scadenza}'";
-}
+  $testo = mysqli_real_escape_string($con, trim($request->data->testo)); 
+  $scadenza = mysqli_real_escape_string($con, trim($request->data->scadenza)); 
+  $blocco = mysqli_real_escape_string($con, (int)$request->data->blocco);
+		  
+  $sql = "UPDATE `_opzioni` SET `open`={$blocco},`scadenza`='{$scadenza}',`testo`='{$testo}'";
 
-if($testo)
-{
-	$sql .= ",`testo`='{$testo}'";
-}
-
-if(mysqli_query($con, $sql))
-{
-  http_response_code(201);
+  if(mysqli_query($con,$sql))
+  {
+    http_response_code(201);
+    
     $tmp = [
       'blocco' => $blocco
     ];
     echo json_encode(['data'=>$tmp]);
-}
-else
-{
-  return http_response_code(422);
+  }
+  else
+  {
+    http_response_code(422);
+  }
 }
