@@ -6,7 +6,7 @@
     <clr-dg-column>pt</clr-dg-column>
     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">view</clr-dg-column>
     <clr-dg-row *clrDgItems="let scheda of pronostici;" [clrDgItem]="match">
-        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{scheda.posizione}}</clr-dg-cell>
+        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{scheda.posizione}}°</clr-dg-cell>
         <clr-dg-cell>{{scheda.tempo}}</clr-dg-cell>
         <clr-dg-cell>{{scheda.punteggio}}</clr-dg-cell>
         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
