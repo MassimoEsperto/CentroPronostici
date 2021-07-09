@@ -31,6 +31,7 @@ ng g component component-name --skip-import
 
 ## build
 ng build --base-href "/pronostici2021/"
+ng build --base-href "/sviluppo/"
 
 
 ## in angular material $font-family:   'Paint'
