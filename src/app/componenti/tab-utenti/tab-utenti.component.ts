@@ -12,12 +12,10 @@ import { Generale } from 'src/app/classi/utils/general-component';
 export class TabUtentiComponent extends Generale implements OnInit {
   utenti: Utente[];
 
-  newBomber = '';
   totale: number = 0;
-  options: boolean;
   options2: boolean;
 
-  newUtente: Utente = new Utente('', '','0','', 'password', 0);
+  newUtente: Utente = new Utente('', '', '', '','0','', 'password', 0);
 
 
   constructor(
@@ -42,7 +40,7 @@ export class TabUtentiComponent extends Generale implements OnInit {
   //crud method Utenti
   getUtenti() {
     this.resetErrors();
-    this.utenteService.getAll()
+    this.utenteService.getUtenti()
       .subscribe({
 
         next: (result: Utente[]) => {
@@ -50,6 +48,7 @@ export class TabUtentiComponent extends Generale implements OnInit {
           this.utenti = result;
           this.totale = this.utenti.length;
           this.loading = false;
+          this.options2 = false;
 
         },
         error: (error: any) => {
@@ -66,10 +65,9 @@ export class TabUtentiComponent extends Generale implements OnInit {
     this.utenteService.delete(user.username)
       .subscribe({
 
-        next: (result: Utente[]) => {
+        next: (result: any) => {
 
-          this.utenti = result;
-          this.totale = this.utenti.length;
+          this.getUtenti()
           this.successo();
 
         },
@@ -92,6 +90,8 @@ export class TabUtentiComponent extends Generale implements OnInit {
 
     this.utenteService.update({
       username: this.newUtente.username,
+      nome:'',
+      cognome:'',
       email: this.newUtente.email,
       cellulare: this.newUtente.cellulare,
       ruolo: this.newUtente.ruolo,
@@ -104,8 +104,7 @@ export class TabUtentiComponent extends Generale implements OnInit {
 
         next: (result: any) => {
 
-          this.utenti = result;
-          this.options2 = false;
+          this.getUtenti();
           this.successo();
 
         },
