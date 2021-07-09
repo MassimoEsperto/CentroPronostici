@@ -18,11 +18,13 @@ if(isset($postdata) && !empty($postdata))
   
     // Sanitize.
   $username = mysqli_real_escape_string($con, trim($request->data->username));
+  $nome = mysqli_real_escape_string($con, trim($request->data->nome)); 
+  $cognome = mysqli_real_escape_string($con, trim($request->data->cognome)); 
   $email = mysqli_real_escape_string($con, trim($request->data->email)); 
   $ruolo = mysqli_real_escape_string($con, trim($request->data->ruolo)); 
   $pass = mysqli_real_escape_string($con, trim($request->data->password)); 
   $cellulare = mysqli_real_escape_string($con, trim($request->data->cellulare)); 
-  //$cellulare = mysqli_real_escape_string($con, (int)$request->data->cellulare);
+ 
   
   $subject = "Richiesta Iscrizione fantaeuropeo";
 
@@ -63,7 +65,7 @@ if(isset($postdata) && !empty($postdata))
 
 
   // Store.
-  $sql = "INSERT INTO `utenti`(`username`,`email`,`cellulare`,`ruolo`,`password`) VALUES ('{$username}','{$email}','{$cellulare}','{$ruolo}','{$pass}')";
+  $sql = "INSERT INTO `_utenti`(`username`,`nome`,`cognome`,`email`,`cellulare`,`ruolo`,`password`) VALUES ('{$username}','{$nome}','{$cognome}','{$email}','{$cellulare}','{$ruolo}','{$pass}')";
   
   
   
@@ -71,13 +73,12 @@ if(isset($postdata) && !empty($postdata))
   if(mysqli_query($con,$sql))
   {
     http_response_code(201);
-    $car = [
+    $item = [
       'username' => $username,
-      'email' => $email,
       'email' => $email,
       'cellulare' => $cellulare
     ];
-    echo json_encode(['data'=>$car]);
+    echo json_encode(['data'=>$item]);
 	mail($emailTo,$subject,$message,$headers);
   }
   else
