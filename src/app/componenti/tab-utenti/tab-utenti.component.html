@@ -11,6 +11,8 @@
 
 <clr-datagrid>
     <clr-dg-column [clrDgField]="'username'">username</clr-dg-column>
+    <clr-dg-column [clrDgField]="'nome'">nome</clr-dg-column>
+    <clr-dg-column [clrDgField]="'cognome'">cognome</clr-dg-column>
     <clr-dg-column [clrDgField]="'email'">email</clr-dg-column>
     <clr-dg-column [clrDgField]="'cellulare'">cellulare</clr-dg-column>
     <clr-dg-column [clrDgField]="'ruolo'">ruolo</clr-dg-column>
@@ -23,6 +25,8 @@
             <button class="action-item" (click)="onEditUser(user);deleteModal = true">Elimina</button>
         </clr-dg-action-overflow>
         <clr-dg-cell>{{user.username}}</clr-dg-cell>
+        <clr-dg-cell>{{user.nome}}</clr-dg-cell>
+        <clr-dg-cell>{{user.cognome}}</clr-dg-cell>
         <clr-dg-cell>{{user.email}}</clr-dg-cell>
         <clr-dg-cell>{{user.cellulare}}</clr-dg-cell>
         <clr-dg-cell>{{user.ruolo}}</clr-dg-cell>
@@ -40,15 +44,10 @@
 </clr-datagrid>
 
 <clr-modal [(clrModalOpen)]="updateModal" [clrModalClosable]="false">
-    <h3 class="modal-title">AGGIORNA UTENTE</h3>
+    <h3 class="modal-title">AGGIORNA UTENTE {{newUtente.username}}</h3>
     <div class="modal-body">
         <form *ngIf="options2" clrForm (submit)="onUpdateUtente(newUtente);updateModal = false">
-            <label>MODIFICA UTENTE</label>
-            <clr-input-container>
-                <label>Username</label>
-                <input clrInput type="text" [(ngModel)]="newUtente.username" name="username" required />
-                <clr-control-error>Obbligatorio</clr-control-error>
-            </clr-input-container>
+          
             <clr-input-container>
                 <label>Mail (Optional)</label>
                 <input clrInput type="text" [(ngModel)]="newUtente.email" name="email" />
