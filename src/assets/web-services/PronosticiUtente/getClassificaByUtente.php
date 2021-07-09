@@ -42,7 +42,7 @@ $sql .=") as pt ";
 $sql .="  FROM _schedina fa,_schedina_user fu "; 
 $sql .="  WHERE fa.id_schedina = fu.schedina_id ";
 $sql .="  AND fu.utente_id ='{$username}' ";
-$sql .="  group by fa.id_schedina order by pt DESC ";
+$sql .="  group by fa.id_schedina order by fa.id_schedina ASC ";
   
 
  
