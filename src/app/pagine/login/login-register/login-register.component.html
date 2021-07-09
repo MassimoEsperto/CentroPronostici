@@ -16,7 +16,17 @@
                                 <clr-input-container>
                                     <label>Username</label>
                                     <input clrInput type="text" [(ngModel)]="newUtente.username" name="username"
-                                        required />
+                                    minlength="5" maxlength="7" required />
+                                </clr-input-container>
+                                <clr-input-container>
+                                    <label>Nome</label>
+                                    <input clrInput type="text" [(ngModel)]="newUtente.nome" name="nome"
+                                    minlength="3" maxlength="15" required />
+                                </clr-input-container>
+                                <clr-input-container>
+                                    <label>Cognome</label>
+                                    <input clrInput type="text" [(ngModel)]="newUtente.cognome" name="cognome"
+                                    minlength="3" maxlength="15" required />
                                 </clr-input-container>
                                 <clr-input-container>
                                     <label>Mail</label>
@@ -29,7 +39,7 @@
                                 <clr-input-container>
                                     <label>Password</label>
                                     <input clrInput type="text" [(ngModel)]="newUtente.password" name="password"
-                                        required />
+                                    minlength="5" maxlength="15" required />
                                 </clr-input-container>
                                 <button class="btn btn-primary btn-block margine-16"
                                     [disabled]="newUtente.invalid || useremail.invalid ||loadingg">Registrati</button>
