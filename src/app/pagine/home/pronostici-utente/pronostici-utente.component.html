@@ -34,11 +34,11 @@
   </inserimento-scheda>
 </div>
 
-<div *ngIf="!bloccato&&pronostici&&pronostici.length">
+<div *ngIf="!bloccato&&pronostici&&pronostici.length&&!viewSchedaDaCompilare">
   <modifica-schede [pronostici]="pronostici" [combo]="combosel"></modifica-schede>
 </div>
 
-<div *ngIf="bloccato&&pronostici&&pronostici.length">
+<div *ngIf="bloccato&&pronostici&&pronostici.length&&!viewSchedaDaCompilare">
   <visualizza-schede [pronostici]="pronostici"></visualizza-schede>
 </div>
 
