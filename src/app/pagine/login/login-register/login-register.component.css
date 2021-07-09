@@ -1,10 +1,11 @@
 .registrer{
-    height: 100vh;
+    
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10%;
 }
+
 
 .card-header {
     text-align: center;  
