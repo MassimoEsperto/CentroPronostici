@@ -47,6 +47,11 @@ export class ModificaSchedeComponent extends Generale implements OnInit {
     this.evento_selected = element
   }
 
+  onViewList() {
+    this.scheda_selected = []
+    this.viewModScheda = false
+  }
+
   //CRUD
   deleteScheda() {
 
