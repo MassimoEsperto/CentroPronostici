@@ -53,8 +53,11 @@
             <clr-dg-cell *ngIf="element.tipo==2&&element.gruppo=='C'">
                 <a (click)="onEditEvento(element);bomberModal = true">{{element.risultato}}</a>
             </clr-dg-cell>
-            <clr-dg-cell *ngIf="element.tipo==3">
+            <clr-dg-cell *ngIf="element.tipo==3&&element.specie!='C'">
                 <a (click)="onEditEvento(element);gironiModal = true">{{element.risultato}}</a>
+            </clr-dg-cell>
+            <clr-dg-cell *ngIf="element.tipo==3&&element.specie=='C'">
+                {{element.risultato}}
             </clr-dg-cell>
 
         </clr-dg-row>
@@ -92,7 +95,7 @@
             <form clrForm (submit)="onUpdateEvento(evento_selected);gironiModal = false">
                 <clr-select-container>
                     <label>Seleziona</label>
-                    <select clrSelect name="evento_selected.risultato" [(ngModel)]="evento_selected.risultato">
+                    <select clrSelect name="evento_selected.risultato"  [(ngModel)]="evento_selected.risultato">
                         <option *ngFor="let item of getSquadreByGirone(evento_selected.girone)" [value]="item.nome">
                             {{item.nome}}</option>
                     </select>
