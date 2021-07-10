@@ -25,10 +25,10 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.getCombo()
     this.getSchedaDaCompilare()
     this.getBloccato()
-    this.getClassificaByUtente()
   }
 
   viewScheda(event) {
@@ -104,7 +104,7 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
 
     this.commonService.getCombo()
       .pipe(finalize(() => {
-        this.loading = false;
+        
       }))
       .subscribe({
 
@@ -127,6 +127,12 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
       .subscribe({
         next: (result: any) => {
           this.bloccato = result.valore;
+          if(this.bloccato){
+            this.getClassificaByUtente()
+          }
+          else{
+            this.getSchedeByUtente()
+          }
         },
         error: (error: any) => {
         }
@@ -201,7 +207,7 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
           else {
             this.successo()
             this.viewSchedaDaCompilare = false
-            this.getClassificaByUtente()
+            this.getSchedeByUtente()
           }
 
         },
@@ -225,6 +231,32 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
 
           this.pronostici = res
           this.disableBtn=false
+          this.loading=false
+
+        },
+        error: (error: any) => {
+
+          this.stampaErrore(error);
+
+        }
+      })
+
+  }
+
+  getSchedeByUtente() {
+    this.resetErrors();
+
+    let username = this.pronosticiService.username();
+    this.pronostici = []
+
+    this.pronosticiService.getSchedeByUtente(username)
+      .subscribe({
+
+        next: (res: any) => {
+
+          this.pronostici = res
+          this.disableBtn=false
+          this.loading=false
 
         },
         error: (error: any) => {
@@ -243,8 +275,14 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
 
         next: (result: any) => {
 
+
           let scheda_selected = result
+          if(scheda_selected.length){
           this.getIdSchedina(scheda_selected, SchedaModo.COPIATA)
+          }else{
+            this.vediErrore("Scheda inesistente");
+            this.disableBtn=false
+          }
         },
         error: (error: any) => {
 
