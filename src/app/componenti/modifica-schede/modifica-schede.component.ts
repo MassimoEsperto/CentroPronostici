@@ -82,7 +82,7 @@ export class ModificaSchedeComponent extends Generale implements OnInit {
 
         next: (result: string) => {
           this.successo();
-
+          this.onChange(evento)
         },
         error: (error: any) => {
           this.evento_selected.risultato = ""
@@ -110,5 +110,40 @@ export class ModificaSchedeComponent extends Generale implements OnInit {
         }
       })
 
+  }
+
+  onChange(element) {
+    let girone = this.scheda_selected.filter(i => i.tipo == "3" && i.girone == element.girone);
+    let team = girone.filter(i => i.specie == "S");
+    let completo = girone.find(i => i.specie == "C");
+    let completoString = "";
+    let sep = "";
+    let diff = []
+
+    for (let item of team) {
+      let esiste = diff.some(i => i == item.risultato && i != "");
+      if (esiste) {
+        completoString = "non valido"
+        break
+      } else {
+        completoString = completoString + sep + item.risultato.substring(0, 3)
+        sep = "-"
+        diff.push(item.risultato)
+      }
+    }
+
+    completo.risultato = completoString
+    this.pronosticiService.updEventoScheda(completo)
+    .subscribe({
+
+      next: (result: string) => {
+       
+      },
+      error: (error: any) => {
+        this.evento_selected.risultato = ""
+        this.stampaErrore(error);
+
+      }
+    })
   }
 }
