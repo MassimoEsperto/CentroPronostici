@@ -16,8 +16,8 @@
 
     <clr-dg-row *clrDgItems="let element of gironi;let i = index;" [clrDgItem]="element">
 
-        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
-            <clr-icon shape="administrator" class="is-solid"
+        <clr-dg-cell  [style.min-width.px]="50" [style.width.px]="50">
+            <clr-icon *ngIf="element.specie!='C'" shape="administrator" class="is-solid"
                 (click)="onEditSelected(element);updateMatchModal = true">
             </clr-icon>
         </clr-dg-cell>
