@@ -19,9 +19,7 @@ export class InserimentoSchedaComponent extends Generale implements OnInit {
 
   constructor(private pronosticiService: GestionePronosticiService) { super() }
 
-  ngOnInit() {
-    console.log("this.scheda", this.scheda)
-  }
+  ngOnInit() {}
 
   isAviable(): boolean {
     return this.scheda.some(i => i.risultato == "");
@@ -32,7 +30,6 @@ export class InserimentoSchedaComponent extends Generale implements OnInit {
   }
 
   onEditRisultati(ele) {
-    console.log("this.scheda", this.scheda)
     this.selected = ele
   }
 
