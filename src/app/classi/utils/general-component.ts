@@ -24,4 +24,11 @@ export class Generale {
         this.loading = false;
     }
 
+    vediErrore(errore) {
+        this.error = errore
+        this.loading = false;
+        setTimeout(() => {
+            this.resetErrors();
+        }, 3000);
+    }
 }
