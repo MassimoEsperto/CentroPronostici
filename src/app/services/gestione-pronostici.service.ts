@@ -80,11 +80,11 @@ export class GestionePronosticiService extends HttpSenderService {
         catchError(this.handleError));
   }
 
-  getClassificaByUtenteOLD(username: string) {
+  getSchedeByUtente(username: string) {
 
     const params = new HttpParams().set('username', username);
 
-    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getClassificaByUtente")}`, { params: params })
+    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getSchedeByUtente")}`, { params: params })
       .pipe(map((res) => {
 
         return res['data'];
@@ -104,6 +104,7 @@ export class GestionePronosticiService extends HttpSenderService {
       }),
         catchError(this.handleError));
   }
+  
 
   getClassificaGenerale() {
 
