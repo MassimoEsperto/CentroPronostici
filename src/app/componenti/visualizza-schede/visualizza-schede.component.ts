@@ -24,6 +24,11 @@ export class VisualizzaSchedeComponent extends Generale implements OnInit {
     this.getSchedaCompilata(element.id_schedina)
   }
 
+  onViewList() {
+    this.scheda_selected = []
+    this.viewScheda = false
+  }
+
 
   getSchedaCompilata(id_schedina: number) {
 
