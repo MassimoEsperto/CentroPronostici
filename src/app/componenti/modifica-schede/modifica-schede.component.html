@@ -1,22 +1,24 @@
 <h3>VISUALIZZA E MODIFICA PRONOSTICI INSERITI</h3>
+<div *ngIf="!viewModScheda">
+    <clr-datagrid>
+        <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">id</clr-dg-column>
+        <clr-dg-column>data</clr-dg-column>
+        <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">mod</clr-dg-column>
+        <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">canc</clr-dg-column>
+        <clr-dg-row *clrDgItems="let scheda of pronostici;" [clrDgItem]="match">
+            <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{scheda.id_schedina}}</clr-dg-cell>
+            <clr-dg-cell>{{scheda.tempo}}</clr-dg-cell>
+            <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
+                <clr-icon shape="pencil" class="is-solid" (click)="onEditScheda(scheda)"></clr-icon>
+            </clr-dg-cell>
+            <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
+                <clr-icon shape="trash" class="is-solid" (click)="onDeleteScheda(scheda);confermaaModal=true">
+                </clr-icon>
+            </clr-dg-cell>
+        </clr-dg-row>
 
-<clr-datagrid>
-    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">id</clr-dg-column>
-    <clr-dg-column>data</clr-dg-column>
-    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">mod</clr-dg-column>
-    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">canc</clr-dg-column>
-    <clr-dg-row *clrDgItems="let scheda of pronostici;" [clrDgItem]="match">
-        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{scheda.id_schedina}}</clr-dg-cell>
-        <clr-dg-cell>{{scheda.tempo}}</clr-dg-cell>
-        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
-            <clr-icon shape="pencil" class="is-solid" (click)="onEditScheda(scheda)"></clr-icon>
-        </clr-dg-cell>
-        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
-            <clr-icon shape="trash" class="is-solid" (click)="onDeleteScheda(scheda);confermaaModal=true"></clr-icon>
-        </clr-dg-cell>
-    </clr-dg-row>
-
-</clr-datagrid>
+    </clr-datagrid>
+</div>
 
 <clr-modal [(clrModalOpen)]="confermaaModal" [clrModalClosable]="false">
     <h3 class="modal-title">Conferma</h3>
@@ -32,6 +34,8 @@
 </clr-modal>
 <br>
 <div *ngIf="viewModScheda">
+
+    <button class="btn btn-primary btn-block" (click)="onViewList()">RITORNA ALLA LISTA</button>
 
     <clr-datagrid>
         <clr-dg-column>Evento</clr-dg-column>
