@@ -1,12 +1,15 @@
 <h3>VISUALIZZA PRONOSTICI INSERITI</h3>
 
+<div *ngIf="!viewScheda">
 <clr-datagrid>
-    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">pos</clr-dg-column>
+    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50"></clr-dg-column>
+    <clr-dg-column>utente</clr-dg-column>
     <clr-dg-column>data</clr-dg-column>
     <clr-dg-column>pt</clr-dg-column>
-    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">view</clr-dg-column>
+    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50"></clr-dg-column>
     <clr-dg-row *clrDgItems="let scheda of pronostici;" [clrDgItem]="match">
         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{scheda.posizione}}°</clr-dg-cell>
+        <clr-dg-cell>{{scheda.id_utente}}-{{scheda.id_schedina}}</clr-dg-cell>
         <clr-dg-cell>{{scheda.tempo}}</clr-dg-cell>
         <clr-dg-cell>{{scheda.punteggio}}</clr-dg-cell>
         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
@@ -15,8 +18,10 @@
     </clr-dg-row>
 
 </clr-datagrid>
-<br>
+</div>
 <div *ngIf="viewScheda">
+
+    <button class="btn btn-primary btn-block" (click)="onViewList()">RITORNA ALLA LISTA</button>
 
     <clr-datagrid>
         <clr-dg-column>Evento</clr-dg-column>
