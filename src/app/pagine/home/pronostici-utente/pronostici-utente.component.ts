@@ -44,7 +44,7 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
   }
 
   copiaScheda(id_copia) {
-    this.disableBtn=true
+    this.disableBtn = true
     this.getSchedaCompilata(id_copia)
   }
 
@@ -55,7 +55,7 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
       let tmp = {
         descrizione: ele.descrizione,
         id_evento: ele.id_evento,
-        risultato: this.getRisultatoRandom(ele.tipo, ele.gruppo, ele.girone, list),
+        risultato: this.getRisultatoRandom(ele.tipo, ele.gruppo, ele.girone, ele.specie, list),
         girone: ele.girone || "",
         gruppo: ele.gruppo || "",
         tipo: ele.tipo
@@ -65,7 +65,7 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
     this.getIdSchedina(list, SchedaModo.RANDOM)
   }
 
-  getRisultatoRandom(tipo: string, gruppo: string, girone: string, list) {
+  getRisultatoRandom(tipo: string, gruppo: string, girone: string, specie: string, list) {
 
     switch (tipo) {
       case "1":
@@ -82,19 +82,29 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
         }
 
       case "3":
-        let inizio = this.combosel.squadre.filter(i => i.girone == girone);
         let presenti = list.filter(i => i.girone == girone);
+        if (specie != "C") {
+          let inizio = this.combosel.squadre.filter(i => i.girone == girone);
 
-        let teams = []
-        for (let ele of inizio) {
-          let esiste = presenti.some(i => i['risultato'] == ele['nome']);
-          if (!esiste)
-            teams.push(ele)
+          let teams = []
+          for (let ele of inizio) {
+            let esiste = presenti.some(i => i['risultato'] == ele['nome']);
+            if (!esiste)
+              teams.push(ele)
+          }
+
+          let n3: number = Math.floor(Math.random() * teams.length);
+          return teams[n3]['nome']
+        } else {
+          let completoString = ""
+          let sep = "";
+
+          for (let item of presenti) {
+            completoString = completoString + sep + item.risultato.substring(0, 3)
+            sep = "-"
+          }
+          return completoString
         }
-
-        let n3: number = Math.floor(Math.random() * teams.length);
-        return teams[n3]['nome']
-
       default:
         return ""
     }
@@ -104,7 +114,7 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
 
     this.commonService.getCombo()
       .pipe(finalize(() => {
-        
+
       }))
       .subscribe({
 
@@ -127,10 +137,10 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
       .subscribe({
         next: (result: any) => {
           this.bloccato = result.valore;
-          if(this.bloccato){
+          if (this.bloccato) {
             this.getClassificaByUtente()
           }
-          else{
+          else {
             this.getSchedeByUtente()
           }
         },
@@ -163,7 +173,7 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
   getIdSchedina(scheda, desc) {
 
     this.resetErrors();
-    this.disableBtn=true
+    this.disableBtn = true
 
     let username = this.pronosticiService.username();
 
@@ -230,8 +240,8 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
         next: (res: any) => {
 
           this.pronostici = res
-          this.disableBtn=false
-          this.loading=false
+          this.disableBtn = false
+          this.loading = false
 
         },
         error: (error: any) => {
@@ -255,8 +265,8 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
         next: (res: any) => {
 
           this.pronostici = res
-          this.disableBtn=false
-          this.loading=false
+          this.disableBtn = false
+          this.loading = false
 
         },
         error: (error: any) => {
@@ -277,11 +287,11 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
 
 
           let scheda_selected = result
-          if(scheda_selected.length){
-          this.getIdSchedina(scheda_selected, SchedaModo.COPIATA)
-          }else{
+          if (scheda_selected.length) {
+            this.getIdSchedina(scheda_selected, SchedaModo.COPIATA)
+          } else {
             this.vediErrore("Scheda inesistente");
-            this.disableBtn=false
+            this.disableBtn = false
           }
         },
         error: (error: any) => {
