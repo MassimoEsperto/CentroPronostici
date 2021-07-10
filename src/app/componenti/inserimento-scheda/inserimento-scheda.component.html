@@ -17,7 +17,7 @@
     <clr-dg-column>Evento</clr-dg-column>
     <clr-dg-column>Risultato</clr-dg-column>
 
-    <clr-dg-row *clrDgItems="let element of scheda;" [clrDgItem]="element">
+    <clr-dg-row *clrDgItems="let element of scheda;let indice = index;" [clrDgItem]="element">
 
       <clr-dg-cell>{{element.descrizione}} {{element.girone}}</clr-dg-cell>
       <clr-dg-cell *ngIf="element.tipo==1" (click)="onEditRisultati(element);risultatiModal = true">
@@ -33,10 +33,13 @@
           <option *ngFor="let item of combo.cannonieri" [value]="item">{{item}}</option>
         </select>
       </clr-dg-cell>
-      <clr-dg-cell *ngIf="element.tipo==3">
-        <select class="selectBox" name="risultato" [(ngModel)]="element.risultato">
+      <clr-dg-cell *ngIf="element.tipo==3&&element.specie!='C'">
+        <select class="selectBox" name="risultato" [(ngModel)]="element.risultato" (change)="onChange(element)">
           <option *ngFor="let item of getSquadreByGirone(element.girone)" [value]="item.nome">{{item.nome}}</option>
         </select>
+      </clr-dg-cell>
+      <clr-dg-cell *ngIf="element.tipo==3&&element.specie=='C'">
+        {{element.risultato}}
       </clr-dg-cell>
 
     </clr-dg-row>
