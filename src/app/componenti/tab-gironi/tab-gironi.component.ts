@@ -60,6 +60,49 @@ export class TabGironiComponent extends Generale implements OnInit {
 
         next: (result: any) => {
 
+         this.onChange(element)
+        },
+        error: (error: any) => {
+
+          this.stampaErrore(error);
+
+        }
+      })
+
+  }
+
+  onChange(element) {
+    
+    this.gironi.find(i => i.id_evento == element.id_evento).risultato=element.squadra;
+    let girone = this.gironi.filter(i => i.girone == element.girone);
+    let team = girone.filter(i => i.specie == "S");
+    let completo = girone.find(i => i.specie == "C");
+    let completoString = "";
+    let sep = "";
+    let diff = []
+
+    for (let item of team) {
+      let esiste = diff.some(i => i == item.risultato && i != "");
+      if (esiste) {
+        completoString = "non valido"
+        break
+      } else {
+        completoString = completoString + sep + item.risultato.substring(0, 3)
+        sep = "-"
+        diff.push(item.risultato)
+      }
+    }
+
+    completo.risultato = completoString
+
+    this.gestioneService.updScommesseGirone({
+      id_evento: completo.id_evento,
+      scommessa: completo.descrizione,
+      risultato: completo.risultato
+    })
+      .subscribe({
+
+        next: (result: any) => {
           this.getScommesseGironi()
           this.successo();
         },
@@ -69,6 +112,5 @@ export class TabGironiComponent extends Generale implements OnInit {
 
         }
       })
-
   }
 }
