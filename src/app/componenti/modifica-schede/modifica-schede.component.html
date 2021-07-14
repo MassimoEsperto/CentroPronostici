@@ -37,6 +37,8 @@
 
     <button class="btn btn-primary btn-block" (click)="onViewList()">RITORNA ALLA LISTA</button>
 
+    <div  id="printSectionId1">
+
     <clr-datagrid>
         <clr-dg-column>Evento</clr-dg-column>
         <clr-dg-column>Risultato</clr-dg-column>
@@ -63,6 +65,10 @@
         </clr-dg-row>
 
     </clr-datagrid>
+
+</div>
+
+<button class="btn btn-primary btn-block" (click)="printToCart('printSectionId1')">STAMPA SCHEDA</button>
 
 </div>
 
@@ -130,3 +136,4 @@
         </div>
     </clr-modal>
 </div>
+
