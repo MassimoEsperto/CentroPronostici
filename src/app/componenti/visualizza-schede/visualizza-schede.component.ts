@@ -13,6 +13,7 @@ export class VisualizzaSchedeComponent extends Generale implements OnInit {
 
   scheda_selected: any = []
   viewScheda: boolean = false
+  id_selected: number = 0;
 
   constructor(private pronosticiService: GestionePronosticiService) {
     super();
@@ -36,7 +37,7 @@ export class VisualizzaSchedeComponent extends Generale implements OnInit {
       .subscribe({
 
         next: (result: any) => {
-
+          this.id_selected=id_schedina;
           this.scheda_selected = result
           this.viewScheda = true
         },
@@ -48,4 +49,15 @@ export class VisualizzaSchedeComponent extends Generale implements OnInit {
       })
 
   }
+
+  printToCart(printSectionId: string){
+    let popupWinindow
+    let innerContents = document.getElementById(printSectionId).innerHTML;
+    popupWinindow = window.open('#test', '_blank',  'top=0,left=0,height=100%,width=auto');
+   
+    popupWinindow.document.open();
+    popupWinindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="../../../../assets/css/stampaPDF.css" /></head><body onload="window.print()"><h3>Scheda numero: '+this.id_selected+'</h3>' + innerContents + '</html>');
+
+    popupWinindow.document.close();
+}
 }
