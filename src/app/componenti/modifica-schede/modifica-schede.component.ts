@@ -26,6 +26,7 @@ export class ModificaSchedeComponent extends Generale implements OnInit {
 
   onEditScheda(scheda) {
     this.getSchedaCompilata(scheda.id_schedina);
+    this.id_selected = scheda.id_schedina;
   }
 
   onDeleteScheda(scheda) {
@@ -113,9 +114,13 @@ export class ModificaSchedeComponent extends Generale implements OnInit {
   }
 
   onChange(element) {
+   
     let girone = this.scheda_selected.filter(i => i.tipo == "3" && i.girone == element.girone);
     let team = girone.filter(i => i.specie == "S");
     let completo = girone.find(i => i.specie == "C");
+
+    if(!completo) return
+
     let completoString = "";
     let sep = "";
     let diff = []
@@ -146,4 +151,15 @@ export class ModificaSchedeComponent extends Generale implements OnInit {
       }
     })
   }
+
+  printToCart(printSectionId: string){
+    let popupWinindow
+    let innerContents = document.getElementById(printSectionId).innerHTML;
+    popupWinindow = window.open('#test', '_blank',  'top=0,left=0,height=100%,width=auto');
+   
+    popupWinindow.document.open();
+    popupWinindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="../../../../assets/css/stampaPDF.css" /></head><body onload="window.print()"><h3>Scheda numero: '+this.id_selected+'</h3>' + innerContents + '</html>');
+
+    popupWinindow.document.close();
+}
 }
