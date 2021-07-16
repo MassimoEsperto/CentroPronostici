@@ -12,8 +12,7 @@ if(!$username)
   return http_response_code(400);
 }
 
-// Delete.
- $sql = "INSERT INTO `_schedina_user`(`utente_id`,`descrizione`) VALUES ('{$username}','{$descrizione}')";
+ $sql = "INSERT INTO `_schedina_user`(`utente_id`,`descrizione`,`comp_id`) VALUES ('{$username}','{$descrizione}',{$id_comp})";
 
 if(mysqli_query($con, $sql))
 {
