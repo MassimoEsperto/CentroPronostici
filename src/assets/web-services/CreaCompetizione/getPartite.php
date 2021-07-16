@@ -3,7 +3,7 @@
 require '../connect_local.php';
     
 $element = [];
-$sql = "SELECT id_evento,partita,girone,data FROM _scommesse_risultati order by id_evento";
+$sql = "SELECT id_evento,partita,girone,data FROM _scommesse_risultati WHERE comp_id = {$id_comp} order by id_evento";
 
 if($result = mysqli_query($con,$sql))
 {
