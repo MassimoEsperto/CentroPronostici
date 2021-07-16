@@ -16,7 +16,6 @@ export class DashboardComponent extends Generale implements OnInit {
   username: string;
   puntiPrevisti: any;
   opzioni: any;
-  htmlToAdd:string
 
   ngOnInit() {
     this.username = this.competizioneService.username();
@@ -56,12 +55,11 @@ export class DashboardComponent extends Generale implements OnInit {
 
   getOpzioni() {
 
-    this.commonService.getOpzioni()
+    this.commonService.getOpzioniAdmin()
       .subscribe({
         next: (result: any) => {
           this.loading=false
           this.opzioni = result;
-          this.htmlToAdd=result.testo
         },
         error: (error: any) => {
         }
