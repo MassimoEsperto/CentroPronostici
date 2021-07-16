@@ -21,7 +21,7 @@ export class CreaCompetizioneService extends HttpSenderService {
     
     const params = new HttpParams().set('nome', bomber);
 
-   return this.http.get(`${this.buildURL("CreaCompetizione/setBomber")}`, { params: params })
+   return this.http.get(`${this.buildURL("CreaCompetizione/setBomber")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map((res) => {
        
         let cannoniere=(res['data'].nome);
@@ -35,7 +35,7 @@ export class CreaCompetizioneService extends HttpSenderService {
    
     const params = new HttpParams().set('nome', bomber);
 
-   return this.http.get(`${this.buildURL("CreaCompetizione/delBomber")}`, { params: params })
+   return this.http.get(`${this.buildURL("CreaCompetizione/delBomber")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map((res) => {
        
         let cannoniere=(res['data'].nome);
@@ -50,7 +50,7 @@ export class CreaCompetizioneService extends HttpSenderService {
   
     const params = new HttpParams().set('nome', nome).set('girone',girone);
 
-   return this.http.get(`${this.buildURL("CreaCompetizione/setSquadra")}`, { params: params })
+   return this.http.get(`${this.buildURL("CreaCompetizione/setSquadra")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map((res) => {
        
         let nome=(res['data'].nome);
@@ -64,7 +64,7 @@ export class CreaCompetizioneService extends HttpSenderService {
    
     const params = new HttpParams().set('nome', nome);
 
-   return this.http.get(`${this.buildURL("CreaCompetizione/delSquadra")}`, { params: params })
+   return this.http.get(`${this.buildURL("CreaCompetizione/delSquadra")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map((res) => {
        
         let element=(res['data'].nome);
@@ -78,7 +78,7 @@ export class CreaCompetizioneService extends HttpSenderService {
   /*----------------- CALENDARIO -----------------*/
   getCalendario(): Observable<any> {
 
-   return this.http.get(`${this.buildURL("CreaCompetizione/getPartite")}`)
+   return this.http.get(`${this.buildURL("CreaCompetizione/getPartite")}`,this.myheaders)
       .pipe(map((res) => {
      
         return res['data']
@@ -90,7 +90,7 @@ export class CreaCompetizioneService extends HttpSenderService {
    
     const params = new HttpParams().set('id_evento', id);
 
-   return this.http.get(`${this.buildURL("CreaCompetizione/delPartita")}`, { params: params })
+   return this.http.get(`${this.buildURL("CreaCompetizione/delPartita")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map((res) => {
        
         let element=(res['data'].id_evento);
@@ -103,7 +103,7 @@ export class CreaCompetizioneService extends HttpSenderService {
   
   setPartita(partita: Partita): Observable<Partita[]> {
 
-    return this.http.post(`${this.buildURL("CreaCompetizione/setPartita")}`, { data: partita })
+    return this.http.post(`${this.buildURL("CreaCompetizione/setPartita")}`, { data: partita },this.myheaders)
        .pipe(map((res) => {
          return res['data'];
        }),
@@ -112,7 +112,7 @@ export class CreaCompetizioneService extends HttpSenderService {
  
    updPartita(partita: Partita): Observable<Partita[]> {
 
-    return this.http.post(`${this.buildURL("CreaCompetizione/updPartita")}`, { data: partita })
+    return this.http.post(`${this.buildURL("CreaCompetizione/updPartita")}`, { data: partita },this.myheaders)
        .pipe(map((res) => {
          return res['data'];
        }),
@@ -122,7 +122,7 @@ export class CreaCompetizioneService extends HttpSenderService {
    /*----------------- PUNTI PREVISTI -----------------*/
    getPuntiPrevisti(): Observable<any> {
 
-    return this.http.get(`${this.buildURL("CreaCompetizione/getPuntiPrevisti")}`)
+    return this.http.get(`${this.buildURL("CreaCompetizione/getPuntiPrevisti")}`,this.myheaders)
        .pipe(map((res) => {
       
          return res['data']
@@ -134,7 +134,7 @@ export class CreaCompetizioneService extends HttpSenderService {
     
     const params = new HttpParams().set('id_punti', id_punti).set('valore', valore);
 
-   return this.http.get(`${this.buildURL("CreaCompetizione/updPuntiPrevisti")}`, { params: params })
+   return this.http.get(`${this.buildURL("CreaCompetizione/updPuntiPrevisti")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map((res) => {
        
         return res['data'];
@@ -145,7 +145,7 @@ export class CreaCompetizioneService extends HttpSenderService {
    /*----------------- GIRONI -----------------*/
    getAntepostGironi(): Observable<any> {
 
-    return this.http.get(`${this.buildURL("CreaCompetizione/getAntepostGironi")}`)
+    return this.http.get(`${this.buildURL("CreaCompetizione/getAntepostGironi")}`,this.myheaders)
        .pipe(map((res) => {
       
          return res['data']
@@ -157,7 +157,7 @@ export class CreaCompetizioneService extends HttpSenderService {
     
     const params = new HttpParams().set('girone', girone);
 
-   return this.http.get(`${this.buildURL("CreaCompetizione/setAntepostGironi")}`, { params: params })
+   return this.http.get(`${this.buildURL("CreaCompetizione/setAntepostGironi")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map((res) => {
        
         return res['data'];
@@ -169,7 +169,7 @@ export class CreaCompetizioneService extends HttpSenderService {
     
     const params = new HttpParams().set('girone', girone);
 
-   return this.http.get(`${this.buildURL("CreaCompetizione/delAntepostGironi")}`, { params: params })
+   return this.http.get(`${this.buildURL("CreaCompetizione/delAntepostGironi")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map((res) => {
        
         return res['data'];
@@ -180,7 +180,7 @@ export class CreaCompetizioneService extends HttpSenderService {
 
   getAllSchede(): Observable<any> {
 
-    return this.http.get(`${this.buildURL("CreaCompetizione/getAllSchede")}`)
+    return this.http.get(`${this.buildURL("CreaCompetizione/getAllSchede")}`,this.myheaders)
        .pipe(map((res) => {
       
          return res['data']
