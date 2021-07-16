@@ -45,3 +45,7 @@
 .clr-control-container, .clr-textarea {
    width: 100%;
 }
+
+.cursore{
+   cursor: pointer;
+}
