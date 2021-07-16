@@ -10,7 +10,7 @@ if(!$nome)
 }
 
 
-  $sql = "INSERT INTO `_lista_cannonieri`(`nome`) VALUES ('{$nome}')";
+  $sql = "INSERT INTO `_lista_cannonieri`(`nome`,`comp_id`) VALUES ('{$nome}',{$id_comp})";
 
   if(mysqli_query($con,$sql))
   {
