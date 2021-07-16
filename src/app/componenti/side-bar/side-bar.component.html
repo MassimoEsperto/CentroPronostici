@@ -3,7 +3,7 @@
     <button mat-icon-button class="gap">
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
-    <span>PRONOSTICI</span>
+    <span *ngIf="opzioni&&combosel" class="cursore"  (click)="competizioniModal = true">{{opzioni.sigla}}</span>
     <span class="filler"></span>
     <span *ngIf="isAdmin">{{username}} <clr-icon shape="user" (click)="opzioniModal = true">
       </clr-icon></span>
@@ -20,10 +20,10 @@
       <a mat-list-item [routerLink]="'/home/dashboard'" (click)="sidenav.toggle()">
         <clr-icon class="icone" shape="home"></clr-icon>Home
       </a>
-      <mat-divider *ngIf="isAdmin&&!variabile"></mat-divider>
-      <mat-divider *ngIf="isAdmin&&!variabile"></mat-divider>
-      <mat-divider *ngIf="isAdmin&&!variabile"></mat-divider>
-      <a *ngIf="isAdmin&&!variabile" mat-list-item [routerLink]="'/home/nuova-competizione'" (click)="sidenav.toggle()">
+      <mat-divider *ngIf="isAdmin&&!isOpen"></mat-divider>
+      <mat-divider *ngIf="isAdmin&&!isOpen"></mat-divider>
+      <mat-divider *ngIf="isAdmin&&!isOpen"></mat-divider>
+      <a *ngIf="isAdmin&&!isOpen" mat-list-item [routerLink]="'/home/nuova-competizione'" (click)="sidenav.toggle()">
         <clr-icon class="icone" shape="cog"></clr-icon>Crea Competizione
       </a>
       <mat-divider *ngIf="isAdmin"></mat-divider>
@@ -69,15 +69,15 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<mat-toolbar style="background-color: #AD1457;">
+<mat-toolbar *ngIf="opzioni" style="background-color: #AD1457;">
   <span class='spacer'></span>
-  <h3 style="color: blanchedalmond;">© FantaEuropeo Maresca</h3>
+  <h3 style="color: blanchedalmond;">© {{opzioni.footer}}</h3>
   <span class='spacer'></span>
 </mat-toolbar>
 
 
 <clr-modal *ngIf="opzioni" [(clrModalOpen)]="opzioniModal" [clrModalSize]="'xl'" [clrModalClosable]="false">
-  <h3 class="modal-title">BLOCCA SBLOCCA</h3>
+  <h3 class="modal-title">OPZIONI</h3>
   <div class="modal-body">
     <clr-alert *ngIf="success" [clrAlertType]="'success'">
       <clr-alert-item>
@@ -89,9 +89,9 @@
       <clr-toggle-container >
 
         <clr-toggle-wrapper>
-          <input type="checkbox" clrToggle name="opzioni.valore" [(ngModel)]="opzioni.valore" />
-          <label *ngIf="!opzioni.valore">BLOCCA</label>
-          <label *ngIf="opzioni.valore">SBLOCCA</label>
+          <input type="checkbox" clrToggle name="opzioni.isOpen" [(ngModel)]="opzioni.isOpen" />
+          <label *ngIf="!opzioni.isOpen">BLOCCA</label>
+          <label *ngIf="opzioni.isOpen">SBLOCCA</label>
         </clr-toggle-wrapper>
       </clr-toggle-container>
 
@@ -99,12 +99,12 @@
         <label>Scadenza</label>
         <input clrInput [(ngModel)]="opzioni.scadenza" name="opzioni.scadenza" />
     </clr-input-container>
+
+    <clr-input-container>
+      <label>Footer</label>
+      <input clrInput [(ngModel)]="opzioni.footer" name="opzioni.footer" />
+  </clr-input-container>
     
-  
-    <clr-textarea-container>
-      <label>Descrizione</label>
-      <textarea clrTextarea [(ngModel)]="opzioni.testo" name="opzioni.testo" size="40"></textarea>
-    </clr-textarea-container>
      
       <br>
       <button class="btn btn-primary" style="float: right;">Aggiorna</button>
@@ -117,4 +117,28 @@
     <p *ngIf="!opzioni.valore">PRONOSTICI SBLOCCATI!</p>
     <p *ngIf="opzioni.valore">TUOTTO BLOCCATO!</p>
 </div>
+</clr-modal>
+
+<clr-modal *ngIf="combosel" [(clrModalOpen)]="competizioniModal" [clrModalSize]="'xl'" [clrModalClosable]="false">
+  <h3 class="modal-title">CAMBIA COMPETIZIONE</h3>
+  <div class="modal-body">
+    
+    <form clrForm (submit)="onSelectCompetizione(competizione)">
+
+        <clr-select-container>
+          <label>Competizioni</label>
+          <select clrSelect name="competizione" [(ngModel)]="competizione" >
+              <option *ngFor="let item of combosel.competizioni" value="{{item.id_comp}}">{{item.descrizione}}</option>
+          </select>
+      </clr-select-container>
+    
+     
+      <br>
+      <button class="btn btn-primary" style="float: right;">Aggiorna</button>
+      <button type="button" class="btn btn-outline" (click)="competizioniModal = false"
+        style="float: right;">Chiudi</button>
+    </form>
+  </div>
+ 
+  
 </clr-modal>
