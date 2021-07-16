@@ -1,12 +1,12 @@
 <?php
-/**
- * Returns the list of cars.
- */
+
 require '../connect_local.php';
     
 $list = [];
 
-$sql = "SELECT s.id_evento,s.tipo,p.descrizione,s.girone,s.risultato FROM _scommesse_antepost_gironi s,_punti_previsti p where s.punti_id=p.id_punti order by s.id_evento";
+$sql = "SELECT s.id_evento,s.tipo,p.descrizione,s.girone,s.risultato,s.specie ";
+$sql .="FROM _scommesse_antepost_gironi s,_punti_previsti p  ";
+$sql .="WHERE s.punti_id=p.id_punti AND comp_id = {$id_comp} order by s.id_evento";
 
 if($result = mysqli_query($con,$sql))
 {
@@ -18,7 +18,8 @@ if($result = mysqli_query($con,$sql))
     $list[$cr]['descrizione'] = $row['descrizione'] . " " . $row['girone'];
     $list[$cr]['risultato'] = $row['risultato'];
     $list[$cr]['girone'] = $row['girone'];
-    $cr++;
+	$list[$cr]['specie'] = $row['specie'];
+	$cr++;
   }
     
  echo json_encode(['data'=>$list]);
