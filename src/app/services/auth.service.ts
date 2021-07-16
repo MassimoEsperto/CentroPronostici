@@ -51,7 +51,7 @@ export class AuthService extends HttpSenderService {
   logout(): void {
 
     localStorage.removeItem("tk-user");
-
+    localStorage.removeItem("comp-now");
   }
 
   /**
