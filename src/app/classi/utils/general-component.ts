@@ -31,4 +31,8 @@ export class Generale {
             this.resetErrors();
         }, 3000);
     }
+
+    refreshPage() {
+        window.location.reload();
+    }
 }
