@@ -14,9 +14,9 @@
 <span *ngIf="loading" class="spinner"></span>
 
 <clr-datagrid *ngIf="classifica">
-    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50"></clr-dg-column>
+    <clr-dg-column [clrDgSortBy]="'posizioneString'" [style.min-width.px]="50" [style.width.px]="50">pos</clr-dg-column>
     <clr-dg-column [clrDgField]="'id_utente'">utente</clr-dg-column>
-    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50">pt</clr-dg-column>
+    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50" [clrDgSortBy]="'punteggioString'">pt</clr-dg-column>
     <clr-dg-column>data</clr-dg-column>
     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50"></clr-dg-column>
 
