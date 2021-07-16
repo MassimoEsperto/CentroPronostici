@@ -23,7 +23,7 @@ export class TabBomberComponent extends Generale implements OnInit {
 
     this.resetErrors();
 
-    this.creaService.insertBomber(bomber)
+    this.creaService.insertBomber(bomber.replace(/ /g, ''))
       .subscribe({
 
         next: (result: string) => {
