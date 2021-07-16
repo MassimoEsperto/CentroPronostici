@@ -14,7 +14,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
   getSchedaDaCompilare() {
 
-    return this.http.get<any>(`${this.buildURL("PronosticiUtente/getSchedaDaCompilare")}`)
+    return this.http.get<any>(`${this.buildURL("PronosticiUtente/getSchedaDaCompilare")}`,this.myheaders)
       .pipe(map((res) => {
         return res['data'];
 
@@ -25,7 +25,7 @@ export class GestionePronosticiService extends HttpSenderService {
   getIdSchedina(username: string,desc: string) {
     const params = new HttpParams().set('username', username).set('descrizione', desc);
 
-    return this.http.get(`${this.buildURL("PronosticiUtente/getIdScheda")}`, { params: params })
+    return this.http.get(`${this.buildURL("PronosticiUtente/getIdScheda")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map((res) => {
 
         return res['data'].id_schedina;
@@ -37,7 +37,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
     const params = new HttpParams().set('id_schedina', id_schedina);
 
-    return this.http.get(`${this.buildURL("PronosticiUtente/getSchedaCompilata")}`, { params: params })
+    return this.http.get(`${this.buildURL("PronosticiUtente/getSchedaCompilata")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map((res) => {
 
         return res['data'];
@@ -49,7 +49,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
   setScheda(pronostico: any) {
 
-    return this.http.post(`${this.buildURL("PronosticiUtente/setScheda")}`, { data: pronostico })
+    return this.http.post(`${this.buildURL("PronosticiUtente/setScheda")}`, { data: pronostico },this.myheaders)
       .pipe(map((res) => {
 
         return res['data'];
@@ -61,7 +61,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
     const params = new HttpParams().set('id_schedina', id_schedina.toString());
 
-    return this.http.get(`${this.buildURL("PronosticiUtente/delScheda")}`, { params: params })
+    return this.http.get(`${this.buildURL("PronosticiUtente/delScheda")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map(res => {
 
         return res['data'];
@@ -72,7 +72,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
   updEventoScheda(pronostico: any) {
 
-    return this.http.post(`${this.buildURL("PronosticiUtente/updEventoScheda")}`, { data: pronostico })
+    return this.http.post(`${this.buildURL("PronosticiUtente/updEventoScheda")}`, { data: pronostico },this.myheaders)
       .pipe(map((res) => {
 
         return res['data'];
@@ -84,7 +84,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
     const params = new HttpParams().set('username', username);
 
-    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getSchedeByUtente")}`, { params: params })
+    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getSchedeByUtente")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map((res) => {
 
         return res['data'];
@@ -95,7 +95,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
   getClassificaByUtente(username: string) {
 
-    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getClassificaGenerale")}`)
+    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getClassificaGenerale")}`,this.myheaders)
       .pipe(map((res) => {
 
         let classifica=res['data']
@@ -108,7 +108,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
   getClassificaGenerale() {
 
-    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getClassificaGenerale")}`)
+    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getClassificaGenerale")}`,this.myheaders)
       .pipe(map((res) => {
 
         return res['data'];
