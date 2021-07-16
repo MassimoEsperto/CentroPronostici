@@ -13,35 +13,27 @@ export class CommonService extends HttpSenderService {
       super();
      }
     
-     getCombo(): Observable<any> {
+
+
+     getCombo() {
       
-      return this.http.get(`${this.buildURL("PronosticiUtente/lookups")}`).pipe(
-        map((res) => {
+      return this.http.get(`${this.buildURL("ServiziComuni/getCombo")}`, this.myheaders)
+      .pipe(map((res) => {
           
           return res['data'];
       }),
       catchError(this.handleError));
     }
 
-    getOpzioni(): Observable<any> {
+
+     getOpzioniAdmin() {
       
-      return this.http.get(`${this.buildURL("GestioneCompetizione/getOpzioni")}`).pipe(
-        map((res) => {
+      return this.http.get(`${this.buildURL("ServiziComuni/getOpzioniAdmin")}`, this.myheaders)
+      .pipe(map((res) => {
           
           return res['data'];
       }),
       catchError(this.handleError));
     }
-
-    updOpzioni(opzioni: any){
-
-      return this.http.post(`${this.buildURL("GestioneCompetizione/updOpzioni")}`, { data: opzioni })
-         .pipe(map((res) => {
-           return res['data'];
-         }),
-         catchError(this.handleError));
-     }
-   
-  
   }
   
