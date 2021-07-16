@@ -1,12 +1,13 @@
 <?php
-/**
- * Returns the list of cars.
- */
+
 require '../connect_local.php';
     
 $list = [];
 
-$sql = "SELECT s.id_evento,s.gruppo_id,s.tipo,p.descrizione,g.risultato FROM _scommesse_antepost_base s,_punti_previsti p,_gruppi_antepost_base g where s.punti_id=p.id_punti and g.gruppo=s.gruppo_id order by s.id_evento";
+$sql = "SELECT s.id_evento,s.gruppo_id,s.tipo,p.descrizione,g.risultato ";
+$sql .="FROM _scommesse_antepost_base s,_punti_previsti p,_gruppi_antepost_base g ";
+$sql .="WHERE s.punti_id=p.id_punti and g.gruppo=s.gruppo_id AND comp_id = {$id_comp} order by s.id_evento";
+
 
 if($result = mysqli_query($con,$sql))
 {
