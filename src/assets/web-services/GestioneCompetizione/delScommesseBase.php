@@ -10,7 +10,7 @@ if(!$gruppo)
   return http_response_code(400);
 }
 // Delete.
-$sql = "DELETE FROM `_gruppi_antepost_base` WHERE `gruppo` ='{$gruppo}' AND `risultato` ='{$risultato}' ";
+$sql = "DELETE FROM `_gruppi_antepost_base` WHERE `gruppo` ='{$gruppo}' AND `risultato` ='{$risultato}' AND `comp_id` = {$id_comp} ";
 
   if(mysqli_query($con,$sql))
   {
