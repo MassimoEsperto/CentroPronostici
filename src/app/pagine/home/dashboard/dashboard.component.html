@@ -8,7 +8,7 @@
     <div class="clr-col-lg-6 clr-col-md-6 clr-col-sm-12 clr-col-12">
         <div class="card">
             <div class="card-img">
-                <img src="assets/img/pronostici.jpg">
+                <img src="http://marescafantaeuropeo.altervista.org/archivio/img/pronostici.jpg">
             </div>
             <div class="card-block">
                 <h4 class="card-title">Benvenuto {{username}} nel fanta pronostici maresca</h4>
@@ -16,7 +16,36 @@
                     Di seguito alcune istruzioni per la compilazione dei pronostici.
                 </p>
             </div>
-            <div class="aggiunto" [innerHtml]="htmlToAdd"></div>
+            <div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        Per l'inserimento di nuovi pronostici:
+                        <ul class="list">
+                            <li>Apri il menu laterale Inserimento pronotici</li>
+                            <li>Aggiungi una nuova scheda che sarà associata al tuo account</li>
+                            <li>Compilare la scheda in tutte le sue voci e poi salva</li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item">
+                        Per verificare o modificare i tuoi pronostici:
+                        <ul class="list">
+                            <li>Apri il menu laterale Pronostici Personale</li>
+                            <li>Nella lista che compare potrai eliminare o modificare le schede da te inserite
+                                precedentemente</li>
+                            <li>Una volta aperta la scheda potrai modificare ciascun risultato uno alla volta</li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item">
+                        Per verificare la classifica totale una volta che saranno bloccati gli inserimenti:
+                        <ul class="list">
+                            <li>Apri il menu laterale Classifica</li>
+                            <li>Per ricercare solo i pronostici effettuati da un determinato account è prevista la
+                                possibilità di filtrare per ciascun account</li>
+                            <li>Selezionare poi la casella view per visualizzare l'intera schedina</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
 
             <div class="card-footer">
                 <p class="card-text">
@@ -24,13 +53,13 @@
                 </p>
 
                 <img src="assets/img/download.png"
-                    (click)="downloadPdf('../../../../assets/download/FANTAEUROPEO.pdf','FANTAEUROPEO.pdf')"
+                    (click)="downloadPdf('http://marescafantaeuropeo.altervista.org/archivio/download/FANTAEUROPEO.pdf','FANTAEUROPEO.pdf')"
                     style="width:30%">
             </div>
         </div>
     </div>
     <div class="clr-col-lg-6 clr-col-md-6 clr-col-sm-12 clr-col-12 padtop">
-        <img src="assets/img/gironi.png" style="width:100%">
+        <img src="http://marescafantaeuropeo.altervista.org/archivio/img/gironi.png" style="width:100%">
         <h3>PRONOSTICI VALIDI</h3>
         <clr-datagrid *ngIf="puntiPrevisti">
             <clr-dg-column>Descrizione</clr-dg-column>
