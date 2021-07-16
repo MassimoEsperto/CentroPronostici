@@ -3,7 +3,7 @@
 require '../connect_local.php';
     
 $element = [];
-$sql = "SELECT schedina_id,utente_id,DATE_FORMAT(tempo, '%d-%m-%Y %H:%i:%s') as tempo,descrizione FROM _schedina_user order by schedina_id ASC";
+$sql = "SELECT schedina_id,utente_id,DATE_FORMAT(tempo, '%d-%m-%Y %H:%i:%s') as tempo,descrizione FROM _schedina_user WHERE comp_id = {$id_comp} order by schedina_id ASC";
 
 if($result = mysqli_query($con,$sql))
 {
