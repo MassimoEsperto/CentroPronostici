@@ -158,7 +158,7 @@ export class ModificaSchedeComponent extends Generale implements OnInit {
     popupWinindow = window.open('#test', '_blank',  'top=0,left=0,height=100%,width=auto');
    
     popupWinindow.document.open();
-    popupWinindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="../../../../assets/css/stampaPDF.css" /></head><body onload="window.print()"><h3>Scheda numero: '+this.id_selected+'</h3>' + innerContents + '</html>');
+    popupWinindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="http://marescafantaeuropeo.altervista.org/archivio/css/stampaPDF.css" /></head><body onload="window.print()"><h3>Scheda numero: '+this.id_selected+'</h3>' + innerContents + '</html>');
 
     popupWinindow.document.close();
 }
