@@ -25,7 +25,7 @@ export class TabSquadreComponent extends Generale implements OnInit {
     this.resetErrors();
     let gir = girone.toUpperCase()
 
-    this.creaService.insertSquadra(nome, gir)
+    this.creaService.insertSquadra(nome.replace(/ /g, ''), gir)
       .subscribe({
 
         next: (result: any) => {
