@@ -11,7 +11,7 @@ if(!$nome)
 }
 
 
-  $sql = "INSERT INTO `_lista_squadre`(`nome`,`girone`) VALUES ('{$nome}','{$girone}')";
+  $sql = "INSERT INTO `_lista_squadre`(`nome`,`girone`,`comp_id`) VALUES ('{$nome}','{$girone}',{$id_comp})";
 
   if(mysqli_query($con,$sql))
   {
