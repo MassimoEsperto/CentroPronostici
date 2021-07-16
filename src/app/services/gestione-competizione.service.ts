@@ -16,8 +16,8 @@ export class GestioneCompetizioneService extends HttpSenderService {
   }
 
   getScommesseRisultati(): Observable<any[]> {
-    return this.http.get(`${this.buildURL("GestioneCompetizione/getScommesseRisultati")}`).pipe(
-      map((res) => {
+    return this.http.get(`${this.buildURL("GestioneCompetizione/getScommesseRisultati")}`,this.myheaders)
+    .pipe(map((res) => {
 
         return res['data'];
       }),
@@ -26,7 +26,7 @@ export class GestioneCompetizioneService extends HttpSenderService {
 
   updScommesseRisultati(calendario: Calendario) {
 
-    return this.http.put(`${this.buildURL("GestioneCompetizione/updScommesseRisultati")}`, { data: calendario })
+    return this.http.put(`${this.buildURL("GestioneCompetizione/updScommesseRisultati")}`, { data: calendario },this.myheaders)
       .pipe(map((res) => {
 
         return res['data'];
@@ -35,8 +35,8 @@ export class GestioneCompetizioneService extends HttpSenderService {
   }
 
   getScommesseGironi(): Observable<any[]> {
-    return this.http.get(`${this.buildURL("GestioneCompetizione/getScommesseGironi")}`).pipe(
-      map((res) => {
+    return this.http.get(`${this.buildURL("GestioneCompetizione/getScommesseGironi")}`,this.myheaders)
+    .pipe(map((res) => {
 
         return res['data'];
       }),
@@ -44,7 +44,7 @@ export class GestioneCompetizioneService extends HttpSenderService {
   }
 
   updScommesseGirone(gironi: ScommesseAntepost) {
-    return this.http.put(`${this.buildURL("GestioneCompetizione/updScommesseGirone")}`, { data: gironi })
+    return this.http.put(`${this.buildURL("GestioneCompetizione/updScommesseGirone")}`, { data: gironi },this.myheaders)
       .pipe(map((res) => {
         return res['data'];
       }),
@@ -52,8 +52,8 @@ export class GestioneCompetizioneService extends HttpSenderService {
   }
 
   getScommesseBase(): Observable<any[]> {
-    return this.http.get(`${this.buildURL("GestioneCompetizione/getScommesseBase")}`).pipe(
-      map((res) => {
+    return this.http.get(`${this.buildURL("GestioneCompetizione/getScommesseBase")}`,this.myheaders)
+    .pipe(map((res) => {
 
         return res['data'];
       }),
@@ -64,7 +64,7 @@ export class GestioneCompetizioneService extends HttpSenderService {
 
     const params = new HttpParams().set('gruppo', gruppo).set('risultato', risultato);
 
-    return this.http.get(`${this.buildURL("GestioneCompetizione/delScommesseBase")}`, { params: params })
+    return this.http.get(`${this.buildURL("GestioneCompetizione/delScommesseBase")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map((res) => {
 
         return res['data'];
@@ -76,7 +76,7 @@ export class GestioneCompetizioneService extends HttpSenderService {
 
     const params = new HttpParams().set('gruppo', gruppo).set('risultato', risultato);
 
-    return this.http.get(`${this.buildURL("GestioneCompetizione/setScommesseBase")}`, { params: params })
+    return this.http.get(`${this.buildURL("GestioneCompetizione/setScommesseBase")}`, { params: params, headers: this.myheaders.headers })
       .pipe(map((res) => {
 
         return res['data'];
@@ -84,5 +84,13 @@ export class GestioneCompetizioneService extends HttpSenderService {
         catchError(this.handleError));
   }
 
+  updOpzioni(opzioni: any){
+
+    return this.http.post(`${this.buildURL("GestioneCompetizione/updOpzioni")}`, { data: opzioni },this.myheaders)
+       .pipe(map((res) => {
+         return res['data'];
+       }),
+       catchError(this.handleError));
+   }
 
 }
