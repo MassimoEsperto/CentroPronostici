@@ -14,6 +14,12 @@
 
     <mat-tab-group backgroundColor="primary" mat-align-tabs="center">
   
+      <mat-tab label="GENERALE">
+        <div class="pt-16 pl-8 pr-8 tabula">
+          <tab-competizioni></tab-competizioni>
+        </div>
+      </mat-tab>
+
       <mat-tab label="SQUADRE">
         <div class="pt-16 pl-8 pr-8 tabula">
           <tab-squadre [squadre]="combosel.squadre"></tab-squadre>
