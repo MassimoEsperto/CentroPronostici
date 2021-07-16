@@ -12,7 +12,7 @@ if(!$nome)
 }
 
 // Delete.
-$sql = "DELETE FROM `_lista_cannonieri` WHERE `nome` ='{$nome}' LIMIT 1";
+$sql = "DELETE FROM `_lista_cannonieri` WHERE `nome` ='{$nome}' AND `comp_id` = {$id_comp} LIMIT 1";
 
   if(mysqli_query($con,$sql))
   {
