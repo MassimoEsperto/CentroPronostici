@@ -12,7 +12,7 @@ if(!$girone)
 }
 
 // Delete.
-$sql = "DELETE FROM `_scommesse_antepost_gironi` WHERE `girone` ='{$girone}'";
+$sql = "DELETE FROM `_scommesse_antepost_gironi` WHERE `girone` ='{$girone}' AND `comp_id` = {$id_comp}";
 
   if(mysqli_query($con,$sql))
   {
