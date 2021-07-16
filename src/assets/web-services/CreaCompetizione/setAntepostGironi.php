@@ -10,10 +10,11 @@ if(!$girone)
 }
 
 
-  $sql  = "INSERT INTO `_scommesse_antepost_gironi`(`girone`,`punti_id`) VALUES ('{$girone}',11);";
-  $sql .= "INSERT INTO `_scommesse_antepost_gironi`(`girone`,`punti_id`) VALUES ('{$girone}',12);";
-  $sql .= "INSERT INTO `_scommesse_antepost_gironi`(`girone`,`punti_id`) VALUES ('{$girone}',13);";
-  $sql .= "INSERT INTO `_scommesse_antepost_gironi`(`girone`,`punti_id`) VALUES ('{$girone}',14);";
+  $sql  = "INSERT INTO `_scommesse_antepost_gironi`(`girone`,`punti_id`,`comp_id`) VALUES ('{$girone}',11,{$id_comp});";
+  $sql .= "INSERT INTO `_scommesse_antepost_gironi`(`girone`,`punti_id`,`comp_id`) VALUES ('{$girone}',12,{$id_comp});";
+  $sql .= "INSERT INTO `_scommesse_antepost_gironi`(`girone`,`punti_id`,`comp_id`) VALUES ('{$girone}',13,{$id_comp});";
+  $sql .= "INSERT INTO `_scommesse_antepost_gironi`(`girone`,`punti_id`,`comp_id`) VALUES ('{$girone}',14,{$id_comp});";
+  $sql .= "INSERT INTO `_scommesse_antepost_gironi`(`girone`,`specie`,`punti_id`,`comp_id`) VALUES ('{$girone}','C',15,{$id_comp});";
   
 if ($con->multi_query($sql) === TRUE) 
 {
