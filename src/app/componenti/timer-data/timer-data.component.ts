@@ -22,7 +22,7 @@ export class TimerDataComponent implements OnInit {
 
   ngOnInit() {
     
-    this.bloccato=this.opzioni.valore
+    this.bloccato=this.opzioni.isOpen
     
     this._trialEndsAt = this.opzioni.scadenza
     this.getCountdown();
