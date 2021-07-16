@@ -14,7 +14,7 @@ if(isset($postdata) && !empty($postdata))
   $girone = mysqli_real_escape_string($con, trim($request->data->girone)); 
   //$id_evento = mysqli_real_escape_string($con, (int)$request->data->id_evento);
 		  
- 	$sql = "INSERT INTO `_scommesse_risultati`(`partita`,`data`,`girone`) VALUES ('{$partita}','{$data}','{$girone}')";
+ 	$sql = "INSERT INTO `_scommesse_risultati`(`partita`,`data`,`girone`,`comp_id`) VALUES ('{$partita}','{$data}','{$girone}',{$id_comp})";
 
   if(mysqli_query($con,$sql))
   {
