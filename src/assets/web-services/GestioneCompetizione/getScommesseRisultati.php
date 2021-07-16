@@ -1,11 +1,10 @@
 <?php
-/**
- * Returns the list of cars.
- */
+
 require '../connect_local.php';
     
 $list = [];
-$sql = "SELECT id_evento,tipo,partita,risesatto FROM _scommesse_risultati order by id_evento ";
+$sql = "SELECT id_evento,tipo,partita,risesatto ";
+$sql .="FROM _scommesse_risultati WHERE comp_id = {$id_comp} order by id_evento ";
 
 if($result = mysqli_query($con,$sql))
 {
