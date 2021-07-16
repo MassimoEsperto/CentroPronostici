@@ -38,7 +38,7 @@ $sql2 .="FROM _schedina_user u,_schedina s,_scommesse_antepost_base b,_punti_pre
 $sql2 .="WHERE b.punti_id=p.id_punti and u.schedina_id={$id_schedina} and u.schedina_id=s.id_schedina and b.id_evento= s.id_evento and b.tipo= s.tipo order by b.id_evento ";
  
  
-$sql3 = "SELECT g.id_evento,g.tipo,p.descrizione,g.girone,u.schedina_id,u.utente_id,s.risultato, ";
+$sql3 = "SELECT g.id_evento,g.tipo,p.descrizione,g.girone,g.specie,u.schedina_id,u.utente_id,s.risultato, ";
 $sql3 .="CASE s.risultato  ";
 $sql3 .="   WHEN g.risultato THEN p.valore ";
 $sql3 .="   ELSE 0 ";
@@ -104,6 +104,7 @@ if($result = mysqli_query($con,$sql3))
     $list[$ele]['username'] = $row['utente_id'];
     $list[$ele]['punteggio'] = $row['punteggio'];
     $list[$ele]['tipo'] = $row['tipo'];
+    $list[$ele]['specie'] = $row['specie'];
     $ele++;
   }
     
