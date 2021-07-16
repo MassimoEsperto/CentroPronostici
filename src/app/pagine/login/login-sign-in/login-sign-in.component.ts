@@ -5,7 +5,7 @@ import { SFONDO_HOME } from 'src/app/classi/utils/costanti';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-login-sign-in',
+  selector: 'login-sign-in',
   templateUrl: './login-sign-in.component.html',
   styleUrls: ['./login-sign-in.component.css']
 })
@@ -43,6 +43,7 @@ export class LoginSignInComponent implements AfterViewInit {
             this.utente.scadenza = this.scadenza().toString();
 
             this.service.setLogged(JSON.stringify(this.utente));
+            this.service.assegnaCompetizione()
             this.router.navigate(['/home/dashboard']);
           }
           else {
