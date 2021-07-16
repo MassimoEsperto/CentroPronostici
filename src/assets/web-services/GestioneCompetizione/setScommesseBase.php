@@ -11,7 +11,7 @@ if(!$gruppo)
 }
 
 
-$sql  = "INSERT INTO `_gruppi_antepost_base`(`risultato`,`gruppo`) VALUES ('{$risultato}','{$gruppo}');";
+$sql  = "INSERT INTO `_gruppi_antepost_base`(`risultato`,`gruppo`,`comp_id`) VALUES ('{$risultato}','{$gruppo}',{$id_comp});";
   
  if(mysqli_query($con,$sql))
   {
