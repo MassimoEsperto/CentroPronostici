@@ -1,10 +1,11 @@
-import { HttpErrorResponse } from '@angular/common/http'
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import { throwError } from 'rxjs'
 import { WS_BASE_URL } from '../classi/utils/costanti'
 import { Ruolo } from '../classi/utils/enums'
 
 export class HttpSenderService {
 
+  myheaders = { headers: new HttpHeaders().set('Comp', this.getCompetizione()) }
 
 
   buildURL(operation: string = ""): string {
@@ -42,6 +43,22 @@ export class HttpSenderService {
     }
     else {
       return false
+    }
+  }
+
+  setCompetizione(comp: string) {
+    localStorage.setItem('comp-now', comp);
+  }
+
+  getCompetizione() {
+    let comp = localStorage.getItem("comp-now")
+    return comp
+  }
+
+  assegnaCompetizione(){
+    let comp = localStorage.getItem("comp-now")
+    if(!comp){
+      localStorage.setItem('comp-now', '1');
     }
   }
 
