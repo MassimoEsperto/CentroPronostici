@@ -26,9 +26,9 @@ export class CommonService extends HttpSenderService {
     }
 
 
-     getOpzioniAdmin() {
+     getDettagliCompetizione() {
       
-      return this.http.get(`${this.buildURL("ServiziComuni/getOpzioniAdmin")}`, this.myheaders)
+      return this.http.get(`${this.buildURL("ServiziComuni/getCompetizione")}`, this.myheaders)
       .pipe(map((res) => {
           
           return res['data'];
