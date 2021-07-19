@@ -7,6 +7,7 @@ import { ClassificaComponent } from './classifica/classifica.component';
 import { CreaCompetizioneComponent } from './crea-competizione/crea-competizione.component';
 import { GestioneCompetizioneComponent } from './gestione-competizione/gestione-competizione.component';
 import { PronosticiUtenteComponent } from './pronostici-utente/pronostici-utente.component';
+import { CompetizioniComponent } from './competizioni/competizioni.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,10 @@ const routes: Routes = [
             {
                 path: 'classifica',
                 component: ClassificaComponent
+            },
+            {
+                path: 'organizza-competizioni',
+                component: CompetizioniComponent
             }
            
         ]
