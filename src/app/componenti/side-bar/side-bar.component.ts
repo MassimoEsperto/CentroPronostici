@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommonService } from 'src/app/services/common.service';
 import { GestioneCompetizioneService } from 'src/app/services/gestione-competizione.service';
-import { finalize } from 'rxjs/operators';
+
 
 @Component({
   selector: 'side-bar',
@@ -17,9 +17,9 @@ export class SideBarComponent extends Generale implements OnInit {
   isAdmin: boolean;
   isPlayer: boolean;
   isOpen: boolean;
-  opzioni: any;
+  dettagli: any;
   combosel: any;
-  competizione:string;
+  competizione:string="";
 
   constructor(
     private router: Router, 
@@ -33,41 +33,26 @@ export class SideBarComponent extends Generale implements OnInit {
     this.username = this.service.username();
     this.isPlayer = this.service.isPlayer();
     this.loading = true;
-    this.getOpzioni();
+    this.getDettagli();
     this.getCombo();
   }
 
 
-  getOpzioni() {
+  getDettagli() {
 
-    this.commonService.getOpzioniAdmin()
+    this.commonService.getDettagliCompetizione()
       .subscribe({
         next: (result: any) => {
           this.isOpen = result.isOpen;
-          this.opzioni = result
+          this.dettagli = result
+          this.competizione=result.id_comp
         },
         error: (error: any) => {
         }
       })
   }
 
-  upadateOpzioni(payload:any) {
-    this.competizioneService.updOpzioni(payload)
-    .subscribe({
-      next: (result: any) => {
-        this.successo()
-      },
-      error: (error: any) => {
-      }
-    })
-  }
-
-
-  onUpdateOpzioni(opzioni) {
-    let scelta = (opzioni.valore) ? 1 : 0;
-    let payload = { blocco: scelta, scadenza: opzioni.scadenza, footer: opzioni.footer }
-    this.upadateOpzioni(payload)
-  }
+  
 
   logOut() {
     this.authservice.logout();
