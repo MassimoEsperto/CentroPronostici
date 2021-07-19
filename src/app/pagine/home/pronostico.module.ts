@@ -34,7 +34,7 @@ import { InserimentoSchedaComponent } from 'src/app/componenti/inserimento-sched
 import { ModificaSchedeComponent } from 'src/app/componenti/modifica-schede/modifica-schede.component';
 import { VisualizzaSchedeComponent } from 'src/app/componenti/visualizza-schede/visualizza-schede.component';
 import { TabEliminaSchedeComponent } from '../../componenti/tab-elimina-schede/tab-elimina-schede.component';
-import { TabCompetizioniComponent } from 'src/app/componenti/tab-competizioni/tab-competizioni.component';
+import { CompetizioniComponent } from './competizioni/competizioni.component';
 
 
 @NgModule({
@@ -59,7 +59,7 @@ import { TabCompetizioniComponent } from 'src/app/componenti/tab-competizioni/ta
     ModificaSchedeComponent,
     VisualizzaSchedeComponent,
     TabEliminaSchedeComponent,
-    TabCompetizioniComponent
+    CompetizioniComponent
   ],
   imports: [
     CommonModule,
