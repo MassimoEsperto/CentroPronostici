@@ -84,13 +84,5 @@ export class GestioneCompetizioneService extends HttpSenderService {
         catchError(this.handleError));
   }
 
-  updOpzioni(opzioni: any){
-
-    return this.http.post(`${this.buildURL("GestioneCompetizione/updOpzioni")}`, { data: opzioni },this.myheaders)
-       .pipe(map((res) => {
-         return res['data'];
-       }),
-       catchError(this.handleError));
-   }
 
 }
