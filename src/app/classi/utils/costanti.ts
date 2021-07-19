@@ -5,6 +5,8 @@ export const VERSION = "0.0.2"
 
 export const WS_BASE_URL =  `http://marescafantaeuropeo.altervista.org/services`
 
+export const DOMINIO_BASE =  `http://marescafantaeuropeo.altervista.org/`
+
 // Timeout richieste POST
 export const REQUEST_TIMEOUT = 2*60*1000 // 2 minuti
 
