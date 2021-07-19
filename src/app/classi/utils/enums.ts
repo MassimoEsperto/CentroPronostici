@@ -26,3 +26,10 @@ export enum SchedaModo {
     COPIATA = "Copiata",
     RANDOM = "Random",
 }
+
+export enum SiNo {
+    SI_V = "1",
+    NO_V = "0",
+    SI_S = "SI",
+    NO_S = "NO",
+}
