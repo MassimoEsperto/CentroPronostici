@@ -49,3 +49,15 @@
 .cursore{
    cursor: pointer;
 }
+
+
+.selectBox{
+   background: none repeat scroll 0 0 #0077b8;
+   width: 100%;
+   border-radius: 8px;
+   padding: 2px;
+   border:0px;
+   outline:none;
+   color: white;
+}
+
