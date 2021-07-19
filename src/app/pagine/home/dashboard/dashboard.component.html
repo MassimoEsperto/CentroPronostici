@@ -1,14 +1,14 @@
 <span *ngIf="loading" class="spinner"></span>
 
-<div *ngIf="opzioni">
-    <timer-data [opzioni]="opzioni"></timer-data>
+<div *ngIf="dettagli">
+    <timer-data [dettagli]="dettagli"></timer-data>
 </div>
 
 <div *ngIf="!loading" class="clr-row">
     <div class="clr-col-lg-6 clr-col-md-6 clr-col-sm-12 clr-col-12">
         <div class="card">
             <div class="card-img">
-                <img src="http://marescafantaeuropeo.altervista.org/archivio/img/pronostici.jpg">
+                <img src="{{dominio}}archivio/img/competizioni.png">
             </div>
             <div class="card-block">
                 <h4 class="card-title">Benvenuto {{username}} nel fanta pronostici maresca</h4>
@@ -19,28 +19,28 @@
             <div>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        Per l'inserimento di nuovi pronostici:
+                        Per il cambio di competizione:
                         <ul class="list">
-                            <li>Apri il menu laterale Inserimento pronotici</li>
-                            <li>Aggiungi una nuova scheda che sarà associata al tuo account</li>
-                            <li>Compilare la scheda in tutte le sue voci e poi salva</li>
+                            <li>Selezione il nome della competizione in alto nell'header della pagina</li>
+                            <li>Dal menu che compare scegli la competizione, attendi pochi secondi che il sistema riaggiorni la pagina</li>
                         </ul>
                     </li>
-                    <li class="list-group-item">
-                        Per verificare o modificare i tuoi pronostici:
+                     <li class="list-group-item">
+                        Per la gestione dei pronostici:
                         <ul class="list">
-                            <li>Apri il menu laterale Pronostici Personale</li>
-                            <li>Nella lista che compare potrai eliminare o modificare le schede da te inserite
-                                precedentemente</li>
-                            <li>Una volta aperta la scheda potrai modificare ciascun risultato uno alla volta</li>
+                            <li>Apri il menu laterale Pronostici Utente dove potrai gestire tutte le schede associate al tuo account per quella competizione</li>
+                            <li>Sarà possibile aggiungere, modificarle ed eliminarle le schede</li>
+                            <li>La scheda puo' essere inserita partendo da zero, generata random o copiata da una già esistente </li>
+                            <li>Una volta selezionato un elemento della lista di schede inserite verrà aperta la scheda dove potrai modificare ciascun risultato uno alla volta</li>
+                            <li>Nel caso il tempo di inserimento sarà scaduto comparirà solo la lista delle tue schede con punti e posizione selezionabili in sola lettura</li>
                         </ul>
-                    </li>
+                    </li>            
                     <li class="list-group-item">
                         Per verificare la classifica totale una volta che saranno bloccati gli inserimenti:
                         <ul class="list">
                             <li>Apri il menu laterale Classifica</li>
                             <li>Per ricercare solo i pronostici effettuati da un determinato account è prevista la
-                                possibilità di filtrare per ciascun account</li>
+                                possibilità di filtrare per ciascun account e ordinare in base ai punti e posizione</li>
                             <li>Selezionare poi la casella view per visualizzare l'intera schedina</li>
                         </ul>
                     </li>
@@ -53,13 +53,13 @@
                 </p>
 
                 <img src="assets/img/download.png"
-                    (click)="downloadPdf('http://marescafantaeuropeo.altervista.org/archivio/download/FANTAEUROPEO.pdf','FANTAEUROPEO.pdf')"
+                    (click)="downloadPdf('archivio/download/FANTAEUROPEO.pdf','FANTAEUROPEO.pdf')"
                     style="width:30%">
             </div>
         </div>
     </div>
     <div class="clr-col-lg-6 clr-col-md-6 clr-col-sm-12 clr-col-12 padtop">
-        <img src="http://marescafantaeuropeo.altervista.org/archivio/img/gironi.png" style="width:100%">
+        <img src="{{dominio}}archivio/img/palinsesto.jpg" style="width:100%">
         <h3>PRONOSTICI VALIDI</h3>
         <clr-datagrid *ngIf="puntiPrevisti">
             <clr-dg-column>Descrizione</clr-dg-column>
