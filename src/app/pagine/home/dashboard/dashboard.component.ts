@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DOMINIO_BASE } from 'src/app/classi/utils/costanti';
 import { Generale } from 'src/app/classi/utils/general-component';
 import { CommonService } from 'src/app/services/common.service';
 import { CreaCompetizioneService } from 'src/app/services/crea-competizione.service';
@@ -15,7 +16,8 @@ export class DashboardComponent extends Generale implements OnInit {
 
   username: string;
   puntiPrevisti: any;
-  opzioni: any;
+  dettagli: any;
+  dominio: string=DOMINIO_BASE;
 
   ngOnInit() {
     this.username = this.competizioneService.username();
@@ -26,7 +28,7 @@ export class DashboardComponent extends Generale implements OnInit {
   downloadPdf(pdfUrl: string, pdfName: string) {
 
     // const FileSaver = require('file-saver');
-    require('file-saver').saveAs(pdfUrl, pdfName);
+    require('file-saver').saveAs(this.dominio+pdfUrl, pdfName);
   }
 
   constructor(private commonService: CommonService,
@@ -44,7 +46,7 @@ export class DashboardComponent extends Generale implements OnInit {
 
         next: (result: any) => {
           this.puntiPrevisti = result;
-          this.getOpzioni()
+          this.getDettagli()
         },
         error: (error: any) => {
 
@@ -53,13 +55,13 @@ export class DashboardComponent extends Generale implements OnInit {
 
   }
 
-  getOpzioni() {
+  getDettagli() {
 
-    this.commonService.getOpzioniAdmin()
+    this.commonService.getDettagliCompetizione()
       .subscribe({
         next: (result: any) => {
           this.loading=false
-          this.opzioni = result;
+          this.dettagli = result;
         },
         error: (error: any) => {
         }
