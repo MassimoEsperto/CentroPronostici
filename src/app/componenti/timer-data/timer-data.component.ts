@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TimerDataComponent implements OnInit {
 
-  @Input() opzioni: any;
+  @Input() dettagli: any;
 
   private _trialEndsAt;
   private _diff: number;
@@ -22,9 +22,9 @@ export class TimerDataComponent implements OnInit {
 
   ngOnInit() {
     
-    this.bloccato=this.opzioni.isOpen
+    this.bloccato=!this.dettagli.isOpen
     
-    this._trialEndsAt = this.opzioni.scadenza
+    this._trialEndsAt = this.dettagli.scadenza
     this.getCountdown();
     setTimeout(() => {
       this.getCountdown();
