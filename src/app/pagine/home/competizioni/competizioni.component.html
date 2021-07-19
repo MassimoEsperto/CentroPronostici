@@ -1,0 +1,124 @@
+<span *ngIf="loading" class="spinner"></span>
+<clr-alert *ngIf="success" [clrAlertType]="'success'">
+    <clr-alert-item>
+        <span class="alert-text">{{success}}</span>
+    </clr-alert-item>
+</clr-alert>
+<clr-alert *ngIf="error" [clrAlertType]="'warning'">
+    <clr-alert-item>
+        <span class="alert-text">{{error}}</span>
+    </clr-alert-item>
+</clr-alert>
+
+
+<div *ngIf="!isModifica" class="card">
+    <div class="card-header">
+        Aggiungi Competizione
+    </div>
+    <div class="card-block">
+
+        <form clrForm clrLayout="vertical" (submit)="onAddCompetizione(sigla,descrizione)">
+
+            <div class="clr-form-control pb-16">
+
+                <clr-input-container>
+                    <label>Sigla(max 10 caratteri)</label>
+                    <input clrInput type="text" [(ngModel)]="sigla" name="sigla"  minlength="3" maxlength="10" />
+                </clr-input-container>
+
+                <clr-input-container>
+                    <label>Descrizione</label>
+                    <input clrInput type="text" [(ngModel)]="descrizione" name="descrizione" />
+                </clr-input-container>
+                <br>
+            </div>
+            <div class="pt-16">
+                <button class="btn btn-primary btn-sm" [disabled]="sigla==''||descrizione==''">Aggiungi</button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+
+<div *ngIf="isModifica" class="card">
+    <div class="card-header">
+        Modifica Competizione
+    </div>
+    <div class="card-block">
+
+        <form clrForm clrLayout="vertical" (submit)="onUpdateCompetizione(sigla,descrizione,isAttiva,footer,scadenza,isOpen)">
+
+            <div class="clr-form-control pb-16">
+
+
+                <clr-input-container>
+                    <label>Sigla(max 10 caratteri)</label>
+                    <input clrInput type="text" [(ngModel)]="sigla" name="sigla"  minlength="3" maxlength="10" />
+                </clr-input-container>
+
+                <clr-input-container>
+                    <label>Descrizione</label>
+                    <input clrInput type="text" [(ngModel)]="descrizione" name="descrizione" />
+                </clr-input-container>
+
+                <clr-select-container>
+                    <label>Attiva competizione</label>
+                    <select clrSelect name="isAttiva" [(ngModel)]="isAttiva">
+                        <option value="1">SI</option>
+                        <option value="0">NO</option>
+                    </select>
+                </clr-select-container>
+
+                <clr-input-container>
+                    <label>Footer della pagina</label>
+                    <input clrInput type="text" [(ngModel)]="footer" name="footer"  minlength="3" />
+                </clr-input-container>
+
+                <clr-input-container>
+                    <label>Scadenza (es. 2021/08/30)</label>
+                    <input clrInput type="text" [(ngModel)]="scadenza" name="scadenza" />
+                </clr-input-container>
+
+                <clr-select-container>
+                    <label>Schede sbloccate</label>
+                    <select clrSelect name="isOpen" [(ngModel)]="isOpen">
+                        <option value="1">SI</option>
+                        <option value="0">NO</option>
+                    </select>
+                </clr-select-container>
+                <br>
+            </div>
+            <div class="pt-16">
+                <button class="btn btn-primary btn-sm" [disabled]="sigla==''||descrizione==''||isAttiva==''||footer==''||scadenza==''||isOpen==''">Modifica</button>
+                <button class="btn btn-primary btn-sm" (click)="closeModifica()">Annulla</button>
+            </div>
+        </form>
+
+    </div>
+ 
+</div>
+
+<clr-datagrid *ngIf="!loading">
+    <clr-dg-column [style.min-width.px]="80" [style.width.px]="80"></clr-dg-column>
+    <clr-dg-column>Sigla</clr-dg-column>
+    <clr-dg-column>Descrizione</clr-dg-column>
+    <clr-dg-column>Attivata</clr-dg-column>
+    <clr-dg-column>Footer</clr-dg-column>
+    <clr-dg-column>Scadenza</clr-dg-column>
+    <clr-dg-column>Sbloccata</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let item of competizioni;let i = index;" [clrDgItem]="item">
+
+        <clr-dg-cell [style.min-width.px]="80" [style.width.px]="80">
+            <clr-icon shape="pencil" class="is-solid" (click)="openModifica(item)"></clr-icon>
+        </clr-dg-cell>
+        <clr-dg-cell>{{item.sigla}}</clr-dg-cell>
+        <clr-dg-cell>{{item.descrizione}}</clr-dg-cell>
+        <clr-dg-cell>{{viewSiNo(item.isAttiva)}}</clr-dg-cell>
+        <clr-dg-cell>{{item.footer}}</clr-dg-cell>
+        <clr-dg-cell>{{item.scadenza}}</clr-dg-cell>
+        <clr-dg-cell>{{viewSiNo(item.isOpen)}}</clr-dg-cell>
+    </clr-dg-row>
+
+</clr-datagrid>
