@@ -133,10 +133,10 @@ export class PronosticiUtenteComponent extends Generale implements OnInit {
 
   getBloccato() {
 
-    this.commonService.getOpzioniAdmin()
+    this.commonService.getDettagliCompetizione()
       .subscribe({
         next: (result: any) => {
-          this.bloccato = result.isOpen;
+          this.bloccato = !result.isOpen;
           if (this.bloccato) {
             this.getClassificaByUtente()
           }
