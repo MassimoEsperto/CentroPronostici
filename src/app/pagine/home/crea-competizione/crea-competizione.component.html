@@ -13,12 +13,6 @@
 <div *ngIf="!loading" class="page">
 
     <mat-tab-group backgroundColor="primary" mat-align-tabs="center">
-  
-      <mat-tab label="GENERALE">
-        <div class="pt-16 pl-8 pr-8 tabula">
-          <tab-competizioni></tab-competizioni>
-        </div>
-      </mat-tab>
 
       <mat-tab label="SQUADRE">
         <div class="pt-16 pl-8 pr-8 tabula">
@@ -40,7 +34,7 @@
   
       <mat-tab label="GIRONI">
         <div class="pt-16 tabula">
-          <tab-antepost [gironi]="combosel.squadre"></tab-antepost>
+          <tab-antepost [gironi]="combosel.gironi"></tab-antepost>
         </div>
       </mat-tab>
 
