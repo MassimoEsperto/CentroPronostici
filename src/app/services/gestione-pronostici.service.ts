@@ -14,7 +14,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
   getSchedaDaCompilare() {
 
-    return this.http.get<any>(`${this.buildURL("PronosticiUtente/getSchedaDaCompilare")}`,this.myheaders)
+    return this.http.get<any>(`${this.buildURL("PronosticiUtente/getSchedaDaCompilare")}`, this.myheaders)
       .pipe(map((res) => {
         return res['data'];
 
@@ -22,7 +22,7 @@ export class GestionePronosticiService extends HttpSenderService {
         catchError(this.handleError));
   }
 
-  getIdSchedina(username: string,desc: string) {
+  getIdSchedina(username: string, desc: string) {
     const params = new HttpParams().set('username', username).set('descrizione', desc);
 
     return this.http.get(`${this.buildURL("PronosticiUtente/getIdScheda")}`, { params: params, headers: this.myheaders.headers })
@@ -49,7 +49,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
   setScheda(pronostico: any) {
 
-    return this.http.post(`${this.buildURL("PronosticiUtente/setScheda")}`, { data: pronostico },this.myheaders)
+    return this.http.post(`${this.buildURL("PronosticiUtente/setScheda")}`, { data: pronostico }, this.myheaders)
       .pipe(map((res) => {
 
         return res['data'];
@@ -72,7 +72,7 @@ export class GestionePronosticiService extends HttpSenderService {
 
   updEventoScheda(pronostico: any) {
 
-    return this.http.post(`${this.buildURL("PronosticiUtente/updEventoScheda")}`, { data: pronostico },this.myheaders)
+    return this.http.post(`${this.buildURL("PronosticiUtente/updEventoScheda")}`, { data: pronostico }, this.myheaders)
       .pipe(map((res) => {
 
         return res['data'];
@@ -95,20 +95,20 @@ export class GestionePronosticiService extends HttpSenderService {
 
   getClassificaByUtente(username: string) {
 
-    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getClassificaGenerale")}`,this.myheaders)
+    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getClassificaGenerale")}`, this.myheaders)
       .pipe(map((res) => {
 
-        let classifica=res['data']
-        return classifica.filter(i => i.id_utente == username);
+        let classifica = res['data']
+        return classifica ? classifica.filter(i => i.id_utente == username) : [];
 
       }),
         catchError(this.handleError));
   }
-  
+
 
   getClassificaGenerale() {
 
-    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getClassificaGenerale")}`,this.myheaders)
+    return this.http.get<any[]>(`${this.buildURL("PronosticiUtente/getClassificaGenerale")}`, this.myheaders)
       .pipe(map((res) => {
 
         return res['data'];
