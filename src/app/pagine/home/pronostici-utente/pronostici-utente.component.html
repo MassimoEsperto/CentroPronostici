@@ -21,12 +21,14 @@
   </div>
 
   <div *ngIf="!bloccato&&!viewSchedaDaCompilare" class="bottoni">
-    <button class="btn btn-primary btn-block" [disabled]="disableBtn" (click)="nuovaScheda()">INSERISCI NUOVA
-      SCHEDA</button>
-    <button [disabled]="disableBtn" class="btn btn-success btn-block" (click)="randomScheda()">GENERA RANDOM
-    </button>
-    <button [disabled]="disableBtn" class="btn btn-warning btn-block" (click)="copiaModal = true">COPIA SCHEDA
-    </button>
+    <button class="btn btn-primary btn-block" [disabled]="disableBtn" 
+    (click)="nuovaScheda()">INSERISCI NUOVA SCHEDA</button>
+
+    <button [disabled]="disableBtn||combosel.cannonieri.length==0||combosel.squadre.length==0||combosel.risultati.length==0" class="btn btn-success btn-block" 
+    (click)="randomScheda()">GENERA RANDOM</button>
+
+    <button [disabled]="disableBtn" class="btn btn-warning btn-block" 
+    (click)="copiaModal = true">COPIA SCHEDA</button>
   </div>
 
 
