@@ -61,3 +61,6 @@
    color: white;
 }
 
+.mat-toolbar-row, .mat-toolbar-single-row {
+   padding-left: 0px !important;
+}
