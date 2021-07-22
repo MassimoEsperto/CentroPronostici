@@ -10,6 +10,7 @@ $risultati = [];
 $scommesseBase = [];
 $puntiPrevisti = [];
 $competizioni = [];
+$gironi = [];
 $totObj = [];
 
 $sql1 = "SELECT nome,girone FROM _lista_squadre WHERE `comp_id` = {$id_comp} order by girone asc";
@@ -18,6 +19,7 @@ $sql3 = "SELECT  id_risulato,tipo_ris FROM  _punteggi_risultati order by id_risu
 $sql4 = "SELECT p.descrizione,s.gruppo_id FROM _scommesse_antepost_base s,_punti_previsti p where s.punti_id=p.id_punti order by s.id_evento";
 $sql5 = "SELECT descrizione,valore FROM _punti_previsti order by id_punti";
 $sql6 = "SELECT id_comp,descrizione FROM _competizioni WHERE isAttiva=1  order by id_comp";
+$sql7 = "SELECT distinct girone FROM _lista_squadre WHERE `comp_id` = {$id_comp} order by girone asc";
 
 
 
@@ -102,7 +104,20 @@ else
   http_response_code(404);
 }
 
+if($result = mysqli_query($con,$sql7))
+{
+  $count = 0;
+  while($row = mysqli_fetch_assoc($result))
+  {
+    $gironi[$count]['girone'] = $row['girone'];
+    $count++;
+  }
 
+}
+else
+{
+  http_response_code(400);
+}
 
 if($result = mysqli_query($con,$sql3))
 {
@@ -120,7 +135,7 @@ if($result = mysqli_query($con,$sql3))
     $myObj->team = $team;
     $myObj->puntiPrevisti = $puntiPrevisti;
     $myObj->competizioni = $competizioni;
-    
+    $myObj->gironi = $gironi;
     
     
 	$totObj=['data'=>$myObj];
