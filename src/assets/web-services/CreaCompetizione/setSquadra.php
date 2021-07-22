@@ -1,21 +1,22 @@
 <?php
 require '../connect_local.php';
 
-$nome = ($_GET['nome'] !== null && $_GET['nome'] !== '')? mysqli_real_escape_string($con, trim($_GET['nome'])) : false;
-$girone = ($_GET['girone'] !== null && $_GET['girone'] !== '')? mysqli_real_escape_string($con, trim($_GET['girone'])) : false;
- 
+// Get the posted data.
+$postdata = file_get_contents("php://input");
 
-if(!$nome)
+if(isset($postdata) && !empty($postdata))
 {
-  return http_response_code(400);
-}
+  // Extract the data.
+  $request = json_decode($postdata);
 
-
+  $nome = mysqli_real_escape_string($con, trim($request->data->nome));
+  $girone = mysqli_real_escape_string($con, trim($request->data->girone));
+		  
   $sql = "INSERT INTO `_lista_squadre`(`nome`,`girone`,`comp_id`) VALUES ('{$nome}','{$girone}',{$id_comp})";
 
   if(mysqli_query($con,$sql))
   {
-    
+    http_response_code(201);
     $squadra = ['nome' => $nome];
     echo json_encode(['data'=>$squadra]);
   }
@@ -23,3 +24,4 @@ if(!$nome)
   {
     http_response_code(422);
   }
+}
