@@ -62,6 +62,7 @@ export class DashboardComponent extends Generale implements OnInit {
         next: (result: any) => {
           this.loading=false
           this.dettagli = result;
+    
         },
         error: (error: any) => {
         }
