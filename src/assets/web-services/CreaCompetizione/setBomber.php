@@ -1,20 +1,21 @@
 <?php
 require '../connect_local.php';
 
-$nome = ($_GET['nome'] !== null && $_GET['nome'] !== '')? mysqli_real_escape_string($con, trim($_GET['nome'])) : false;
- 
+// Get the posted data.
+$postdata = file_get_contents("php://input");
 
-if(!$nome)
+if(isset($postdata) && !empty($postdata))
 {
-  return http_response_code(400);
-}
+  // Extract the data.
+  $request = json_decode($postdata);
 
-
+  $nome = mysqli_real_escape_string($con, trim($request->data->nome));
+		  
   $sql = "INSERT INTO `_lista_cannonieri`(`nome`,`comp_id`) VALUES ('{$nome}',{$id_comp})";
 
   if(mysqli_query($con,$sql))
   {
-    
+    http_response_code(201);
     $bomber = ['nome' => $nome];
     echo json_encode(['data'=>$bomber]);
   }
@@ -22,3 +23,4 @@ if(!$nome)
   {
     http_response_code(422);
   }
+}
