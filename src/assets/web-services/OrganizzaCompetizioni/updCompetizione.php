@@ -14,10 +14,14 @@ if(isset($postdata) && !empty($postdata))
   $sigla = mysqli_real_escape_string($con, trim($request->data->sigla));
   $descrizione = mysqli_real_escape_string($con, trim($request->data->descrizione));
   $isAttiva = mysqli_real_escape_string($con, (int)$request->data->isAttiva);
+  $footer = mysqli_real_escape_string($con, trim($request->data->footer)); 
+  $scadenza = mysqli_real_escape_string($con, trim($request->data->scadenza)); 
+  $isOpen = mysqli_real_escape_string($con, (int)$request->data->isOpen);
 
    // Update.
-  $sql = "UPDATE `_competizioni` SET `sigla`='{$sigla}',`descrizione`='{$descrizione}',`isAttiva`={$isAttiva} WHERE `id_comp` = {$id} LIMIT 1";
-
+  $sql = "UPDATE `_competizioni` SET `sigla`='{$sigla}',`descrizione`='{$descrizione}',`isAttiva`={$isAttiva}, ";
+  $sql .="`footer`='{$footer}',`scadenza`='{$scadenza}',`isOpen`={$isOpen} WHERE `id_comp` = {$id} LIMIT 1";
+  
   if(mysqli_query($con,$sql))
   {
     http_response_code(201);
