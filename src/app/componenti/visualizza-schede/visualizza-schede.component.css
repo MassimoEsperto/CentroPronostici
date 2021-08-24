@@ -15,3 +15,7 @@ h3 {
     border:0px;
     outline:none;
 }
+
+.cursore{
+  cursor: pointer;
+}
