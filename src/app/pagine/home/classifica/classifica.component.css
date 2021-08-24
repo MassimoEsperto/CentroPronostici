@@ -10,3 +10,7 @@ h3 {
 .limit-height clr-datagrid {
     height: 240px;
 }
+
+.cursore{
+  cursor: pointer;
+}
