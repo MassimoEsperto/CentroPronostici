@@ -18,17 +18,13 @@
     <clr-dg-column [clrDgField]="'id_utente'">utente (id)</clr-dg-column>
     <clr-dg-column [style.min-width.px]="50" [style.width.px]="50" [clrDgSortBy]="'punteggioString'">pt</clr-dg-column>
     <clr-dg-column>data</clr-dg-column>
-    <clr-dg-column [style.min-width.px]="50" [style.width.px]="50"></clr-dg-column>
 
-    <clr-dg-row *clrDgItems="let scheda of classifica" [clrDgItem]="match">
+    <clr-dg-row class="cursore" *clrDgItems="let scheda of classifica" [clrDgItem]="match" (click)="onViewScheda(scheda);viewSchedaModal=true">
         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">{{scheda.posizione}}°</clr-dg-cell>
         <clr-dg-cell>{{scheda.id_utente}} ({{scheda.id_schedina}})</clr-dg-cell>
         <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50"><span
                 style="font-weight: bold;">{{scheda.punteggio}}</span></clr-dg-cell>
         <clr-dg-cell>{{scheda.tempo}}</clr-dg-cell>
-        <clr-dg-cell [style.min-width.px]="50" [style.width.px]="50">
-            <clr-icon shape="eye" class="is-solid" (click)="onViewScheda(scheda);viewSchedaModal=true"></clr-icon>
-        </clr-dg-cell>
 
     </clr-dg-row>
    
